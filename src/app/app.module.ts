@@ -3,35 +3,33 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { MenuPage} from '../pages/menu/menu';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { LoginGooglePage } from '../pages/login/login-google/login-google';
-import { LoginFacebookPage } from '../pages/login/login-facebook/login-facebook';
-import { MonumentService } from '../providers/monuments';
+import { MonumentService } from '../providers/monument.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginPageModule } from '../pages/login/login.module';
+import { MenuPageModule } from '../pages/menu/menu.module';
+
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     LoginPage,
-    LoginGooglePage,
-    LoginFacebookPage,
+    MenuPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    LoginPageModule,
+    MenuPageModule,
     HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     LoginPage,
-    LoginGooglePage,
-    LoginFacebookPage,
+    MenuPage,
   ],
   providers: [
     StatusBar,

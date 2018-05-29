@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PagesLoginFacebookPage } from './login-facebook';
+import { LoginFacebookPage } from './login-facebook';
 
 @NgModule({
   declarations: [
-    PagesLoginFacebookPage,
+    LoginFacebookPage,
   ],
   imports: [
-    IonicPageModule.forChild(PagesLoginFacebookPage),
+    IonicPageModule.forChild(LoginFacebookPage),
   ],
 })
 export class PagesLoginFacebookPageModule {}

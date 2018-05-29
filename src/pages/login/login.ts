@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginGooglePage } from './login-google/login-google';
 import { LoginFacebookPage } from './login-facebook/login-facebook';
-import { MonumentService } from '../../providers/monuments';
+import { MonumentService } from '../../providers/monument.service';
 
 /**
  * Generated class for the LoginPage page.
@@ -24,7 +24,7 @@ export class LoginPage {
     public navParams: NavParams,
     private _monumentService : MonumentService,
   ) {
-    console.log(this._monumentService.getMonuments());
+    console.log('data' ,this._monumentService.getMonuments());
   }
 
   ionViewDidLoad() {

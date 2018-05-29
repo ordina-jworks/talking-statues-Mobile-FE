@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the LoginFacebookPage page.
+ * Generated class for the MyRoutePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-login-facebook',
-  templateUrl: 'login-facebook.html',
+  selector: 'page-my-route',
+  templateUrl: 'my-route.html',
 })
-export class LoginFacebookPage {
+export class MyRoutePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginFacebookPage');
+    console.log('ionViewDidLoad MyRoutePage');
   }
 
 }

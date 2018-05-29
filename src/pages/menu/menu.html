@@ -7,8 +7,10 @@
 </ion-header>
 
 <ion-content padding>
-  This is the menu-page from the frontend app in Ionic for project talking statues.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div>
+    <button ion-button (click)="planningRoutes()">Route plannen</button>
+    <button ion-button (click)="myRoutes()">Mijn Routes</button>
+    <button ion-button (click)="info()">Info</button>
+    <button ion-button (click)="chat()">Chat</button>
+  </div>
 </ion-content>
