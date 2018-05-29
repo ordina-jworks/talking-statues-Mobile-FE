@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ChoisePage } from './choise/choise';
+import { InfluencerPage } from './influencer/influencer';
 
 /**
  * Generated class for the RouteplannerPage page.
@@ -20,6 +22,14 @@ export class RouteplannerPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RouteplannerPage');
+  }
+
+  choices() {
+    this.navCtrl.push(ChoisePage);
+  }
+
+  influencers() {
+    this.navCtrl.push(InfluencerPage);
   }
 
 }
