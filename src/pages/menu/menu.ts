@@ -4,6 +4,9 @@ import { RouteplannerPage } from './routeplanner/routeplanner';
 import { MyRoutePage } from './my-route/my-route';
 import { InfoPage } from './info/info';
 import { ChatPage } from './chat/chat';
+import { LoginPage } from '../login/login';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Facebook } from '@ionic-native/facebook';
 
 @Component({
   selector: 'page-menu',
@@ -14,6 +17,8 @@ export class MenuPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public fb: Facebook,
+    public nativeStorage: NativeStorage,
   ) {
   }
 
@@ -31,6 +36,19 @@ export class MenuPage {
 
   chat() {
     this.navCtrl.push(ChatPage);
+  }
+
+  logout() {
+    var nav = this.navCtrl;
+    let env = this;
+    this.fb.logout()
+      .then(function(response) {
+        //user logged out so we will remove him from the NativeStorage
+        env.nativeStorage.remove('user');
+        nav.push(LoginPage);
+      }, function(error){
+        console.log(error);
+      });
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { MenuPage } from '../../menu/menu';
 
 /**
  * Generated class for the LoginFacebookPage page.
@@ -14,12 +16,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login-facebook.html',
 })
 export class LoginFacebookPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userData = null;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private facebook: Facebook,
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginFacebookPage');
+  }
+
+  loginWithFB() {
+    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', [])
+        .then(profile => {
+          this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']
+              ['data']['url'], username: profile[ 'name']};
+        })
+    })
+    this.navCtrl.push(MenuPage);
   }
 
 }

@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>pages/login/facebook</ion-title>
+    <ion-title>Facebook Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  this is the page to login with a facebook account.
+  <button ion-button full (click)="loginWithFB()">Login</button>
+
+  <ion-card *ngIf="userData">
+    <ion-card-header>{{ userData.username }}</ion-card-header>
+  </ion-card>
 </ion-content>
