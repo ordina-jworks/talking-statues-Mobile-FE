@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
 
 /**
  * Generated class for the InfoPage page.
@@ -13,12 +14,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'info.html',
 })
 export class InfoPage {
+  userData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private fb: Facebook,
+  ) {
+    fb.getLoginStatus()
+      .then(data => {
+        this.getUserDetail(data.authResponse.userID);
+      })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoPage');
+    // console.log('ionViewDidLoad InfoPage');
+  }
+
+  getUserDetail(userid) {
+    this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+      .then(res => {
+        this.userData = res;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
   }
 
 }

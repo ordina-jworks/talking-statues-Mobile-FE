@@ -86,8 +86,12 @@
         <variable name="APP_NAME" value="Ionic talking statues" />
     </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.1" />
+    <plugin name="cordova-plugin-statusbar" spec="https://github.com/apache/cordova-plugin-statusbar.git" />
+    <plugin name="cordova-plugin-facebook" spec="^0.2.2">
+        <variable name="FACEBOOK_DISPLAY_NAME" value="Ionic" />
+        <variable name="FACEBOOK_APP_ID" value="ID1349727158506619" />
+    </plugin>
     <engine name="ios" spec="4.5.4" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
 </widget>
