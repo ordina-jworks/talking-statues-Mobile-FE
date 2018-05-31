@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 
 import { LoginPage } from '../pages/login/login';
+import { MenuPage } from '../pages/menu/menu';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage:any = MenuPage;
 
   constructor(
     platform: Platform,

@@ -62,12 +62,4 @@ export class MenuPage {
 
     })
   }
-  //   var nav = this.navCtrl;
-  //   this.fb.logout().then( res => {
-  //       this.isLoggedIn = false;
-  //       nav.push(LoginPage);
-  //     })
-  //     .catch(e => console.log('Error logout from Facebook', e));
-  // }
-
 }
