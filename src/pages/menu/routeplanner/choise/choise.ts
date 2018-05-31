@@ -22,4 +22,23 @@ export class ChoisePage {
     console.log('ionViewDidLoad ChoisePage');
   }
 
+  activities = [
+    {
+      id: 1,
+      name: 'name 1',
+      description: 'description 1',
+      image: 'image url 1'
+    },
+    {
+      id: 2,
+      name: 'name 2',
+      description: 'description 2',
+      image: 'image url 2'
+    },{
+      id: 3,
+      name: 'name 3',
+      description: 'description 3',
+      image: 'image url 3'
+    },
+  ];
 }
