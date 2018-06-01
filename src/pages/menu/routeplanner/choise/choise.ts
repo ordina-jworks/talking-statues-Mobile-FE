@@ -14,31 +14,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'choise.html',
 })
 export class ChoisePage {
+  activitylist: any[] =[
+    {
+      id: 1,
+      name: 'Sunset',
+      description: 'description 1',
+      image: 'Sunset_2007-1.jpg'
+    },
+    {
+      id: 2,
+      name: 'Serene Sunset',
+      description: 'description 2',
+      image: 'serene-sunset-robert-bynum.jpg'
+    },{
+      id: 3,
+      name: 'Sunset and Wave',
+      description: 'description 3',
+      // image: 'Sunset.png'
+      image: 'sunset+wave.jpg'
+    },
+  ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+  ) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChoisePage');
   }
 
-  activities = [
-    {
-      id: 1,
-      name: 'name 1',
-      description: 'description 1',
-      image: 'image url 1'
-    },
-    {
-      id: 2,
-      name: 'name 2',
-      description: 'description 2',
-      image: 'image url 2'
-    },{
-      id: 3,
-      name: 'name 3',
-      description: 'description 3',
-      image: 'image url 3'
-    },
-  ];
+
 }
