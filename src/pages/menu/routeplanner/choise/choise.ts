@@ -30,7 +30,6 @@ export class ChoisePage {
       id: 3,
       name: 'Sunset and Wave',
       description: 'description 3',
-      // image: 'Sunset.png'
       image: 'sunset+wave.jpg'
     },
   ];
