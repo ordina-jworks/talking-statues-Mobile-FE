@@ -2,9 +2,6 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
 import {
-  Stack,
-  Card,
-  ThrowEvent,
   DragEvent,
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
@@ -31,23 +28,40 @@ export class ChoisePage {
   recentCard: string = '';
 
 
-  activitylist: any =[
+  activitylist: Array<any> =[
     {
-      id: 1,
-      name: 'Sunset',
-      description: 'description 1',
-      image: 'Sunset_2007-1.jpg'
+      gender: 'male',
+      name: {
+        title: 'Sir',
+        first: 'Antoon',
+        last: 'Van Dyck'
+      },
+      location: {
+        street: '127 Meir',
+        city: 'Antwerpen',
+        state: 'Provincie Antwerpen',
+        postcode: '2000'
+      },
+      picture: {
+        medium: 'https://www.google.be/search?biw=1440&bih=755&tbs=isz%3Am&tbm=isch&sa=1&ei=qiYVW9XfKOnjsAf44LqgBA&q=antoon+van+dyck+standbeeld&oq=antoon+van+dyck+standbeeld&gs_l=img.3..0j0i30k1.6279.8061.0.8132.11.5.0.6.6.0.80.262.5.5.0....0...1c.1.64.img..0.11.277...0i8i30k1j0i24k1j0i10i24k1.0.hM2IqR5zj6o#imgrc=nT_QBi6xMzdRvM:'
+      }
     },
     {
-      id: 2,
-      name: 'Serene Sunset',
-      description: 'description 2',
-      image: 'serene-sunset-robert-bynum.jpg'
-    },{
-      id: 3,
-      name: 'Sunset and Wave',
-      description: 'description 3',
-      image: 'sunset+wave.jpg'
+      gender: 'male',
+      name: {
+        title: 'Baron',
+        first: 'Hendrik',
+        last: 'Leys'
+      },
+      location: {
+        street: 'Louiza-Marialei',
+        city: 'Antwerpen',
+        state: 'Provincie Antwerpen',
+        postcode: '2000'
+      },
+      picture: {
+        medium: 'http://www.standbeelden.be/standbeeld/333'
+      }
     },
   ];
 
@@ -111,6 +125,8 @@ export class ChoisePage {
 
 // Add new cards to our array
   addNewCards(count: number) {
+    const data = this.cards;
+    console.log(data);
     this.http.get('https://randomuser.me/api/?results=' + count)
       .map(data => data.json().results)
       .subscribe(result => {
