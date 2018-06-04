@@ -1,9 +1,6 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
-import { Http } from '@angular/http';
-
-
 import {
   Stack,
   Card,
@@ -12,6 +9,7 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 import 'rxjs/add/operator/map';
+import { Http } from '@angular/http';
 /**
  * Generated class for the ChoisePage page.
  *
@@ -28,7 +26,12 @@ export class ChoisePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
-  activitylist: any[] =[
+  cards: Array<any>;
+  stackConfig: StackConfig;
+  recentCard: string = '';
+
+
+  activitylist: any =[
     {
       id: 1,
       name: 'Sunset',
@@ -47,22 +50,20 @@ export class ChoisePage {
       image: 'sunset+wave.jpg'
     },
   ];
-  cards: Array<any>;
-  stackConfig: StackConfig;
-  recentCard: string = '';
 
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: Http,
+    private http: Http
   ) {
+
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
       },
       transform: (element, x, y, r) => {
-        // this.onItemMove(element, x, y, r);
+        this.onItemMove(element, x, y, r);
       },
       throwOutDistance: (d) => {
         return 800;
@@ -72,19 +73,13 @@ export class ChoisePage {
 
   ngAfterViewInit() {
     // Either subscribe in controller or set in HTML
-    // this.swingStack.throwin.subscribe((event: DragEvent) => {
-    //   event.target.style.background = '#ffffff';
-    // });
+    this.swingStack.throwin.subscribe((event: DragEvent) => {
+      event.target.style.background = '#ffffff';
+    });
 
     this.cards = [{email: ''}];
     this.addNewCards(1);
   }
-
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChoisePage');
-  }
-
 
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
@@ -103,7 +98,7 @@ export class ChoisePage {
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
   }
 
-  // Connected through HTML
+// Connected through HTML
   voteUp(like: boolean) {
     let removedCard = this.cards.pop();
     this.addNewCards(1);
@@ -136,8 +131,6 @@ export class ChoisePage {
 
     return hex;
   }
-
-
 }
 
 

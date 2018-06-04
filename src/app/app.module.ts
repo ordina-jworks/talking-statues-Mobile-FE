@@ -11,7 +11,6 @@ import { MenuPageModule } from '../pages/menu/menu.module';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Facebook } from '@ionic-native/facebook';
 import { HttpModule } from '@angular/http';
-import { SwingModule } from 'angular2-swing';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { SwingModule } from 'angular2-swing';
     MenuPageModule,
     HttpClientModule,
     HttpModule,
-    SwingModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

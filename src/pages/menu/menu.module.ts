@@ -8,6 +8,7 @@ import { ChatPage } from './chat/chat';
 import { InfluencerPage } from './routeplanner/influencer/influencer';
 import { ChoisePage } from './routeplanner/choise/choise';
 import { ChatroomPage } from './chat/chatroom/chatroom';
+import { SwingModule } from 'angular2-swing';
 
 
 
@@ -32,6 +33,7 @@ import { ChatroomPage } from './chat/chatroom/chatroom';
   ],
   imports: [
     IonicPageModule.forChild(MenuPage),
+    SwingModule,
   ],
 })
 export class MenuPageModule {}
