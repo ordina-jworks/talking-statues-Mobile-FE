@@ -13,12 +13,26 @@
 </ion-header>
 
 
-<ion-content padding>
-<ion-list *ngIf="routes">
-  <ion-item *ngFor="let route of routes.in">
-    {{ route}}
-  </ion-item>
-  <button ion-item  (click)="routeSelected">
-  </button>
-</ion-list>
+<ion-content>
+  <div *ngIf="!routes.length == 0">
+    <ion-list>
+      <ion-title style="margin-bottom: 15px">
+        Geplande Routes
+      </ion-title>
+      <ion-item *ngFor="let route of routes">
+        {{route.information[0].name }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!routes.length == 0">
+    <ion-list>
+      <ion-title style="margin-bottom: 15px">
+        Agelegde Routes
+      </ion-title>
+      <ion-item *ngFor="let route of completedRoutes">
+        {{route.information[0].name }}
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

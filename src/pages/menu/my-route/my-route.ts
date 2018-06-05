@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RoutesService } from '../../../services/routes.service';
 import { NavigationmapPage } from './navigationmap/navigationmap';
-import { Monument } from '../../../app/models/monument';
+import { Language, Monument } from '../../../app/models/monument';
 
 /**
  * Generated class for the MyRoutePage page.
@@ -18,6 +18,22 @@ import { Monument } from '../../../app/models/monument';
 })
 export class MyRoutePage {
   routes: Monument[] = [];
+  completedRoutes: Monument[] = [
+    {
+      id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
+      information:[{
+        name: 'Antoon Van Dyck',
+        language:Language.NL,
+        description: 'mens op een voetstuk',
+        question:[],
+      }],
+
+      area:"meir",
+      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+      latitude: 51.218,
+      longitude: 4.413
+    },
+  ];
 
   constructor(
     public navCtrl: NavController,
@@ -25,17 +41,10 @@ export class MyRoutePage {
     private _routesService: RoutesService,
     public myRouteEvent: Events,
     ) {
-    myRouteEvent.subscribe('list:like', (data) => {
-      console.log('Receiving data: ',  data);
-    });
-
+    // this.myRouteEvent.subscribe('list:like', (data) => {
+    //   console.log('Receiving data: ',  data);
+    // });
     this.routes = navParams.get('data');
-    console.log(this.routes);
-  }
-
-  ionViewDidLoad() {
-    this._routesService.getRoutes()
-      .then((routes) => this.routes = routes);
   }
 
   onLoadNewRoute() {

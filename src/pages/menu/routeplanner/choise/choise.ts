@@ -30,7 +30,6 @@ export class ChoisePage {
   choisenList: Monument[] = [];
   currentList: Monument[] = [];
 
-
   monuments: Monument[] =[
     {
       id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
@@ -152,8 +151,8 @@ export class ChoisePage {
   }
 
   goToRoutes() {
-
     // this.choiseEvent.publish('list:like', this.choisenList);
+
     console.log('sending data: ' , this.choisenList);
     this.navCtrl.push(MyRoutePage, {
       data: this.choisenList
