@@ -2,8 +2,6 @@ page-choise {
   #card-stack {
     width: 90%;
     height: 200px;
-    //background: #047915;
-    //border: 10px solid #4cb338;
     margin: 100px auto 0;
     position: relative;
   }
@@ -14,5 +12,15 @@ page-choise {
     text-align: center;
     top: 3%;
     height: 90%;
+  }
+
+  .card-content {
+    background-color: white;
+  }
+
+  .confirm-button {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
   }
 }

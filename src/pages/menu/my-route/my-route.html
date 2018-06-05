@@ -14,5 +14,11 @@
 
 
 <ion-content padding>
-
+<ion-list *ngIf="routes">
+  <ion-item *ngFor="let route of routes.in">
+    {{ route}}
+  </ion-item>
+  <button ion-item  (click)="routeSelected">
+  </button>
+</ion-list>
 </ion-content>

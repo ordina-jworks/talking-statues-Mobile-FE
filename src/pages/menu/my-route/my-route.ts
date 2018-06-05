@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RoutesService } from '../../../services/routes.service';
+import { NavigationmapPage } from './navigationmap/navigationmap';
+import { Monument } from '../../../app/models/monument';
 
 /**
  * Generated class for the MyRoutePage page.
@@ -14,12 +17,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'my-route.html',
 })
 export class MyRoutePage {
+  routes: Monument[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _routesService: RoutesService,
+    public myRouteEvent: Events,
+    ) {
+    myRouteEvent.subscribe('list:like', (data) => {
+      console.log('Receiving data: ',  data);
+    });
+
+    this.routes = navParams.get('data');
+    console.log(this.routes);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MyRoutePage');
+    this._routesService.getRoutes()
+      .then((routes) => this.routes = routes);
   }
+
+  onLoadNewRoute() {
+    this.navCtrl.push(NavigationmapPage);
+  }
+
 
 }

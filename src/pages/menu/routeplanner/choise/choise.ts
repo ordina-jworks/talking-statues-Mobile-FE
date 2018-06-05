@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
 import {
   DragEvent,
@@ -7,6 +7,9 @@ import {
   SwingCardComponent} from 'angular2-swing';
 import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
+import { Language, Monument } from '../../../../app/models/monument';
+import { MenuPage } from '../../menu';
+import { MyRoutePage } from '../../my-route/my-route';
 /**
  * Generated class for the ChoisePage page.
  *
@@ -22,55 +25,64 @@ import { Http } from '@angular/http';
 export class ChoisePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
-
-  cards: Array<any>;
   stackConfig: StackConfig;
   recentCard: string = '';
+  choisenList: Monument[] = [];
+  currentList: Monument[] = [];
 
 
-  activitylist: Array<any> =[
+  monuments: Monument[] =[
     {
-      gender: 'male',
-      name: {
-        title: 'Sir',
-        first: 'Antoon',
-        last: 'Van Dyck'
-      },
-      location: {
-        street: '127 Meir',
-        city: 'Antwerpen',
-        state: 'Provincie Antwerpen',
-        postcode: '2000'
-      },
-      picture: {
-        medium: 'https://www.google.be/search?biw=1440&bih=755&tbs=isz%3Am&tbm=isch&sa=1&ei=qiYVW9XfKOnjsAf44LqgBA&q=antoon+van+dyck+standbeeld&oq=antoon+van+dyck+standbeeld&gs_l=img.3..0j0i30k1.6279.8061.0.8132.11.5.0.6.6.0.80.262.5.5.0....0...1c.1.64.img..0.11.277...0i8i30k1j0i24k1j0i10i24k1.0.hM2IqR5zj6o#imgrc=nT_QBi6xMzdRvM:'
-      }
+      id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
+      information:[{
+        name: 'Antoon Van Dyck',
+        language:Language.NL,
+        description: 'mens op een voetstuk',
+        question:[],
+      }],
+
+      area:"meir",
+      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+      latitude: 51.218,
+      longitude: 4.413
     },
     {
-      gender: 'male',
-      name: {
-        title: 'Baron',
-        first: 'Hendrik',
-        last: 'Leys'
-      },
-      location: {
-        street: 'Louiza-Marialei',
-        city: 'Antwerpen',
-        state: 'Provincie Antwerpen',
-        postcode: '2000'
-      },
-      picture: {
-        medium: 'http://www.standbeelden.be/standbeeld/333'
-      }
+      id:'hdffhgxfhgxdfgxfhxf',
+      information:[{
+        name: 'Baron Hendrik Leys',
+        language:Language.NL,
+        description: 'mens op een voetstuk',
+        question:[],
+      }],
+      area:"Louiza-Marialei",
+      imageRef: 'https://images.standbeelden.be/300x0/931/Baron%20Hendrik%20Leys.jpg',
+      latitude:1.1,
+      longitude:1.1
     },
+    {
+      id:'hdfhdfhfhgdjjgmgmdrfghdsfsfsf',
+      information:[{
+        name: 'Antoon Van Dyck2',
+        language:Language.NL,
+        description: 'mens op een voetstuk',
+        question:[],
+      }],
+
+      area:"meir",
+      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+      latitude:1.1,
+      longitude:1.1
+    }
   ];
 
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: Http
+    private http: Http,
+    public choiseEvent: Events,
   ) {
+    this.currentList = this.monuments;
 
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
@@ -90,9 +102,6 @@ export class ChoisePage {
     this.swingStack.throwin.subscribe((event: DragEvent) => {
       event.target.style.background = '#ffffff';
     });
-
-    this.cards = [{email: ''}];
-    this.addNewCards(1);
   }
 
   // Called whenever we drag an element
@@ -114,26 +123,17 @@ export class ChoisePage {
 
 // Connected through HTML
   voteUp(like: boolean) {
-    let removedCard = this.cards.pop();
-    this.addNewCards(1);
-    if (like) {
-      this.recentCard = 'You liked: ' + removedCard.email;
-    } else {
-      this.recentCard = 'You disliked: ' + removedCard.email;
+    let monument = this.currentList.pop();
+    if(this.currentList.length == 0){
+      console.log(this.choisenList);
     }
-  }
 
-// Add new cards to our array
-  addNewCards(count: number) {
-    const data = this.cards;
-    console.log(data);
-    this.http.get('https://randomuser.me/api/?results=' + count)
-      .map(data => data.json().results)
-      .subscribe(result => {
-        for (let val of result) {
-          this.cards.push(val);
-        }
-      })
+    if (like) {
+      this.recentCard = 'You liked: ' + monument.information[0].name;
+      this.choisenList.push(monument);
+    } else {
+      this.recentCard = 'You disliked: ' + monument.information[0].name;
+    }
   }
 
 // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
@@ -144,8 +144,20 @@ export class ChoisePage {
     while (hex.length < padding) {
       hex = "0" + hex;
     }
-
     return hex;
+  }
+
+  getNewMonuments() {
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+
+  goToRoutes() {
+
+    // this.choiseEvent.publish('list:like', this.choisenList);
+    console.log('sending data: ' , this.choisenList);
+    this.navCtrl.push(MyRoutePage, {
+      data: this.choisenList
+    });
   }
 }
 
