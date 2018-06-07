@@ -10,6 +10,7 @@ import { Http } from '@angular/http';
 import { Language, Monument } from '../../../../app/models/monument';
 import { Geolocation} from '@ionic-native/geolocation';
 import { MyRoutePage } from '../../my-route/my-route';
+import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 /**
  * Generated class for the ChoisePage page.
  *
@@ -31,6 +32,9 @@ export class ChoisePage {
   currentList: Monument[] = [];
   latitude;
   longitude;
+
+  route = {};
+  monumentsForm: FormGroup;
 
   monuments: Monument[] =[
     {
@@ -81,9 +85,15 @@ export class ChoisePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private http: Http,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private fb: FormBuilder,
   ) {
     this.currentList = this.monuments;
+
+    this.monumentsForm = fb.group({
+      routeTitle: [''],
+      monuments: [ this.choisenList]
+    });
 
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
@@ -162,7 +172,7 @@ export class ChoisePage {
 
   goToRoutes() {
     this.navCtrl.push(MyRoutePage, {
-      data: this.choisenList
+      data: this.monumentsForm.value
     });
   }
 }

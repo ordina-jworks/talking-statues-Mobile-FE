@@ -16,6 +16,7 @@ import { RoutesService } from '../services/routes.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigationmap';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     MenuPageModule,
     HttpClientModule,
     HttpModule,
+    ReactiveFormsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

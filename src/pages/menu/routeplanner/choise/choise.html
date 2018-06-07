@@ -1,13 +1,7 @@
-<!--
-  Generated template for the ChoisePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Keuzes</ion-title>
+    <ion-title>Voorgestelde Keuzes</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -44,25 +38,28 @@
     </div>
 
     <div *ngIf="currentList.length == 0">
-      <ion-list>
-        <ion-title style="margin-bottom: 15px">
-          Liked Monuments to visit
+
+      <form [formGroup]="monumentsForm">
+        <ion-title style="text-align: center">
+          <ion-label>Proposed Route</ion-label>
         </ion-title>
-        <ion-item *ngFor="let list of choisenList">
-          {{list.information[0].name }}
+        <ion-item>
+          <ion-input type="text" formControlName="routeTitle" name="routeTitle" placeholder="Route name for liked monuments..."></ion-input>
         </ion-item>
-      </ion-list>
+        <ion-title style="text-align: center; margin-bottom: 15px">
+          <ion-label style="margin-bottom: 15px">Liked Monuments to visit</ion-label>
+        </ion-title>
+        <ion-item formControlName="monuments" *ngFor="let list of monuments"  name="monumens">
+          {{ list.information[0].name }}
+        </ion-item>
+        <button ion-button block (click)="goToRoutes()">Start Routes</button>
+      </form>
+
       <ion-row style="">
-        <ion-col>
-          <button class="confirm-button" ion-button (click)="goToRoutes()">Start Routes</button>
-        </ion-col>
         <ion-col>
           <button class="confirm-button"ion-button (click)="getNewMonuments()">Refresh Monument Options</button>
         </ion-col>
       </ion-row>
-    </div>
-    <div>
-
     </div>
   </ion-content>
 

@@ -39,6 +39,7 @@ export class MyRoutePage {
     ) {
     this.receivedRoutes = navParams.get('data');
     this.routes = this.receivedRoutes;
+    console.log(this.routes);
     if (this.receivedRoutes) {
       this.dateVariable = new Date().toDateString();
     }
