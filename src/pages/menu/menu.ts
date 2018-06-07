@@ -25,8 +25,8 @@ export class MenuPage {
     this.data = navParams.get('payload');
     fb.getLoginStatus()
       .then(res => {
-        console.log(res.status);
-        console.log(res.authResponse.userID);
+        // console.log(res.status);
+        // console.log(res.authResponse.userID);
         if (res.status === 'connect') {
           this,this.isLoggedIn = true;
         }

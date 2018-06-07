@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
-import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { RoutesService } from '../../../services/routes.service';
 import { NavigationmapPage } from './navigationmap/navigationmap';
 import { Language, Monument } from '../../../app/models/monument';
-
-/**
- * Generated class for the MyRoutePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,6 +10,7 @@ import { Language, Monument } from '../../../app/models/monument';
   templateUrl: 'my-route.html',
 })
 export class MyRoutePage {
+  receivedRoutes: Monument[] = [];
   routes: Monument[] = [];
   completedRoutes: Monument[] = [
     {
@@ -40,15 +34,37 @@ export class MyRoutePage {
     public navParams: NavParams,
     private _routesService: RoutesService,
     public myRouteEvent: Events,
+    private _modalCtrl: ModalController,
     ) {
     // this.myRouteEvent.subscribe('list:like', (data) => {
     //   console.log('Receiving data: ',  data);
     // });
-    this.routes = navParams.get('data');
+    this.receivedRoutes = navParams.get('data');
+    this.routes = this.receivedRoutes;
+    console.log(this.routes);
+
+  }
+
+  ionViewWillEnter() {
+    // this.onAddRoute(this.receivedRoutes);
+    this._routesService.getRoutes()
+      .then((routes) => {
+        this.routes = routes;
+      })
+  }
+
+  onAddRoute(data: Monument[]) {
+    this._routesService.addRoutes(data);
+    this.navCtrl.pop();
   }
 
   onLoadNewRoute() {
     this.navCtrl.push(NavigationmapPage);
+  }
+
+  onOpenRoute() {
+    // create the modal, but present will also show the modal.
+    this._modalCtrl.create(NavigationmapPage).present();
   }
 
 

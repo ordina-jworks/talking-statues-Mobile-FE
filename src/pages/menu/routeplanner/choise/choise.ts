@@ -8,7 +8,7 @@ import {
 import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { Language, Monument } from '../../../../app/models/monument';
-import { MenuPage } from '../../menu';
+import { Geolocation} from '@ionic-native/geolocation';
 import { MyRoutePage } from '../../my-route/my-route';
 /**
  * Generated class for the ChoisePage page.
@@ -29,6 +29,8 @@ export class ChoisePage {
   recentCard: string = '';
   choisenList: Monument[] = [];
   currentList: Monument[] = [];
+  latitude;
+  longitude;
 
   monuments: Monument[] =[
     {
@@ -80,6 +82,7 @@ export class ChoisePage {
     public navParams: NavParams,
     private http: Http,
     public choiseEvent: Events,
+    private geolocation: Geolocation
   ) {
     this.currentList = this.monuments;
 
@@ -94,6 +97,15 @@ export class ChoisePage {
         return 800;
       }
     };
+
+    geolocation.getCurrentPosition()
+      .then((locate) => {
+        this.latitude = locate.coords.latitude;
+        this.longitude = locate.coords.longitude;
+        console.log('Current Location coordinates are:' , this.latitude + ' latitude & ' + this.longitude + ' longitude.')
+    }).catch((error) => {
+      console.log('Error getting location: ', error);
+    })
   }
 
   ngAfterViewInit() {
@@ -124,7 +136,6 @@ export class ChoisePage {
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
     if(this.currentList.length == 0){
-      console.log(this.choisenList);
     }
 
     if (like) {
@@ -152,8 +163,6 @@ export class ChoisePage {
 
   goToRoutes() {
     // this.choiseEvent.publish('list:like', this.choisenList);
-
-    console.log('sending data: ' , this.choisenList);
     this.navCtrl.push(MyRoutePage, {
       data: this.choisenList
     });

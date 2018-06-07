@@ -1,38 +1,34 @@
-<!--
-  Generated template for the MyRoutePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Mijn Routes</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
-  <div *ngIf="!routes.length == 0">
+
+  <div *ngIf="receivedRoutes">
     <ion-list>
       <ion-title style="margin-bottom: 15px">
         Geplande Routes
       </ion-title>
-      <ion-item *ngFor="let route of routes">
+      <ion-item *ngFor="let route of receivedRoutes" (click)="onOpenRoute()">
         {{route.information[0].name }}
       </ion-item>
     </ion-list>
   </div>
 
-  <div *ngIf="!routes.length == 0">
+  <div *ngIf="completedRoutes">
     <ion-list>
       <ion-title style="margin-bottom: 15px">
-        Agelegde Routes
+        Afgelegde Routes
       </ion-title>
-      <ion-item *ngFor="let route of completedRoutes">
+      <ion-item *ngFor="let route of completedRoutes" (click)="onOpenRoute()">
         {{route.information[0].name }}
       </ion-item>
     </ion-list>
   </div>
+
 </ion-content>
+
