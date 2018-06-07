@@ -14,12 +14,15 @@ import { HttpModule } from '@angular/http';
 import { MonumentService } from '../services/monument.service';
 import { RoutesService } from '../services/routes.service';
 import { IonicStorageModule } from '@ionic/storage';
+import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigationmap';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     MenuPage,
+    NavigationmapPage,
   ],
   imports: [
     BrowserModule,
@@ -35,13 +38,16 @@ import { IonicStorageModule } from '@ionic/storage';
     MyApp,
     LoginPage,
     MenuPage,
+    NavigationmapPage,
   ],
   providers: [
     MonumentService,
     RoutesService,
     NativeStorage,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
     Facebook,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+
   ]
 })
 export class AppModule {}
