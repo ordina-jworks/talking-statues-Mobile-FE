@@ -10,7 +10,7 @@ import { Http } from '@angular/http';
 import { Language, Monument } from '../../../../app/models/monument';
 import { Geolocation} from '@ionic-native/geolocation';
 import { MyRoutePage } from '../../my-route/my-route';
-import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 /**
  * Generated class for the ChoisePage page.
  *
@@ -32,6 +32,7 @@ export class ChoisePage {
   currentList: Monument[] = [];
   latitude;
   longitude;
+  monumentNames;
 
   route = {};
   monumentsForm: FormGroup;
@@ -89,12 +90,10 @@ export class ChoisePage {
     private fb: FormBuilder,
   ) {
     this.currentList = this.monuments;
-
     this.monumentsForm = fb.group({
       routeTitle: [''],
       monuments: [ this.choisenList]
     });
-
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -150,6 +149,9 @@ export class ChoisePage {
     if (like) {
       this.recentCard = 'You liked: ' + monument.information[0].name;
       this.choisenList.push(monument);
+      this.monumentNames = this.choisenList.map(a => a.information);
+      console.log('monumentNames: ', this.monumentNames);
+      console.log('choisenList :', this.choisenList);
     } else {
       this.recentCard = 'You disliked: ' + monument.information[0].name;
     }

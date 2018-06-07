@@ -39,7 +39,7 @@
 
     <div *ngIf="currentList.length == 0">
 
-      <form [formGroup]="monumentsForm">
+      <form [formGroup]="monumentsForm" >
         <ion-title style="text-align: center">
           <ion-label>Proposed Route</ion-label>
         </ion-title>
@@ -49,9 +49,9 @@
         <ion-title style="text-align: center; margin-bottom: 15px">
           <ion-label style="margin-bottom: 15px">Liked Monuments to visit</ion-label>
         </ion-title>
-        <ion-item formControlName="monuments" *ngFor="let list of monuments"  name="monumens">
-          {{ list.information[0].name }}
-        </ion-item>
+        <ion-list *ngFor="let monument of monumentNames">
+          {{ monument[0].name }}
+        </ion-list>
         <button ion-button block (click)="goToRoutes()">Start Routes</button>
       </form>
 
