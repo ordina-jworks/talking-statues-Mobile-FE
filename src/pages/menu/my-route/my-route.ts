@@ -12,6 +12,8 @@ import { Language, Monument } from '../../../app/models/monument';
 export class MyRoutePage {
   receivedRoutes: Monument[] = [];
   routes: Monument[] = [];
+  dateVariable: string;
+
   completedRoutes: Monument[] = [
     {
       id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
@@ -33,15 +35,13 @@ export class MyRoutePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private _routesService: RoutesService,
-    public myRouteEvent: Events,
     private _modalCtrl: ModalController,
     ) {
-    // this.myRouteEvent.subscribe('list:like', (data) => {
-    //   console.log('Receiving data: ',  data);
-    // });
     this.receivedRoutes = navParams.get('data');
     this.routes = this.receivedRoutes;
-    console.log(this.routes);
+    if (this.receivedRoutes) {
+      this.dateVariable = new Date().toDateString();
+    }
 
   }
 
@@ -64,7 +64,9 @@ export class MyRoutePage {
 
   onOpenRoute() {
     // create the modal, but present will also show the modal.
-    this._modalCtrl.create(NavigationmapPage).present();
+    this._modalCtrl.create(NavigationmapPage, {
+      myRouteData: this.routes
+    }).present();
   }
 
 

@@ -81,7 +81,6 @@ export class ChoisePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private http: Http,
-    public choiseEvent: Events,
     private geolocation: Geolocation
   ) {
     this.currentList = this.monuments;
@@ -162,7 +161,6 @@ export class ChoisePage {
   }
 
   goToRoutes() {
-    // this.choiseEvent.publish('list:like', this.choisenList);
     this.navCtrl.push(MyRoutePage, {
       data: this.choisenList
     });

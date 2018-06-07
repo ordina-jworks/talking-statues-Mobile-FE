@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Geolocation} from '@ionic-native/geolocation';
 
 declare var google;
@@ -16,9 +16,10 @@ export class NavigationmapPage {
   constructor(
     public navCtrl: NavController,
     public geolocation: Geolocation,
+    public params: NavParams,
     public viewCtrl: ViewController,
   ) {
-
+    console.log(params.get('myRouteData'));
   }
   ionViewDidLoad() {
     this.loadMap();
