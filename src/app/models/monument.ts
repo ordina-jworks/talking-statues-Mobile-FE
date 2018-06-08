@@ -25,3 +25,10 @@ export enum Language {
   EN = 'EN',
   DE = 'DE'
 }
+
+
+// IMPORTANT: needed model to get data when adding routeTitle
+export class Route {
+  routeTitle: string;
+  monuments: Monument[]
+}

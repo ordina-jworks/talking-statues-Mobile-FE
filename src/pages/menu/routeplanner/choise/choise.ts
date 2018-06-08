@@ -11,6 +11,7 @@ import { Language, Monument } from '../../../../app/models/monument';
 import { Geolocation} from '@ionic-native/geolocation';
 import { MyRoutePage } from '../../my-route/my-route';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
 /**
  * Generated class for the ChoisePage page.
  *
@@ -62,8 +63,8 @@ export class ChoisePage {
       }],
       area:"Louiza-Marialei",
       imageRef: 'https://images.standbeelden.be/300x0/931/Baron%20Hendrik%20Leys.jpg',
-      latitude:1.1,
-      longitude:1.1
+      latitude:51.213476,
+      longitude:4.412387
     },
     {
       id:'hdfhdfhfhgdjjgmgmdrfghdsfsfsf',
@@ -76,8 +77,8 @@ export class ChoisePage {
 
       area:"meir",
       imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
-      latitude:1.1,
-      longitude:1.1
+      latitude:51.211,
+      longitude:4.402
     }
   ];
 
@@ -91,7 +92,7 @@ export class ChoisePage {
   ) {
     this.currentList = this.monuments;
     this.monumentsForm = fb.group({
-      routeTitle: ['', Validators.required],
+      routeTitle: ['Route :' + new Date(), ],
       monuments: [ this.choisenList]
     });
     this.stackConfig = {
@@ -173,7 +174,7 @@ export class ChoisePage {
   }
 
   goToRoutes() {
-    this.navCtrl.push(MyRoutePage, {
+    this.navCtrl.push(NavigationmapPage, {
       data: this.monumentsForm.value
     });
   }
