@@ -10,7 +10,7 @@ import { Http } from '@angular/http';
 import { Language, Monument } from '../../../../app/models/monument';
 import { Geolocation} from '@ionic-native/geolocation';
 import { MyRoutePage } from '../../my-route/my-route';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 /**
  * Generated class for the ChoisePage page.
  *
@@ -91,7 +91,7 @@ export class ChoisePage {
   ) {
     this.currentList = this.monuments;
     this.monumentsForm = fb.group({
-      routeTitle: [''],
+      routeTitle: ['', Validators.required],
       monuments: [ this.choisenList]
     });
     this.stackConfig = {
