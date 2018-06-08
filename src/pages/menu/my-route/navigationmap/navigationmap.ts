@@ -42,16 +42,9 @@ export class NavigationmapPage {
       };
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      let markers = this.receivedData.monuments.map(monument => new google.maps.Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map}));
+      let markers = this.receivedData.monuments.map(monument => new google.maps.Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name}));
       let currentPosition = this.receivedData.monuments.map(user => new google.maps.Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map})
         .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
-
-      // let infoWindow = new google.maps.HtmlInfoWindow({
-      //   content: this.receivedData.monuments.map(monumentName => monumentName.information[0].name)
-      // })
-      // markers.addListener('click', function () {
-      //   infoWindow.open(map, markers);
-      // })
 
     }), (error) => {
       console.log(error);
