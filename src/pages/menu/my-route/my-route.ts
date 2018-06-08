@@ -13,6 +13,7 @@ export class MyRoutePage {
   receivedRoutes: Monument[] = [];
   routes: Monument[] = [];
   dateVariable: string;
+  name;
 
   completedRoutes: Monument[] = [
     {
@@ -39,6 +40,8 @@ export class MyRoutePage {
     ) {
     this.receivedRoutes = navParams.get('data');
     this.routes = this.receivedRoutes;
+
+    console.log(this.routes);
     if (this.receivedRoutes) {
       this.dateVariable = new Date().toDateString();
     }
@@ -67,6 +70,7 @@ export class MyRoutePage {
     this._modalCtrl.create(NavigationmapPage, {
       myRouteData: this.routes
     }).present();
+
   }
 
 
