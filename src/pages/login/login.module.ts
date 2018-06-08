@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { LoginPage } from './login';
 import { LoginFacebookPage } from './login-facebook/login-facebook';
 import { LoginGooglePage } from './login-google/login-google';
+import { Facebook} from '@ionic-native/facebook';
 
 
 @NgModule({
@@ -17,5 +18,8 @@ import { LoginGooglePage } from './login-google/login-google';
   imports: [
     IonicPageModule.forChild(LoginPage),
   ],
+  providers: [
+    Facebook,
+  ]
 })
 export class LoginPageModule {}
