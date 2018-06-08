@@ -17,6 +17,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigationmap';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Direction } from 'angular2-swing';
 
 @NgModule({
   declarations: [
