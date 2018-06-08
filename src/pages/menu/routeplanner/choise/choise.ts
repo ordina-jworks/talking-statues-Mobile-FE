@@ -150,8 +150,8 @@ export class ChoisePage {
       this.recentCard = 'You liked: ' + monument.information[0].name;
       this.choisenList.push(monument);
       this.monumentNames = this.choisenList.map(a => a.information);
-      console.log('monumentNames: ', this.monumentNames);
-      console.log('choisenList :', this.choisenList);
+      // console.log('monumentNames: ', this.monumentNames);
+      // console.log('choisenList :', this.choisenList);
     } else {
       this.recentCard = 'You disliked: ' + monument.information[0].name;
     }
