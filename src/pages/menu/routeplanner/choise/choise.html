@@ -44,7 +44,7 @@
           <ion-label>Proposed Route</ion-label>
         </ion-title>
         <ion-item>
-          <ion-input type="text" formControlName="routeTitle" name="routeTitle" placeholder="A route name is required..." required></ion-input>
+          <ion-input type="text" formControlName="routeTitle" name="routeTitle" ></ion-input>
         </ion-item>
         <ion-title style="text-align: center; margin-bottom: 15px">
           <ion-label style="margin-bottom: 15px">Liked Monuments to visit</ion-label>
@@ -52,7 +52,7 @@
         <ion-list *ngFor="let monument of monumentNames">
           {{ monument[0].name }}
         </ion-list>
-        <button ion-button block [disabled]="!monumentsForm.valid"(click)="goToRoutes()">Start Routes</button>
+        <button ion-button block (click)="goToRoutes()">Start Routes</button>
       </form>
 
       <ion-row style="">

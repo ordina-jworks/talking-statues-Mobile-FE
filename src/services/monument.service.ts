@@ -19,7 +19,7 @@ export class MonumentService {
     }
 
     return new Promise(resolve => {
-      let endpoint = 'localhost:8080/api/NL/monuments';
+      let endpoint = 'localhost:8080/NL/monuments';
       let header = new HttpHeaders({'Accept': 'application/vnd.ordina.v1.0+json'})
 
       this._http.get(`${endpoint}/5`, {headers: header});

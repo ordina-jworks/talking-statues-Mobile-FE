@@ -1,7 +1,7 @@
 <<ion-header>
   <ion-navbar>
     <ion-title>
-      Google Map Integration
+      {{ title }}
     </ion-title>
 
   </ion-navbar>
@@ -9,7 +9,6 @@
 
 <ion-content padding>
   <div #map id="map"></div>
-  <button ion-button block (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
   <button ion-button block (click)="onDismiss()">Dismiss</button>
 </ion-content>
 

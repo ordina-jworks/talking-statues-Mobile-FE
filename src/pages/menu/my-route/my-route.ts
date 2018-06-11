@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Events, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { RoutesService } from '../../../services/routes.service';
 import { NavigationmapPage } from './navigationmap/navigationmap';
 import { Language, Monument } from '../../../app/models/monument';
@@ -41,7 +41,6 @@ export class MyRoutePage {
     this.receivedRoutes = navParams.get('data');
     this.routes = this.receivedRoutes;
 
-    console.log(this.routes);
     if (this.receivedRoutes) {
       this.dateVariable = new Date().toDateString();
     }
@@ -61,14 +60,14 @@ export class MyRoutePage {
     this.navCtrl.pop();
   }
 
-  onLoadNewRoute() {
-    this.navCtrl.push(NavigationmapPage);
-  }
+  // onLoadNewRoute() {
+  //   this.navCtrl.push(NavigationmapPage);
+  // }
 
-  onOpenRoute() {
+  onOpenRoute(route) {
     // create the modal, but present will also show the modal.
     this._modalCtrl.create(NavigationmapPage, {
-      myRouteData: this.routes
+      myRouteData:route
     }).present();
 
   }

@@ -13,7 +13,7 @@
       <ion-title style="margin-bottom: 15px">
         Geplande Routes
       </ion-title>
-      <ion-item (click)="onOpenRoute()">
+      <ion-item (click)="onOpenRoute(route)">
           {{ route.routeTitle }}
       </ion-item>
     </ion-list>
@@ -24,7 +24,7 @@
       <ion-title style="margin-bottom: 15px">
         Afgelegde Routes
       </ion-title>
-      <ion-item *ngFor="let route of completedRoutes" (click)="onOpenRoute()">
+      <ion-item *ngFor="let route of completedRoutes" (click)="onOpenRoute(route)">
         {{monumentNames }}
       </ion-item>
     </ion-list>
