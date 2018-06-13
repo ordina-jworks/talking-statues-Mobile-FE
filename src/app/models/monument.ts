@@ -1,5 +1,5 @@
 export class Monument {
-  id: any;
+  id: string;
   information:Information[];
   longitude: number;
   latitude: number;

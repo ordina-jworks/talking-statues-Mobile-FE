@@ -34,7 +34,6 @@ export class NavigationmapPage {
     public viewCtrl: ViewController,
   ) {
     this.receivedData = params.get('data');
-    console.log(this.receivedData);
     this.title = this.receivedData.routeTitle;
   }
 
@@ -44,38 +43,42 @@ export class NavigationmapPage {
 
   loadMap() {
     this.geolocation.getCurrentPosition().then((position) => {
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      this.startLatitude = position.coords.latitude + '';
-      this.startLongitude = position.coords.longitude + '';
-      console.log('start: ' , this.startLatitude, this.startLongitude);
-        let mapOptions = {
-        center: latLng,
-        zoom: 15,
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        this.startLatitude = position.coords.latitude + '';
+        this.startLongitude = position.coords.longitude + '';
+          let mapOptions = {
+          center: latLng,
+          zoom: 15,
+        };
 
-      // let markerList = this.receivedData.monuments.map(monument => new google.maps
-      //   .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
-      // );
-      this.receivedData.monuments.map(monument => {
-        this.monumentLatitude = monument.latitude,
-        this.monumentLongitude = monument.longitude,
-        this.markers.push(monument.latitude+','+monument.longitude),
-          console.log(this.monumentLatitude, this.monumentLongitude);
-      });
+          let markerOptions = {
+            title: this.receivedData.monuments.map(title => title.information[0].name)
+          }
 
-      // let currentPosition = this.receivedData.monuments.map(user => new google.maps
-      //   .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
-      //   .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
 
-      console.log(this.markers);
-      this.directionsDisplay.setMap(this.map);
-      this.calculateAndDisplayRoute();
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    }), (error) => {
-      console.log(error);
+        let markerList = this.receivedData.monuments.map(monument => new google.maps
+          .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
+        );
+        this.receivedData.monuments.map(monument => {
+          this.monumentLatitude = monument.latitude,
+          this.monumentLongitude = monument.longitude,
+          this.markers.push(monument.latitude+','+monument.longitude)
+        });
+
+        // let currentPosition = this.receivedData.monuments.map(user => new google.maps
+        //   .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
+        //   .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
+
+        // console.log(this.markers);
+        this.directionsDisplay.setMap(this.map);
+        this.calculateAndDisplayRoute();
+
+      }), (error) => {
+        console.log(error);
+      }
     }
-  }
 
   calculateAndDisplayRoute() {
     let waypts = [];
@@ -87,12 +90,10 @@ export class NavigationmapPage {
 
     let destinationLat = Math.max(this.monumentLatitude);
     let destinationLong = Math.max(this.monumentLongitude);
-    console.log('destination: ', destinationLat + ',' + destinationLong);
-
-    console.log('waypoints: ', waypts)
     this.directionsService.route({
       origin: `${this.startLatitude}, ${this.startLongitude}`,
       destination: `${destinationLat}, ${destinationLong}`,
+
       waypoints: waypts,
       travelMode: 'WALKING',
     }, (response, status) => {

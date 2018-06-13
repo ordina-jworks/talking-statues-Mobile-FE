@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { map, tap } from 'rxjs/operators';
+import { QueryMonuments } from '../app/models/query';
+import { Route } from '../app/models/route';
 
 
 @Injectable()
 export class MonumentService {
-  data: any;
+  data: QueryMonuments[] = [];
 
 
   constructor(
@@ -13,16 +17,21 @@ export class MonumentService {
     this.data = null;
   }
 
-  getMonuments() {
-    if (this.data) {
-      return Promise.resolve(this.data);
-    }
+  getSwipeMonuments(): Observable<QueryMonuments[]> {
+    let endpoint = 'http://localhost:9000/monuments/selection?area=Sint-Andries&lang=NL';
+    return this._http.get<QueryMonuments[]>(endpoint).pipe(
+      map(res => this.data = res),
+      tap(res => console.log(res))
+    );
+  };
 
-    return new Promise(resolve => {
-      let endpoint = 'localhost:8080/NL/monuments';
-      let header = new HttpHeaders({'Accept': 'application/vnd.ordina.v1.0+json'})
+  sendLikedMonumentIds(likedIds): Observable<Route> {
+    let endpoint = `http://localhost:9000/routes`;
 
-      this._http.get(`${endpoint}/5`, {headers: header});
-    })
+    likedIds.locations = likedIds.locations.map(id => id.id);
+    console.log(likedIds);
+    return this._http.post<Route>(endpoint, likedIds);
   }
+
+
 }

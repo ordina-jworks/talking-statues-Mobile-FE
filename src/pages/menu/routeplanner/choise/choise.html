@@ -8,15 +8,17 @@
   <ion-content padding>
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" *ngIf="!currentList.length == 0">
       <ion-card #mycards1 swing-card *ngFor="let monument of currentList">
-        <ion-item *ngIf="monument.information[0].name" >
+        <ion-item *ngIf="monument.name" >
           <ion-avatar item-left>
             <img *ngIf="monument.imageRef"[src]="monument.imageRef">
           </ion-avatar>
-          <h2>{{monument.information[0].name}}</h2>
+          <h2>{{monument.name}}</h2>
         </ion-item>
+        <!--
         <ion-card-content *ngIf="monument.area">
           {{ monument.area}}<br>
         </ion-card-content>
+        -->
       </ion-card>
     </div>
 
@@ -44,15 +46,17 @@
           <ion-label>Proposed Route</ion-label>
         </ion-title>
         <ion-item>
-          <ion-input type="text" formControlName="routeTitle" name="routeTitle" ></ion-input>
+          <ion-input type="text" formControlName="name" name="name" ></ion-input>
         </ion-item>
         <ion-title style="text-align: center; margin-bottom: 15px">
           <ion-label style="margin-bottom: 15px">Liked Monuments to visit</ion-label>
         </ion-title>
         <ion-list *ngFor="let monument of monumentNames">
-          {{ monument[0].name }}
+          <ion-item>
+            {{ monument.name }}
+          </ion-item>
         </ion-list>
-        <button ion-button block (click)="goToRoutes()">Start Routes</button>
+        <button ion-button block (click)="sendRoutes()">Start Routes</button>
       </form>
 
       <ion-row style="">

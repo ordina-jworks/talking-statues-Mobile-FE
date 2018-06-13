@@ -1,23 +1,20 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
 import {
   DragEvent,
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 import 'rxjs/add/operator/map';
-import { Http } from '@angular/http';
-import { Language, Monument } from '../../../../app/models/monument';
 import { Geolocation} from '@ionic-native/geolocation';
-import { MyRoutePage } from '../../my-route/my-route';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
-/**
- * Generated class for the ChoisePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MonumentService } from '../../../../services/monument.service';
+import { HttpClient } from '@angular/common/http';
+import { QueryMonuments } from '../../../../app/models/query';
+import { Language, Monument } from '../../../../app/models/monument';
+import { Route } from '../../../../app/models/route';
+
 
 @IonicPage()
 @Component({
@@ -27,74 +24,91 @@ import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
 export class ChoisePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
+
   stackConfig: StackConfig;
   recentCard: string = '';
-  choisenList: Monument[] = [];
-  currentList: Monument[] = [];
-  latitude;
-  longitude;
+  choisenList: QueryMonuments[] = [];
+  currentList: QueryMonuments[] = [];
+  responseList: Route;
+  latitude: number;
+  longitude: number;
   monumentNames;
 
   route = {};
   monumentsForm: FormGroup;
+  userCoords: FormGroup;
 
-  monuments: Monument[] =[
-    {
-      id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
-      information:[{
-        name: 'Antoon Van Dyck',
-        language:Language.NL,
-        description: 'mens op een voetstuk',
-        question:[],
-      }],
-
-      area:"meir",
-      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
-      latitude: 51.218,
-      longitude: 4.413
-    },
-    {
-      id:'hdffhgxfhgxdfgxfhxf',
-      information:[{
-        name: 'Baron Hendrik Leys',
-        language:Language.NL,
-        description: 'mens op een voetstuk',
-        question:[],
-      }],
-      area:"Louiza-Marialei",
-      imageRef: 'https://images.standbeelden.be/300x0/931/Baron%20Hendrik%20Leys.jpg',
-      latitude:51.213476,
-      longitude:4.412387
-    },
-    {
-      id:'hdfhdfhfhgdjjgmgmdrfghdsfsfsf',
-      information:[{
-        name: 'Antoon Van Dyck2',
-        language:Language.NL,
-        description: 'mens op een voetstuk',
-        question:[],
-      }],
-
-      area:"meir",
-      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
-      latitude:51.211,
-      longitude:4.402
-    }
-  ];
+  // monuments: Monument[] =[
+  //   {
+  //     id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
+  //     information:[{
+  //       name: 'Antoon Van Dyck',
+  //       language:Language.NL,
+  //       description: 'mens op een voetstuk',
+  //       question:[],
+  //     }],
+  //
+  //     area:"meir",
+  //     imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+  //     latitude: 51.218,
+  //     longitude: 4.413
+  //   },
+  //   {
+  //     id:'hdffhgxfhgxdfgxfhxf',
+  //     information:[{
+  //       name: 'Baron Hendrik Leys',
+  //       language:Language.NL,
+  //       description: 'mens op een voetstuk',
+  //       question:[],
+  //     }],
+  //     area:"Louiza-Marialei",
+  //     imageRef: 'https://images.standbeelden.be/300x0/931/Baron%20Hendrik%20Leys.jpg',
+  //     latitude:51.213476,
+  //     longitude:4.412387
+  //   },
+  //   {
+  //     id:'hdfhdfhfhgdjjgmgmdrfghdsfsfsf',
+  //     information:[{
+  //       name: 'Antoon Van Dyck2',
+  //       language:Language.NL,
+  //       description: 'mens op een voetstuk',
+  //       question:[],
+  //     }],
+  //
+  //     area:"meir",
+  //     imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+  //     latitude:51.211,
+  //     longitude:4.402
+  //   }
+  // ];
 
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: Http,
+    private http: HttpClient,
     private geolocation: Geolocation,
+    private _monumentService: MonumentService,
     private fb: FormBuilder,
   ) {
-    this.currentList = this.monuments;
-    this.monumentsForm = fb.group({
-      routeTitle: ['Route :' + new Date(), ],
-      monuments: [ this.choisenList]
+    this.createMonumentForm();
+    geolocation.getCurrentPosition()
+      .then((locate) => {
+        this.latitude =  locate.coords.latitude;
+        this.longitude = locate.coords.longitude;
+        console.log('Current Location coordinates are:' , this.latitude
+          + ' latitude & ' + this.longitude + ' longitude.');
+        this.monumentsForm.controls['userLocation'].setValue({
+          latitude: this.latitude,
+          longitude: this.longitude
+        })
+      }).catch((error) => {
+      console.log('Error getting location: ', error);
     });
+
+
+
+
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -106,23 +120,25 @@ export class ChoisePage {
         return 800;
       }
     };
-
-    geolocation.getCurrentPosition()
-      .then((locate) => {
-        this.latitude = locate.coords.latitude;
-        this.longitude = locate.coords.longitude;
-        console.log('Current Location coordinates are:' , this.latitude + ' latitude & ' + this.longitude + ' longitude.')
-    }).catch((error) => {
-      console.log('Error getting location: ', error);
-    })
+    this.addNewCards();
   }
-
-  ngAfterViewInit() {
-    // Either subscribe in controller or set in HTML
-    this.swingStack.throwin.subscribe((event: DragEvent) => {
-      event.target.style.background = '#ffffff';
+  createMonumentForm(){
+    this.monumentsForm = this.fb.group({
+      name: ['Route :' + new Date(), ],
+      locations: [ this.choisenList],
+      userLocation: {
+        latitude: 0.0,
+        longitude: 0.0
+      }
     });
   }
+
+  // ngAfterViewInit() {
+  //   // Either subscribe in controller or set in HTML
+  //   this.swingStack.throwin.subscribe((event: DragEvent) => {
+  //     event.target.style.background = '#ffffff';
+  //   });
+  // }
 
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
@@ -136,7 +152,6 @@ export class ChoisePage {
     } else {
       color = '#' + hexCode + 'FF' + hexCode;
     }
-
     element.style.background = color;
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
   }
@@ -144,17 +159,12 @@ export class ChoisePage {
 // Connected through HTML
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
-    if(this.currentList.length == 0){
-    }
-
     if (like) {
-      this.recentCard = 'You liked: ' + monument.information[0].name;
+      this.recentCard = 'You liked: ' + monument.name;
       this.choisenList.push(monument);
-      this.monumentNames = this.choisenList.map(a => a.information);
-      // console.log('monumentNames: ', this.monumentNames);
-      // console.log('choisenList :', this.choisenList);
+      this.monumentNames = this.choisenList;
     } else {
-      this.recentCard = 'You disliked: ' + monument.information[0].name;
+      this.recentCard = 'You disliked: ' + monument.name;
     }
   }
 
@@ -169,14 +179,27 @@ export class ChoisePage {
     return hex;
   }
 
+  addNewCards() {
+    this._monumentService.getSwipeMonuments().subscribe(
+      res => this.currentList = res
+    );
+  }
+
   getNewMonuments() {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
-  goToRoutes() {
-    this.navCtrl.push(NavigationmapPage, {
-      data: this.monumentsForm.value
-    });
+  sendRoutes() {
+    this._monumentService.sendLikedMonumentIds(this.monumentsForm.value).subscribe(
+      res => {
+        this.responseList = res;
+        console.log(this.responseList);
+        this.navCtrl.push(NavigationmapPage, {
+          data: this.responseList
+        });
+      }
+    )
+
   }
 }
 
