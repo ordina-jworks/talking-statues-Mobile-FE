@@ -10,6 +10,7 @@ import { MonumentService } from '../providers/monument.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPageModule } from '../pages/login/login.module';
 import { MenuPageModule } from '../pages/menu/menu.module';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MenuPageModule } from '../pages/menu/menu.module';
     StatusBar,
     SplashScreen,
     MonumentService,
+    NativeStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
