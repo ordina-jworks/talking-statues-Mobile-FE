@@ -2,16 +2,16 @@ page-choise {
   #card-stack {
     width: 90%;
     height: 200px;
-    margin: 100px auto 0;
+    margin-top: 10%;
+    margin-left: 5%;
     position: relative;
   }
 
   #card-stack ion-card {
-    border-radius: 5px;
+    border-radius: 2px;
     position: absolute;
     text-align: center;
-    top: 3%;
-    height: 90%;
+    height: 380px;
   }
 
   .card-content {
@@ -25,5 +25,12 @@ page-choise {
   }
   ion-list {
     margin: -1px 0 0 !important;
+  }
+
+  .voting {
+    margin-top: 80%;
+    position: center;
+    margin-left: 15%;
+
   }
 }

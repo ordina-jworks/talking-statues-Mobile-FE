@@ -59,9 +59,6 @@ export class ChoisePage {
       console.log('Error getting location: ', error);
     });
 
-
-
-
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -134,7 +131,10 @@ export class ChoisePage {
 
   addNewCards() {
     this._monumentService.getSwipeMonuments().subscribe(
-      res => this.currentList = res
+      res => {
+        this.currentList = res,
+          console.log(this.currentList);
+      }
     );
   }
 
