@@ -3,14 +3,15 @@ export class Monument {
   information:Information[];
   longitude: number;
   latitude: number;
-  area: String
+  area: string;
+  imageRef?:string;
 }
 
 export class Information {
   language:Language;
   name: String;
   description: String;
-  questions:Question[];
+  question:Question[];
 }
 
 export class Question{
@@ -25,3 +26,9 @@ export enum Language {
   DE = 'DE'
 }
 
+
+// IMPORTANT: needed model to get data when adding routeTitle
+export class Route {
+  routeTitle: string;
+  monuments: Monument[]
+}

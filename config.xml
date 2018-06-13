@@ -86,8 +86,22 @@
         <variable name="APP_NAME" value="Ionic talking statues" />
     </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.1" />
+    <plugin name="cordova-plugin-statusbar" spec="https://github.com/apache/cordova-plugin-statusbar.git" />
+    <plugin name="cordova-plugin-facebook" spec="^0.2.2">
+        <variable name="FACEBOOK_DISPLAY_NAME" value="Ionic" />
+        <variable name="FACEBOOK_APP_ID" value="ID1349727158506619" />
+    </plugin>
     <engine name="ios" spec="4.5.4" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.3.6">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I" />
+        <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="26.1.0" />
+        <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="This app wants to get your location while this app runs only." />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="This app wants to get your location always, even this app runs in background." />
+    </plugin>
+    <allow-navigation href="http://192.168.56.30:8101" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
 </widget>

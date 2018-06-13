@@ -15,8 +15,11 @@
 
 <ion-content padding>
   <div id="list">
-    <button class="login-button"ion-button (click)="goToGoogleLogin()">G</button>
-    <button class="login-button" ion-button (click)="goToFbLogin()">F</button>
+    <button class="login-button" ion-button (click)="goToGoogleLogin()">G</button>
+   <button class="login-button" ion-button icon-right (click)="goToFbLogin()">
+      Login with
+      <ion-icon name="logo-facebook"></ion-icon>
+    </button>
   </div>
 
 </ion-content>
