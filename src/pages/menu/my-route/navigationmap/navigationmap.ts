@@ -24,6 +24,7 @@ export class NavigationmapPage {
   markers: any[] = [];
 
   directionsService = new google.maps.DirectionsService();
+  // directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 
   constructor(
@@ -53,21 +54,22 @@ export class NavigationmapPage {
 
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         this.receivedData.monuments.map(monument => {
-          this.title = monument.information[0].name,
           this.monumentLatitude = monument.latitude,
           this.monumentLongitude = monument.longitude,
           this.markers.push(monument.latitude+','+monument.longitude)
         });
 
+      let markerList = this.receivedData.monuments
+        .map(monument => new google.maps
+        .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
+      );
 
-        let currentPosition = this.receivedData.monuments.map(user => new google.maps
+        let currentPosition = this.receivedData.monuments
+          .map(user => new google.maps
           .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
           .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
 
-        // console.log(this.markers);
-
         this.calculateAndDisplayRoute();
-
       }), (error) => {
         console.log(error);
       }
@@ -91,7 +93,24 @@ export class NavigationmapPage {
     let destinationLat = Math.max(this.monumentLatitude);
     let destinationLong = Math.max(this.monumentLongitude);
 
+    this.directionsDisplay.setOptions({
+      polylineOptions: {
+        strokeColor: 'green'
+      }
+    });
     this.directionsDisplay.setMap(this.map);
+    // google.maps.event.addListener(this.map, 'click', function() {
+    //
+    //   this.directionsDisplay.setMap(null);
+    //
+    //   this.directionsDisplay.setOptions({
+    //     polylineOptions: {
+    //       strokeColor: 'blue'
+    //     }
+    //   });
+    //
+    //   this.directionsDisplay.setMap(this.map);
+    // });
 
     // let request = {
     //   origin: `${this.startLatitude}, ${this.startLongitude}`,
