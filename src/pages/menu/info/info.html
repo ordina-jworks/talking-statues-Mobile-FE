@@ -7,7 +7,7 @@
 <ion-content  *ngIf="monumentData[0] as monument">
   <div class="banner">
     <div class="overlapse">
-        <img class="monument-image" src="http://localhost:9000/monuments/5b20c46895fe130001885599/image">
+        <img class="monument-image" [src]="'http://localhost:9000/monuments/' + monumentData[0].id + '/image'">
 
     </div>
   </div>
