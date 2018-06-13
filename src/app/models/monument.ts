@@ -4,7 +4,7 @@ export class Monument {
   longitude: number;
   latitude: number;
   area: string;
-  imageRef?:string;
+  picture?:string;
 }
 
 export class Information {
