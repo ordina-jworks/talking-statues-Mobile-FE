@@ -1,9 +1,7 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Voorgestelde Keuzes</ion-title>
   </ion-navbar>
-
 </ion-header>
   <ion-content padding>
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" *ngIf="!currentList.length == 0">
@@ -18,8 +16,8 @@
       </ion-card>
     </div>
 
-    <div class="voting">
-      <ion-row *ngIf="!currentList.length == 0">
+    <div>
+      <ion-row class="voting" *ngIf="!currentList.length == 0">
         <ion-col>
           <button ion-button clear small icon-left color="primary" (click)="voteUp(false)">
             <ion-icon name="thumbs-down"></ion-icon>
@@ -35,9 +33,9 @@
       </ion-row>
     </div>
 
-    <div *ngIf="currentList.length == 0">
+    <div  *ngIf="currentList.length == 0">
 
-      <form [formGroup]="monumentsForm" >
+      <form  [formGroup]="monumentsForm" >
         <ion-title style="text-align: center">
           <ion-label>Proposed Route</ion-label>
         </ion-title>

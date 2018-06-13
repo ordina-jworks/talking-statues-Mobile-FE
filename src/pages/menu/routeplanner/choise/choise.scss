@@ -2,7 +2,7 @@ page-choise {
   #card-stack {
     width: 90%;
     height: 200px;
-    margin-top: 10%;
+
     margin-left: 5%;
     position: relative;
   }
@@ -30,7 +30,12 @@ page-choise {
   .voting {
     margin-top: 80%;
     position: center;
-    margin-left: 15%;
+    text-align: center;
+  }
+
+
+  .list {
+    margin-top: 0;
 
   }
 }
