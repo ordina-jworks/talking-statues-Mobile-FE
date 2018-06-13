@@ -15,7 +15,7 @@ declare var google;
 export class NavigationmapPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  title: string;
+  title;
   receivedData: Route;
   startLatitude;
   startLongitude;
@@ -23,8 +23,9 @@ export class NavigationmapPage {
   monumentLongitude;
   markers: any[] = [];
 
-  directionsService = new google.maps.DirectionsService;
-  directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsService = new google.maps.DirectionsService();
+  // directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 
   constructor(
     public navCtrl: NavController,
@@ -51,34 +52,36 @@ export class NavigationmapPage {
           zoom: 15,
         };
 
-          let markerOptions = {
-            title: this.receivedData.monuments.map(title => title.information[0].name)
-          }
-
-
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-        let markerList = this.receivedData.monuments.map(monument => new google.maps
-          .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
-        );
         this.receivedData.monuments.map(monument => {
           this.monumentLatitude = monument.latitude,
           this.monumentLongitude = monument.longitude,
           this.markers.push(monument.latitude+','+monument.longitude)
         });
 
-        // let currentPosition = this.receivedData.monuments.map(user => new google.maps
-        //   .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
-        //   .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
+      let markerList = this.receivedData.monuments
+        .map(monument => new google.maps
+        .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
+      );
 
-        // console.log(this.markers);
-        this.directionsDisplay.setMap(this.map);
+        let currentPosition = this.receivedData.monuments
+          .map(user => new google.maps
+          .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
+          .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
+
         this.calculateAndDisplayRoute();
-
       }), (error) => {
         console.log(error);
       }
     }
+
+  createMarker(position, title) {
+    new google.maps.Marker({
+      position: position,
+      map: this.map,
+      title: title
+    });
+  }
 
   calculateAndDisplayRoute() {
     let waypts = [];
@@ -87,18 +90,61 @@ export class NavigationmapPage {
         location: this.markers[i]
       })
     }
-
     let destinationLat = Math.max(this.monumentLatitude);
     let destinationLong = Math.max(this.monumentLongitude);
+
+    this.directionsDisplay.setOptions({
+      polylineOptions: {
+        strokeColor: 'green'
+      }
+    });
+    this.directionsDisplay.setMap(this.map);
+    // google.maps.event.addListener(this.map, 'click', function() {
+    //
+    //   this.directionsDisplay.setMap(null);
+    //
+    //   this.directionsDisplay.setOptions({
+    //     polylineOptions: {
+    //       strokeColor: 'blue'
+    //     }
+    //   });
+    //
+    //   this.directionsDisplay.setMap(this.map);
+    // });
+
+    // let request = {
+    //   origin: `${this.startLatitude}, ${this.startLongitude}`,
+    //   destination: `${destinationLat}, ${destinationLong}`,
+    //   waypoints: waypts,
+    //   travelMode: 'WALKING',
+    // }
+    //
+    // this.directionsService.route({
+    //   origin: `${this.startLatitude}, ${this.startLongitude}`,
+    //   destination: `${destinationLat}, ${destinationLong}`,
+    //   waypoints: waypts,
+    //   travelMode: 'WALKING',
+    // }, (response, status) =>{
+    //   if (status === 'OK') {
+    //     this.directionsDisplay.setDirections(request, response);
+    //     let leg = response.routes[ 0 ].legs[ 0 ];
+    //     this.createMarker( request.origin, 'title');
+    //     this.createMarker( request.destination, 'title');
+    //     this.createMarker(leg.waypoints, 'title');
+    //   } else {
+    //         window.alert('Directions request failed due to ' + status);
+    //       }
+    // });
+
     this.directionsService.route({
       origin: `${this.startLatitude}, ${this.startLongitude}`,
       destination: `${destinationLat}, ${destinationLong}`,
-
       waypoints: waypts,
       travelMode: 'WALKING',
     }, (response, status) => {
       if (status === 'OK') {
         this.directionsDisplay.setDirections(response);
+        console.log(response);
       } else {
         window.alert('Directions request failed due to ' + status);
       }

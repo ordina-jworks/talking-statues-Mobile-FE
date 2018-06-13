@@ -12,7 +12,6 @@ import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
 import { MonumentService } from '../../../../services/monument.service';
 import { HttpClient } from '@angular/common/http';
 import { QueryMonuments } from '../../../../app/models/query';
-import { Language, Monument } from '../../../../app/models/monument';
 import { Route } from '../../../../app/models/route';
 
 
@@ -36,52 +35,6 @@ export class ChoisePage {
 
   route = {};
   monumentsForm: FormGroup;
-  userCoords: FormGroup;
-
-  // monuments: Monument[] =[
-  //   {
-  //     id:'hdfhdfhgxffrdrbdrfghdsfsfsf',
-  //     information:[{
-  //       name: 'Antoon Van Dyck',
-  //       language:Language.NL,
-  //       description: 'mens op een voetstuk',
-  //       question:[],
-  //     }],
-  //
-  //     area:"meir",
-  //     imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
-  //     latitude: 51.218,
-  //     longitude: 4.413
-  //   },
-  //   {
-  //     id:'hdffhgxfhgxdfgxfhxf',
-  //     information:[{
-  //       name: 'Baron Hendrik Leys',
-  //       language:Language.NL,
-  //       description: 'mens op een voetstuk',
-  //       question:[],
-  //     }],
-  //     area:"Louiza-Marialei",
-  //     imageRef: 'https://images.standbeelden.be/300x0/931/Baron%20Hendrik%20Leys.jpg',
-  //     latitude:51.213476,
-  //     longitude:4.412387
-  //   },
-  //   {
-  //     id:'hdfhdfhfhgdjjgmgmdrfghdsfsfsf',
-  //     information:[{
-  //       name: 'Antoon Van Dyck2',
-  //       language:Language.NL,
-  //       description: 'mens op een voetstuk',
-  //       question:[],
-  //     }],
-  //
-  //     area:"meir",
-  //     imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
-  //     latitude:51.211,
-  //     longitude:4.402
-  //   }
-  // ];
-
 
   constructor(
     public navCtrl: NavController,
