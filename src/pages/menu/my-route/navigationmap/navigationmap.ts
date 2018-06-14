@@ -14,28 +14,30 @@ declare var google;
 })
 export class NavigationmapPage {
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
+
+  map;
+  directionsService;
+  directionsDisplay;
+  monuments;
+  markers = [];
+
+  droppedMarker;
+
   title;
   receivedData: Route;
+
   startLatitude;
   startLongitude;
   monumentLatitude;
   monumentLongitude;
-  markers: any[] = [];
 
-  directionsService = new google.maps.DirectionsService();
-  // directionsDisplay = new google.maps.DirectionsRenderer();
-  directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public geolocation: Geolocation,
+              public params: NavParams,
+              public viewCtrl: ViewController,
+              ) {
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public geolocation: Geolocation,
-    public params: NavParams,
-    public viewCtrl: ViewController,
-  ) {
-    this.receivedData = params.get('data');
-    this.title = this.receivedData.routeTitle;
   }
 
   ionViewDidLoad() {
@@ -43,48 +45,96 @@ export class NavigationmapPage {
   }
 
   loadMap() {
+    this.directionsService = new google.maps.DirectionsService;
+    this.directionsDisplay = new google.maps.DirectionsRenderer;
+
     this.geolocation.getCurrentPosition().then((position) => {
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        this.startLatitude = position.coords.latitude + '';
-        this.startLongitude = position.coords.longitude + '';
-          let mapOptions = {
-          center: latLng,
-          zoom: 15,
-        };
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      this.startLatitude = position.coords.latitude + '';
+      this.startLongitude = position.coords.longitude + '';
 
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-        this.receivedData.monuments.map(monument => {
-          this.monumentLatitude = monument.latitude,
-          this.monumentLongitude = monument.longitude,
-          this.markers.push(monument.latitude+','+monument.longitude)
-        });
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      this.monuments = this.loadMonuments();
+      this.generateMarkersAndCards();
+      this.listenToMapClicksAndDropMarker();
+      // this.receivedData.monuments.map(monument => {
+      //   this.monumentLatitude = monument.latitude,
+      //   this.monumentLongitude = monument.longitude
+      //   // this.markers.push(monument.latitude+','+monument.longitude)
+      // });
+    });
+  };
 
-      let markerList = this.receivedData.monuments
-        .map(monument => new google.maps
-        .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
-      );
+  loadMonuments() {
+    return this.receivedData = this.params.get('data'),
+    this.title = this.receivedData.routeTitle;
+  }
 
-        let currentPosition = this.receivedData.monuments
-          .map(user => new google.maps
-          .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
-          .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
+  generateMarkersAndCards() {
+    for (let i = 0; i < this.receivedData.monuments.length; i++) {
+      let monument = this.receivedData.monuments[i];
 
-        this.calculateAndDisplayRoute();
-      }), (error) => {
-        console.log(error);
-      }
+      let marker = new google.maps.Marker({
+        position: (monument.latitude + ',' + monument.longitude),
+        map: this.map,
+        title: monument.information[0].name,
+      });
+      let infowindow = new google.maps.InfoWindow({
+        content: `<div id="content">` +
+        `<h1>monument.information[0].name</h1>`,
+        maxWidth: 489
+      });
+      marker.infowindow = infowindow;
+      marker.addListener('click', function () {
+        return this.infowindow.open(this.map, this);
+      });
+      this.markers.push(marker);
     }
 
-  createMarker(position, title) {
-    new google.maps.Marker({
-      position: position,
-      map: this.map,
-      title: title
+    // let markerList = this.receivedData.monuments
+    //   .map(monument => new google.maps
+    //   .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name })
+    // );
+    //
+    //   let currentPosition = this.receivedData.monuments
+    //     .map(user => new google.maps
+    //     .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
+    //     .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
+  }
+
+  listenToMapClicksAndDropMarker(){
+    this.map.addListener('click', function(event){
+      if(this.droppedMarker != null)
+      {	//clears previous marker, only one
+        this.droppedMarker.setMap(null);
+      }
+      this.droppedMarker = new google.maps.Marker({
+        position : event.latLng,
+        map: this.map,
+        title : 'Location: ' + event.latLng.lat() + ', ' + event.latLng.lng(),
+        infowindow : new google.maps.InfoWindow({
+          content: 'Hello'
+        })
+      });
+      this.droppedMarker.addListener('click', function() {
+        return this.infowindow.open(this.map, this);
+      });
+
+      //call route display (will check if building is selected)
+      // needed to ensure route changes on new marker
+      this.calculateAndDisplayRoute(this.directionsService, this.directionsDisplay)
     });
   }
 
-  calculateAndDisplayRoute() {
+
+
+  calculateAndDisplayRoute(directionsService, directionsDisplay) {
     let waypts = [];
+    console.log(this.markers);
     for (let i = 0; i < this.markers.length; i++) {
       waypts.push({
         location: this.markers[i]
@@ -98,57 +148,23 @@ export class NavigationmapPage {
         strokeColor: 'green'
       }
     });
+
     this.directionsDisplay.setMap(this.map);
-    // google.maps.event.addListener(this.map, 'click', function() {
-    //
-    //   this.directionsDisplay.setMap(null);
-    //
-    //   this.directionsDisplay.setOptions({
-    //     polylineOptions: {
-    //       strokeColor: 'blue'
-    //     }
-    //   });
-    //
-    //   this.directionsDisplay.setMap(this.map);
-    // });
 
-    // let request = {
-    //   origin: `${this.startLatitude}, ${this.startLongitude}`,
-    //   destination: `${destinationLat}, ${destinationLong}`,
-    //   waypoints: waypts,
-    //   travelMode: 'WALKING',
-    // }
-    //
-    // this.directionsService.route({
-    //   origin: `${this.startLatitude}, ${this.startLongitude}`,
-    //   destination: `${destinationLat}, ${destinationLong}`,
-    //   waypoints: waypts,
-    //   travelMode: 'WALKING',
-    // }, (response, status) =>{
-    //   if (status === 'OK') {
-    //     this.directionsDisplay.setDirections(request, response);
-    //     let leg = response.routes[ 0 ].legs[ 0 ];
-    //     this.createMarker( request.origin, 'title');
-    //     this.createMarker( request.destination, 'title');
-    //     this.createMarker(leg.waypoints, 'title');
-    //   } else {
-    //         window.alert('Directions request failed due to ' + status);
-    //       }
-    // });
-
-    this.directionsService.route({
-      origin: `${this.startLatitude}, ${this.startLongitude}`,
-      destination: `${destinationLat}, ${destinationLong}`,
-      waypoints: waypts,
-      travelMode: 'WALKING',
-    }, (response, status) => {
-      if (status === 'OK') {
-        this.directionsDisplay.setDirections(response);
-        console.log(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
+  this.directionsService.route({
+    origin: `${this.startLatitude}, ${this.startLongitude}`,
+    destination: '',
+    // destination: `${destinationLat}, ${destinationLong}`,
+    // waypoints: waypts,
+    travelMode: 'WALKING',
+  }, (response, status) => {
+    if (status === 'OK') {
+      this.directionsDisplay.setDirections(response);
+      console.log(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
   }
 
   onDismiss() {

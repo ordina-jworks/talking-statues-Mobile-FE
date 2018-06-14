@@ -26,7 +26,7 @@ export class MyRoutePage {
       }],
 
       area:"meir",
-      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+      picture: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
       latitude: 51.218,
       longitude: 4.413
     },
@@ -66,9 +66,11 @@ export class MyRoutePage {
 
   onOpenRoute(route) {
     // create the modal, but present will also show the modal.
-    this._modalCtrl.create(NavigationmapPage, {
-      myRouteData:route
-    }).present();
+    // this._modalCtrl.create(NavigationmapPage, {
+    //   myRouteData:route
+    // }).present();
+    this._modalCtrl.create(NavigationmapPage
+    ).present();
 
   }
 

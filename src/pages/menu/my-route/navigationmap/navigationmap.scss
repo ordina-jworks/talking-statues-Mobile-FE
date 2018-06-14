@@ -3,4 +3,11 @@ page-navigationmap {
     width: 100%;
     height: 85%;
   }
+
+  #directionsPanel {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50%
+  }
 }
