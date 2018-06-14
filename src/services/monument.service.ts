@@ -21,7 +21,7 @@ export class MonumentService {
     let endpoint = 'http://localhost:9000/monuments/selection?area=Sint-Andries&lang=NL';
     return this._http.get<QueryMonuments[]>(endpoint).pipe(
       map(res => this.data = res),
-      tap(res => console.log(res))
+      // tap(res => console.log(res))
     );
   };
 
@@ -29,7 +29,7 @@ export class MonumentService {
     let endpoint = `http://localhost:9000/routes`;
 
     likedIds.locations = likedIds.locations.map(id => id.id);
-    console.log(likedIds);
+    // console.log(likedIds);
     return this._http.post<Route>(endpoint, likedIds);
   }
 

@@ -20,7 +20,7 @@ export class InfoPage {
   image;
   monuments: Monument[] =[
     {
-      id:'5b20c46895fe130001885599',
+      id:'5b22139c95fe1300018f1a83',
       information:[{
         name: 'de NEUS',
         language:Language.NL,

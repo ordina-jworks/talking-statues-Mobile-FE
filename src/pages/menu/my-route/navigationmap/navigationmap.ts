@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { Geolocation} from '@ionic-native/geolocation';
 import { Route } from '../../../../app/models/monument';
 import { InfoPage } from '../../info/info';
-
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 declare var google;
 
@@ -13,162 +14,264 @@ declare var google;
   templateUrl: 'navigationmap.html',
 })
 export class NavigationmapPage {
-  @ViewChild('map') mapElement: ElementRef;
-
-  map;
-  directionsService;
-  directionsDisplay;
-  monuments;
-  markers = [];
-
-  droppedMarker;
-
+  @ViewChild('map') mapContainer: ElementRef;
+  map: any;
+  infoWindows: any;
+  pos: any;
+  marker: any;
   title;
   receivedData: Route;
-
-  startLatitude;
-  startLongitude;
-  monumentLatitude;
-  monumentLongitude;
+  markers = [];
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public geolocation: Geolocation,
-              public params: NavParams,
               public viewCtrl: ViewController,
-              ) {
-
+              public geolocation: Geolocation,
+              public params: NavParams,) {
+    this.receivedData = this.params.get('data');
+    this.title = this.receivedData.name;
+    this.infoWindows = [];
   }
 
-  ionViewDidLoad() {
-    this.loadMap();
+  ionViewWillEnter() {
+    console.log(this.receivedData);
+    this.displayGoogleMap();
   }
 
-  loadMap() {
-    this.directionsService = new google.maps.DirectionsService;
-    this.directionsDisplay = new google.maps.DirectionsRenderer;
+  displayGoogleMap() {
 
-    this.geolocation.getCurrentPosition().then((position) => {
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      this.startLatitude = position.coords.latitude + '';
-      this.startLongitude = position.coords.longitude + '';
-
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.monuments = this.loadMonuments();
-      this.generateMarkersAndCards();
-      this.listenToMapClicksAndDropMarker();
-      // this.receivedData.monuments.map(monument => {
-      //   this.monumentLatitude = monument.latitude,
-      //   this.monumentLongitude = monument.longitude
-      //   // this.markers.push(monument.latitude+','+monument.longitude)
-      // });
-    });
-  };
-
-  loadMonuments() {
-    return this.receivedData = this.params.get('data'),
-    this.title = this.receivedData.routeTitle;
-  }
-
-  generateMarkersAndCards() {
-    for (let i = 0; i < this.receivedData.monuments.length; i++) {
-      let monument = this.receivedData.monuments[i];
-
-      let marker = new google.maps.Marker({
-        position: (monument.latitude + ',' + monument.longitude),
-        map: this.map,
-        title: monument.information[0].name,
-      });
-      let infowindow = new google.maps.InfoWindow({
-        content: `<div id="content">` +
-        `<h1>monument.information[0].name</h1>`,
-        maxWidth: 489
-      });
-      marker.infowindow = infowindow;
-      marker.addListener('click', function () {
-        return this.infowindow.open(this.map, this);
-      });
-      this.markers.push(marker);
-    }
-
-    // let markerList = this.receivedData.monuments
-    //   .map(monument => new google.maps
-    //   .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name })
-    // );
-    //
-    //   let currentPosition = this.receivedData.monuments
-    //     .map(user => new google.maps
-    //     .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
-    //     .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
-  }
-
-  listenToMapClicksAndDropMarker(){
-    this.map.addListener('click', function(event){
-      if(this.droppedMarker != null)
-      {	//clears previous marker, only one
-        this.droppedMarker.setMap(null);
+    let watch = this.geolocation.getCurrentPosition();
+    watch.then((position) => {
+      this.pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
       }
-      this.droppedMarker = new google.maps.Marker({
-        position : event.latLng,
-        map: this.map,
-        title : 'Location: ' + event.latLng.lat() + ', ' + event.latLng.lng(),
-        infowindow : new google.maps.InfoWindow({
-          content: 'Hello'
-        })
-      });
-      this.droppedMarker.addListener('click', function() {
-        return this.infowindow.open(this.map, this);
+      this.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: this.pos
       });
 
-      //call route display (will check if building is selected)
-      // needed to ensure route changes on new marker
-      this.calculateAndDisplayRoute(this.directionsService, this.directionsDisplay)
+      let markers: any[] = this.receivedData.monuments.map(monument =>
+        new google.maps.Marker({ //import fixen naar Markers({...
+          position: {
+            lat: monument.latitude,
+            lng: monument.longitude
+          },
+          map: this.map,
+          title: monument.information[0].name,
+        }))
+      markers.forEach(marker => marker.addListener('click', function () {
+        new google.maps.InfoWindow({ //import fixen
+          content: marker.title
+        }).open(this.map, marker);
+      }));
+
+      var contentString1 = 'Your Current Location.';
+      var infowindow1 = new google.maps.InfoWindow({
+        content: contentString1
+      });
+      console.log('startPosition: ',this.pos);
+      var startMarker = new google.maps.Marker({
+        position: this.pos,
+        map: this.map,
+        title: 'your current Position ( Home)'
+      });
+      startMarker.addListener('click', function () {
+        infowindow1.open(this.map, startMarker);
+        });
     });
   }
 
-
-
-  calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    let waypts = [];
-    console.log(this.markers);
-    for (let i = 0; i < this.markers.length; i++) {
-      waypts.push({
-        location: this.markers[i]
-      })
+  closeAllInfoWindows() {
+    for(let window of this.infoWindows) {
+      window.close();
     }
-    let destinationLat = Math.max(this.monumentLatitude);
-    let destinationLong = Math.max(this.monumentLongitude);
-
-    this.directionsDisplay.setOptions({
-      polylineOptions: {
-        strokeColor: 'green'
-      }
-    });
-
-    this.directionsDisplay.setMap(this.map);
-
-  this.directionsService.route({
-    origin: `${this.startLatitude}, ${this.startLongitude}`,
-    destination: '',
-    // destination: `${destinationLat}, ${destinationLong}`,
-    // waypoints: waypts,
-    travelMode: 'WALKING',
-  }, (response, status) => {
-    if (status === 'OK') {
-      this.directionsDisplay.setDirections(response);
-      console.log(response);
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
   }
 
   onDismiss() {
     this.viewCtrl.dismiss();
   }
-
 }
+
+  //   let latLng = new google.maps.LatLng(51.295178500000006,4.7779182);
+  //   let mapOptions = {
+  //     center: latLng,
+  //     disableDefaultUI: true,
+  //     zoom: 11,
+  //     mapTypeId: google.maps.MapTypeId.ROADMAP
+  //   };
+  //
+  //   this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+  // }
+  //
+  // getMarkers() {
+  //   let markerList = this.receivedData.monuments
+  //     .map(monument => new google.maps
+  //       .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name })
+  //     );
+  //   console.log(markerList);
+  //   this.addMarkersToMap(markerList);
+  //
+  // this.http.get('assets/data/markers.json')
+  //   .map((res) => res.json())
+  //   .subscribe(data => {
+  //     this.addMarkersToMap(data);
+  //   });
+  // }
+  //
+  // addMarkersToMap(markers) {
+  //   for(let marker of markers) {
+  //     var position = new google.maps.LatLng(marker.latitude, marker.longitude);
+  //     var dogwalkMarker = new google.maps.Marker({
+  //       position: position,
+  //       title: marker.name
+  //     });
+  //     dogwalkMarker.setMap(this.map);
+  //     this.addInfoWindowToMarker(dogwalkMarker);
+  //   }
+  // }
+  //
+  // addInfoWindowToMarker(marker) {
+  //   var infoWindowContent =
+  //     '<div id="content"><h1 id="firstHeading" class="firstHeading">'
+  //     + marker.title + '</h1></div>';
+  //   var infoWindow = new google.maps.InfoWindow({
+  //     content: infoWindowContent
+  //   });
+  //   marker.addListener('click', () => {
+  //     this.closeAllInfoWindows();
+  //     infoWindow.open(this.map, marker);
+  //   });
+  //   this.infoWindows.push(infoWindow);
+  // }
+  //
+  // closeAllInfoWindows() {
+  //   for(let window of this.infoWindows) {
+  //     window.close();
+  //   }
+  // }
+
+  // @ViewChild('map') mapElement: ElementRef;
+  //
+  // directionDisplay;
+  // directionsService = new google.maps.DirectionsService();
+  // infowindow = new google.maps.InfoWindow();
+  // map;
+  // latLng;
+  // startLatitude;
+  // startLongitude;
+  // start;
+  // end;
+  //
+  // constructor(
+  //   public navCtrl: NavController,
+  //   public navParams: NavParams,
+  //   public geolocation: Geolocation,
+  //   public params: NavParams,
+  //   public viewCtrl: ViewController,
+  // ) {
+  //
+  // }
+  //
+  // ionViewDidLoad() {
+  //     this.initialize()
+  //   }
+  //
+  // initialize() {
+  //   this.directionDisplay = new google.maps.DirectionsRenderer({
+  //     suppressMarkers: true
+  //   });
+  //
+  //   this.geolocation.getCurrentPosition().then((position) => {
+  //     this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  //     this.startLatitude = position.coords.latitude + '';
+  //     this.startLongitude = position.coords.longitude + '';
+  //
+  //     let mapOptions = {
+  //       center: this.latLng,
+  //       zoom: 12,
+  //     }
+  //     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+  //     this.directionDisplay.setMap(this.map);
+  //     this.calcRoute();
+  //   });
+  // }
+  //
+  // calcRoute() {
+  //
+  //   // let start = new google.maps.LatLng(`${this.startLatitude}, ${this.startLongitude}`);
+  //   this.start = new google.maps.LatLng(51.2952106,4.7779297);
+  //   this.end = new google.maps.LatLng(51.1886235713,4.3723547459);
+  //
+  //   console.log(this.start);
+  //
+  //   this.createMarker(this.start, 'start');
+  //   this.createMarker(this.end, 'end');
+  //
+  //   let request = {
+  //     origin: this.start,
+  //     destination: this.end,
+  //     // optimizeWaypoints: true,
+  //     travelMode: 'WALKING'
+  //   };
+  //
+  //   this.directionsService.route(request, function (response, status) {
+  //     if (status === 'OK') {
+  //       this.directionsDisplay.setDirections(response);
+  //       console.log(response);
+  //     }
+  //   });
+  // }
+  //
+  // createMarker(latLng, title) {
+  //   let marker = new google.maps.Marker({
+  //     position: latLng,
+  //     title: title,
+  //     map: this.map
+  //   });
+  //
+  //   google.maps.event.addListener(marker, 'click', function () {
+  //     this.infowindow.setContent(this.title);
+  //     this.infowindow.open(this.map, this.marker);
+  //   });
+  // }
+
+  // calculateAndDisplayRoute(directionsService, directionsDisplay) {
+  //   let waypts = [];
+  //   console.log(this.markers);
+  //   for (let i = 0; i < this.markers.length; i++) {
+  //     waypts.push({
+  //       location: this.markers[i]
+  //     })
+  //   }
+  //   let destinationLat = Math.max(this.monumentLatitude);
+  //   let destinationLong = Math.max(this.monumentLongitude);
+  //
+  //   this.directionsDisplay.setOptions({
+  //     polylineOptions: {
+  //       strokeColor: 'green'
+  //     }
+  //   });
+  //
+  //   this.directionsDisplay.setMap(this.map);
+  //
+  // this.directionsService.route({
+  //   origin: `${this.startLatitude}, ${this.startLongitude}`,
+  //   destination: '',
+  //   // destination: `${destinationLat}, ${destinationLong}`,
+  //   // waypoints: waypts,
+  //   travelMode: 'WALKING',
+  // }, (response, status) => {
+  //   if (status === 'OK') {
+  //     this.directionsDisplay.setDirections(response);
+  //     console.log(response);
+  //   } else {
+  //     window.alert('Directions request failed due to ' + status);
+  //   }
+  // });
+  // }
+  //
+  // onDismiss() {
+  //   this.viewCtrl.dismiss();
+  // }
+
+

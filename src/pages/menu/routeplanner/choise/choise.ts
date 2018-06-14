@@ -49,15 +49,18 @@ export class ChoisePage {
       .then((locate) => {
         this.latitude =  locate.coords.latitude;
         this.longitude = locate.coords.longitude;
-        console.log('Current Location coordinates are:' , this.latitude
-          + ' latitude & ' + this.longitude + ' longitude.');
+        // console.log('Current Location coordinates are:' , this.latitude
+        //   + ' latitude & ' + this.longitude + ' longitude.');
         this.monumentsForm.controls['userLocation'].setValue({
           latitude: this.latitude,
           longitude: this.longitude
         })
+
       }).catch((error) => {
       console.log('Error getting location: ', error);
     });
+
+
 
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
@@ -132,8 +135,8 @@ export class ChoisePage {
   addNewCards() {
     this._monumentService.getSwipeMonuments().subscribe(
       res => {
-        this.currentList = res,
-          console.log(this.currentList);
+        this.currentList = res;
+          // console.log(this.currentList);
       }
     );
   }
@@ -146,7 +149,7 @@ export class ChoisePage {
     this._monumentService.sendLikedMonumentIds(this.monumentsForm.value).subscribe(
       res => {
         this.responseList = res;
-        console.log(this.responseList);
+        // console.log(this.responseList);
         this.navCtrl.push(NavigationmapPage, {
           data: this.responseList
         });

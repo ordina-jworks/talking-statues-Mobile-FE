@@ -29,6 +29,6 @@ export enum Language {
 
 // IMPORTANT: needed model to get data when adding routeTitle
 export class Route {
-  routeTitle: string;
+  name: string;
   monuments: Monument[]
 }
