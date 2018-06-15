@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, Nav, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Geolocation} from '@ionic-native/geolocation';
 import { Route } from '../../../../app/models/monument';
 import { InfoPage } from '../../info/info';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { DeepLinkConfig } from 'ionic-angular';
 
 declare var google;
 
@@ -12,9 +12,12 @@ declare var google;
 @Component({
   selector: 'page-navigationmap',
   templateUrl: 'navigationmap.html',
+
 })
 export class NavigationmapPage {
   @ViewChild('map') mapContainer: ElementRef;
+  @ViewChild(Nav) navChild:Nav;
+
   map: any;
   infoWindows: any;
   pos: any;
@@ -22,11 +25,14 @@ export class NavigationmapPage {
   title;
   receivedData: Route;
   markers = [];
+  info = [];
 
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
               public geolocation: Geolocation,
-              public params: NavParams,) {
+              public params: NavParams,
+              // private deeplinks: DeepLinkConfig
+              ) {
     this.receivedData = this.params.get('data');
     this.title = this.receivedData.name;
     this.infoWindows = [];
@@ -58,16 +64,34 @@ export class NavigationmapPage {
           },
           map: this.map,
           title: monument.information[0].name,
-        }))
+          data: monument,
+        }));
+
+      var infowindow = new google.maps.InfoWindow({
+        maxWidth: 350
+      });
+
       markers.forEach(marker => marker.addListener('click', function () {
-        new google.maps.InfoWindow({ //import fixen
-          content: marker.title
-        }).open(this.map, marker);
+        var content = document.createElement('div'),
+          button;
+        content.innerHTML = 'My monument name is   ' + marker.title;
+        button = content.appendChild(document.createElement('input'));
+        button.type = 'button';
+        button.value = 'Click here to see my info.'
+        google.maps.event.addDomListener(button, 'click', function () {
+          sendInfo(marker.data);
+        });
+
+        function sendInfo(marker) {
+          console.log(marker);
+        }
+        infowindow.setContent(content);
+        infowindow.open(this.map, marker);
       }));
 
       var contentString1 = 'Your Current Location.';
       var infowindow1 = new google.maps.InfoWindow({
-        content: contentString1
+        content: contentString1,
       });
       console.log('startPosition: ',this.pos);
       var startMarker = new google.maps.Marker({
@@ -80,13 +104,6 @@ export class NavigationmapPage {
         });
     });
   }
-
-  closeAllInfoWindows() {
-    for(let window of this.infoWindows) {
-      window.close();
-    }
-  }
-
   onDismiss() {
     this.viewCtrl.dismiss();
   }

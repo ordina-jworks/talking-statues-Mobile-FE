@@ -58,6 +58,7 @@ export class InfoPage {
   ) {
     // this.monumentData = this.monuments.map(m => m.information);
     this.monumentData = this.monuments;
+
     console.log(this.monumentData);
     this.image = `http://localhost:9000/monuments/${this.monumentData[0].id}/image`
     // fb.getLoginStatus()
