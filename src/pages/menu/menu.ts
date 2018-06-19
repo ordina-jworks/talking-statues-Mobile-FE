@@ -25,8 +25,8 @@ export class MenuPage {
     this.data = navParams.get('payload');
     fb.getLoginStatus()
       .then(res => {
-        console.log(res.status);
-        console.log(res.authResponse.userID);
+        // console.log(res.status);
+        // console.log(res.authResponse.userID);
         if (res.status === 'connect') {
           this,this.isLoggedIn = true;
         }
@@ -62,12 +62,4 @@ export class MenuPage {
 
     })
   }
-  //   var nav = this.navCtrl;
-  //   this.fb.logout().then( res => {
-  //       this.isLoggedIn = false;
-  //       nav.push(LoginPage);
-  //     })
-  //     .catch(e => console.log('Error logout from Facebook', e));
-  // }
-
 }

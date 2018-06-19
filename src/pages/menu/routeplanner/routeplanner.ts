@@ -21,7 +21,6 @@ export class RouteplannerPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RouteplannerPage');
   }
 
   choices() {

@@ -1,3 +1,42 @@
 page-choise {
 
+  #card-stack {
+    width: 90%;
+    height: 200px;
+
+    margin-left: 5%;
+    position: relative;
+  }
+
+  #card-stack ion-card {
+    border-radius: 2px;
+    position: absolute;
+    text-align: center;
+    height: 380px;
+  }
+
+  .card-content {
+    background-color: white;
+  }
+
+  .confirm-button {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+  ion-list {
+    margin: -1px 0 0 !important;
+  }
+
+  .voting {
+    margin-top: 80%;
+    position: center;
+    text-align: center;
+  }
+
+
+  .list {
+    margin-top: 0;
+
+  }
 }
