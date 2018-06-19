@@ -19,8 +19,7 @@ export class NavigationmapPage {
   receivedData: Route;
   monumentLatitude;
   monumentLongitude;
-  // markers: Monument[];
-  markers: any[] = [];
+  markers: String[] = [];
   pos: any;
   destination: any;
   infoWindows: any;
@@ -45,7 +44,6 @@ export class NavigationmapPage {
   }
 
   displayGoogleMap() {
-
     // everything starts with the current position coords
     let watch = this.geolocation.getCurrentPosition();
     watch.then((position) => {
@@ -53,6 +51,7 @@ export class NavigationmapPage {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
+
       // draw the google maps design
       this.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
@@ -66,9 +65,8 @@ export class NavigationmapPage {
           this.markers.push(monument.latitude +','+ monument.longitude)
       });
 
-
       // get all liked monuments their coords in a marker
-      let markers: any[] = this.receivedData.monuments.map(monument =>
+      let mapMarkers: google.maps.Marker[] = this.receivedData.monuments.map(monument =>
         new google.maps.Marker({
          position: {
             lat: monument.latitude,
@@ -84,47 +82,35 @@ export class NavigationmapPage {
         maxWidth: 350
       });
 
-
       // code for info windows per marker
-      markers.forEach(marker => marker.addListener('click', function () {
-        var content = document.createElement('div'),
-          button;
-        content.innerHTML = 'My monument name is   ' + marker.title;
-        button = content.appendChild(document.createElement('input'));
-        button.type = 'button';
-        button.value = 'Click here to see my info.';
-        google.maps.event.addDomListener(button, 'click', function () {
-          sendInfo(marker.data);
-          // google.maps.event.addListener(infowindow, 'domready', () => {
-          //   let goInfoPage = document.getElementById(marker.data);
-          //   goInfoPage.addEventListener('click', () => {
-          //     let pushData = marker.data;
-          //     let nav = this.app.getActiveNav();
-          //     nav.push('InfoPage',{'record':pushData});
-          //
-          //   })
-          // });
+      for(let marker of mapMarkers) {
+
+        marker.addListener('click', function () {
+          var content = document.createElement('div'),
+            button;
+          content.innerHTML = 'My monument name is   ' + marker.title;
+          button = content.appendChild(document.createElement('input'));
+          button.type = 'button';
+          button.value = 'Click here to see my info.';
+
+          // code attempt to get data from JS code into Angular: from the on infowindow click event
+          google.maps.event.addDomListener(button, 'click', () => {
+            this.navCtrl.push(InfoPage, {
+              markerData: marker.data
+            })
+          });
+
+          infowindow.setContent(content);
+          infowindow.open(this.map, marker);
         });
-
-        // code attempt to get data from JS code into Angular: from the on infowindow click event
-        const sendInfo = marker => {
-          let markerInfo = [];
-          markerInfo.push(marker);
-
-          console.log('markerInfo: ', markerInfo);
-          console.log('info: ', marker);
-
-        };
-        infowindow.setContent(content);
-        infowindow.open(this.map, marker);
-      }));
+      }
 
       // seperate same logic as monument markers, but for currentlocation marker.
       var contentString1 = 'Your Current Location.';
       var infowindow1 = new google.maps.InfoWindow({
         content: contentString1,
       });
-      // console.log('startPosition: ', this.pos);
+
       var startMarker = new google.maps.Marker({
         position: this.pos,
         map: this.map,
@@ -145,11 +131,8 @@ export class NavigationmapPage {
         location: this.markers[i]
       })
     }
-    console.log('waypoints: ', waypts);
-
     let destinationLat = Math.max(this.monumentLatitude);
     let destinationLong = Math.max(this.monumentLongitude);
-
     this.directionsDisplay.setOptions({
       polylineOptions: {
         strokeColor: 'green'
