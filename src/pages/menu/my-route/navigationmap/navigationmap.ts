@@ -95,9 +95,10 @@ export class NavigationmapPage {
 
           // code attempt to get data from JS code into Angular: from the on infowindow click event
           google.maps.event.addDomListener(button, 'click', () => {
-            this.navCtrl.push(InfoPage, {
-              markerData: marker.data
-            })
+            console.log(marker.data);
+            // this.navCtrl.push(InfoPage, {
+            //   markerData: marker.data
+            // })
           });
 
           infowindow.setContent(content);
