@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Geolocation} from '@ionic-native/geolocation';
-import { Route } from '../../../../app/models/monument';
+import { Monument, Route } from '../../../../app/models/monument';
 import { InfoPage } from '../../info/info';
 
 
@@ -17,14 +17,15 @@ export class NavigationmapPage {
   map: any;
   title;
   receivedData: Route;
-  startLatitude;
-  startLongitude;
   monumentLatitude;
   monumentLongitude;
+  // markers: Monument[];
   markers: any[] = [];
+  pos: any;
+  destination: any;
+  infoWindows: any;
 
   directionsService = new google.maps.DirectionsService();
-  // directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 
   constructor(
@@ -36,50 +37,104 @@ export class NavigationmapPage {
   ) {
     this.receivedData = params.get('data');
     this.title = this.receivedData.routeTitle;
+    this.infoWindows = [];
   }
 
   ionViewDidLoad() {
-    this.loadMap();
+    this.displayGoogleMap();
   }
 
-  loadMap() {
-    this.geolocation.getCurrentPosition().then((position) => {
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        this.startLatitude = position.coords.latitude + '';
-        this.startLongitude = position.coords.longitude + '';
-          let mapOptions = {
-          center: latLng,
-          zoom: 15,
-        };
+  displayGoogleMap() {
 
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-        this.receivedData.monuments.map(monument => {
-          this.monumentLatitude = monument.latitude,
+    // everything starts with the current position coords
+    let watch = this.geolocation.getCurrentPosition();
+    watch.then((position) => {
+      this.pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      // draw the google maps design
+      this.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: this.pos
+      });
+
+      // needed to implement in directions api logic
+      this.receivedData.monuments.map(monument => {
+        this.monumentLatitude = monument.latitude,
           this.monumentLongitude = monument.longitude,
-          this.markers.push(monument.latitude+','+monument.longitude)
+          this.markers.push(monument.latitude +','+ monument.longitude)
+      });
+
+
+      // get all liked monuments their coords in a marker
+      let markers: any[] = this.receivedData.monuments.map(monument =>
+        new google.maps.Marker({
+         position: {
+            lat: monument.latitude,
+            lng: monument.longitude
+          },
+          map: this.map,
+          title: monument.information[0].name,
+          data: monument,
+        }));
+
+      // global infowindow template to use
+      var infowindow = new google.maps.InfoWindow({
+        maxWidth: 350
+      });
+
+
+      // code for info windows per marker
+      markers.forEach(marker => marker.addListener('click', function () {
+        var content = document.createElement('div'),
+          button;
+        content.innerHTML = 'My monument name is   ' + marker.title;
+        button = content.appendChild(document.createElement('input'));
+        button.type = 'button';
+        button.value = 'Click here to see my info.';
+        google.maps.event.addDomListener(button, 'click', function () {
+          sendInfo(marker.data);
+          // google.maps.event.addListener(infowindow, 'domready', () => {
+          //   let goInfoPage = document.getElementById(marker.data);
+          //   goInfoPage.addEventListener('click', () => {
+          //     let pushData = marker.data;
+          //     let nav = this.app.getActiveNav();
+          //     nav.push('InfoPage',{'record':pushData});
+          //
+          //   })
+          // });
         });
 
-      let markerList = this.receivedData.monuments
-        .map(monument => new google.maps
-        .Marker({position: {lat: monument.latitude, lng: monument.longitude}, map: this.map, title: monument.information[0].name})
-      );
+        // code attempt to get data from JS code into Angular: from the on infowindow click event
+        const sendInfo = marker => {
+          let markerInfo = [];
+          markerInfo.push(marker);
 
-        let currentPosition = this.receivedData.monuments
-          .map(user => new google.maps
-          .Marker({position: {lat: position.coords.latitude, lng: position.coords.longitude}, map: this.map, title: 'Your current location'})
-          .setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png'));
+          console.log('markerInfo: ', markerInfo);
+          console.log('info: ', marker);
 
-        this.calculateAndDisplayRoute();
-      }), (error) => {
-        console.log(error);
-      }
-    }
+        };
+        infowindow.setContent(content);
+        infowindow.open(this.map, marker);
+      }));
 
-  createMarker(position, title) {
-    new google.maps.Marker({
-      position: position,
-      map: this.map,
-      title: title
+      // seperate same logic as monument markers, but for currentlocation marker.
+      var contentString1 = 'Your Current Location.';
+      var infowindow1 = new google.maps.InfoWindow({
+        content: contentString1,
+      });
+      // console.log('startPosition: ', this.pos);
+      var startMarker = new google.maps.Marker({
+        position: this.pos,
+        map: this.map,
+        title: 'your current Position ( Home)'
+      });
+      startMarker.addListener('click', function () {
+        infowindow1.open(this.map, startMarker);
+      });
+
+      this.calculateAndDisplayRoute();
     });
   }
 
@@ -90,6 +145,8 @@ export class NavigationmapPage {
         location: this.markers[i]
       })
     }
+    console.log('waypoints: ', waypts);
+
     let destinationLat = Math.max(this.monumentLatitude);
     let destinationLong = Math.max(this.monumentLongitude);
 
@@ -99,45 +156,8 @@ export class NavigationmapPage {
       }
     });
     this.directionsDisplay.setMap(this.map);
-    // google.maps.event.addListener(this.map, 'click', function() {
-    //
-    //   this.directionsDisplay.setMap(null);
-    //
-    //   this.directionsDisplay.setOptions({
-    //     polylineOptions: {
-    //       strokeColor: 'blue'
-    //     }
-    //   });
-    //
-    //   this.directionsDisplay.setMap(this.map);
-    // });
-
-    // let request = {
-    //   origin: `${this.startLatitude}, ${this.startLongitude}`,
-    //   destination: `${destinationLat}, ${destinationLong}`,
-    //   waypoints: waypts,
-    //   travelMode: 'WALKING',
-    // }
-    //
-    // this.directionsService.route({
-    //   origin: `${this.startLatitude}, ${this.startLongitude}`,
-    //   destination: `${destinationLat}, ${destinationLong}`,
-    //   waypoints: waypts,
-    //   travelMode: 'WALKING',
-    // }, (response, status) =>{
-    //   if (status === 'OK') {
-    //     this.directionsDisplay.setDirections(request, response);
-    //     let leg = response.routes[ 0 ].legs[ 0 ];
-    //     this.createMarker( request.origin, 'title');
-    //     this.createMarker( request.destination, 'title');
-    //     this.createMarker(leg.waypoints, 'title');
-    //   } else {
-    //         window.alert('Directions request failed due to ' + status);
-    //       }
-    // });
-
     this.directionsService.route({
-      origin: `${this.startLatitude}, ${this.startLongitude}`,
+      origin: this.pos,
       destination: `${destinationLat}, ${destinationLong}`,
       waypoints: waypts,
       travelMode: 'WALKING',
