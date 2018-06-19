@@ -1,12 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController, NavParams, ViewController } from 'ionic-angular';
+import { App, IonicPage, Nav, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Geolocation} from '@ionic-native/geolocation';
-import { Route } from '../../../../app/models/monument';
+import { Monument, Route } from '../../../../app/models/monument';
 import { InfoPage } from '../../info/info';
 import 'rxjs/add/operator/map';
-import { DeepLinkConfig } from 'ionic-angular';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 declare var google;
+
 
 @IonicPage()
 @Component({
@@ -24,15 +25,16 @@ export class NavigationmapPage {
   marker: any;
   title;
   receivedData: Route;
-  markers = [];
+  markers : Monument[];
   info = [];
 
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
               public geolocation: Geolocation,
               public params: NavParams,
-              // private deeplinks: DeepLinkConfig
+              public appCtrl: App,
               ) {
+    console.log(navCtrl);
     this.receivedData = this.params.get('data');
     this.title = this.receivedData.name;
     this.infoWindows = [];
@@ -80,10 +82,29 @@ export class NavigationmapPage {
         button.value = 'Click here to see my info.'
         google.maps.event.addDomListener(button, 'click', function () {
           sendInfo(marker.data);
+
+          // google.maps.event.addListener(infowindow, 'domready', () => {
+          //   let goInfoPage = document.getElementById(marker.data);
+          //   goInfoPage.addEventListener('click', () => {
+          //     let pushData = marker.data;
+          //     let nav = this.app.getActiveNav();
+          //     nav.push('InfoPage',{'record':pushData});
+          //
+          //   })
+          // });
         });
 
-        function sendInfo(marker) {
-          console.log(marker);
+         const sendInfo = marker => {
+          let markerInfo = [];
+          markerInfo.push(marker);
+
+          console.log('markerInfo: '  ,markerInfo);
+          console.log(this.navCtrl);
+          //  this.navCtrl.push(InfoPage, {
+          //   infoData: markerInfo
+          // })
+          console.log('info: ', marker);
+
         }
         infowindow.setContent(content);
         infowindow.open(this.map, marker);
@@ -103,6 +124,7 @@ export class NavigationmapPage {
         infowindow1.open(this.map, startMarker);
         });
     });
+
   }
   onDismiss() {
     this.viewCtrl.dismiss();

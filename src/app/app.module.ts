@@ -17,6 +17,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigationmap';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InfoPage } from '../pages/menu/info/info';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp ),
     IonicStorageModule.forRoot(),
     LoginPageModule,
     MenuPageModule,
