@@ -10,24 +10,18 @@
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
-
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XRZJKwlGjlWu15KRI7j-6VFT_LL9TDE"></script>
-
-  <!-- cordova.js required for cordova apps (remove if not needed) -->
-  <script src="cordova.js"></script>
-  <!-- un-comment this code to enable service worker
+  <!-- un-comment this code to enable service worker-->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('service worker installed'))
     .catch(err => console.log('Error', err));
     }
-  </script>-->
-
+  </script>
   <link href="build/main.css" rel="stylesheet">
 
 </head>
@@ -36,8 +30,39 @@
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
 
+  <!--
+  <script>
+    var getJSON = function(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'json';
+      xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+          callback(null, xhr.response);
+        } else {
+          callback(status, xhr.response);
+        }
+      };
+      xhr.send();
+    };
+
+    getJSON('http://localhost:9000/config/google',
+      function (err, data) {
+        if (err !== null) {
+          alert('Something went wrong: ' + err);
+        } else {
+          alert('Your query count: ' + data.query.count);
+        }
+      });
+  </script>
+  -->
+
+  <!-- google maps api key,
+       needed to draw the google maps, markers and directions -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XRZJKwlGjlWu15KRI7j-6VFT_LL9TDE"></script>
   <!-- cordova.js required for cordova apps (remove if not needed) -->
-  <!--<script src="cordova.js"></script>-->
+  <script src="cordova.js"></script>
 
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
