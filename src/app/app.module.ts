@@ -18,6 +18,7 @@ import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigati
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Direction } from 'angular2-swing';
+import { LoginService } from '../services/login.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,13 @@ import { Direction } from 'angular2-swing';
     NavigationmapPage,
   ],
   imports: [
+
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {}, {
+      links: [
+        { component: MenuPage, name: 'Menu', segment: 'menu' }
+        ]
+    }),
     IonicStorageModule.forRoot(),
     LoginPageModule,
     MenuPageModule,
@@ -46,6 +52,7 @@ import { Direction } from 'angular2-swing';
   providers: [
     MonumentService,
     RoutesService,
+    LoginService,
     NativeStorage,
     Geolocation,
     Facebook,

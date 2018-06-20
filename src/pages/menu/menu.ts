@@ -56,10 +56,7 @@ export class MenuPage {
   logout() {
     var nav = this.navCtrl;
     this.isLoggedIn = false;
-    this.fb.getLoginStatus().then(res => {
-      res.status = '';
       nav.push(LoginPage);
 
-    })
   }
 }
