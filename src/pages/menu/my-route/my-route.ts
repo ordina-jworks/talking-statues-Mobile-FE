@@ -26,7 +26,7 @@ export class MyRoutePage {
       }],
 
       area:"meir",
-      imageRef: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
+      picture: 'https://images.standbeelden.be/600x0/1363/Antoon%20Van%20Dyck.jpg',
       latitude: 51.218,
       longitude: 4.413
     },

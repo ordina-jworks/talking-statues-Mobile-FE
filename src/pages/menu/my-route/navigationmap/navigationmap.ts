@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { Geolocation} from '@ionic-native/geolocation';
 import { Monument, Route } from '../../../../app/models/monument';
 import { InfoPage } from '../../info/info';
-
+import { Nav } from 'ionic-angular';
 
 declare var google;
 
@@ -14,6 +14,8 @@ declare var google;
 })
 export class NavigationmapPage {
   @ViewChild('map') mapElement: ElementRef;
+  @ViewChild(Nav) nav: Nav;
+
   map: any;
   title;
   receivedData: Route;
@@ -34,6 +36,7 @@ export class NavigationmapPage {
     public params: NavParams,
     public viewCtrl: ViewController,
   ) {
+    let Key = "AIzaSyB8XRZJKwlGjlWu15KRI7j-6VFT_LL9TDE";
     this.receivedData = params.get('data');
     this.title = this.receivedData.routeTitle;
     this.infoWindows = [];
@@ -66,7 +69,7 @@ export class NavigationmapPage {
       });
 
       // get all liked monuments their coords in a marker
-      let mapMarkers: google.maps.Marker[] = this.receivedData.monuments.map(monument =>
+      let mapMarkers: any[] = this.receivedData.monuments.map(monument =>
         new google.maps.Marker({
          position: {
             lat: monument.latitude,
@@ -96,9 +99,11 @@ export class NavigationmapPage {
           // code attempt to get data from JS code into Angular: from the on infowindow click event
           google.maps.event.addDomListener(button, 'click', () => {
             console.log(marker.data);
-            // this.navCtrl.push(InfoPage, {
-            //   markerData: marker.data
-            // })
+            // var navParent = this.navCtrl.parent.parent as NavController;
+            // console.log(navParent);
+            // navParent.push('InfoPage', {
+            //   infoData: console.log(marker.data)
+            // });
           });
 
           infowindow.setContent(content);
@@ -136,7 +141,7 @@ export class NavigationmapPage {
     let destinationLong = Math.max(this.monumentLongitude);
     this.directionsDisplay.setOptions({
       polylineOptions: {
-        strokeColor: 'green'
+        strokeColor: 'orange'
       }
     });
     this.directionsDisplay.setMap(this.map);
