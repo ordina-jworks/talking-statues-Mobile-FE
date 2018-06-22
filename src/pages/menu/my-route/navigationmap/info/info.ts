@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Language, Monument } from '../../../app/models/monument';
+import { Monument } from '../../../app/models/monument';
 
 @IonicPage()
 @Component({
@@ -19,9 +19,6 @@ export class InfoPage {
     console.log(this.monumentData);
   }
 
-  public onDismiss(): void {
-    this.viewCtrl.dismiss();
-  }
 
 
 }
