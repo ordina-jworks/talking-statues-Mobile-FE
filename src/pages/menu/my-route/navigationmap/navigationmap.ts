@@ -2,8 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Geolocation} from '@ionic-native/geolocation';
 import { Route } from '../../../../app/models/monument';
-import { InfoPage } from '../../info/info';
 import { Nav } from 'ionic-angular';
+import { InfoPage } from './info/info';
 
 declare var google;
 

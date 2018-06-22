@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RouteplannerPage } from './routeplanner/routeplanner';
 import { MyRoutePage } from './my-route/my-route';
-import { InfoPage } from './info/info';
+import { InfoPage } from './my-route/navigationmap/info/info';
 import { ChatPage } from './chat/chat';
 import { LoginPage } from '../login/login';
 import { NativeStorage } from '@ionic-native/native-storage';
