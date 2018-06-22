@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ monumentData[0].information[0].name }}</ion-title>
+    <ion-title>{{ monumentData.information[0].name }}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content  *ngIf="monumentData[0] as monument">
+<ion-content  *ngIf="monumentData as monument">
   <div class="banner">
     <div class="overlapse">
-        <img class="monument-image" [src]="'http://localhost:9000/monuments/' + monumentData[0].id + '/image'">
+        <img class="monument-image" [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
 
     </div>
   </div>
