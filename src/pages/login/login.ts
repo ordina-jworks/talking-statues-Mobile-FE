@@ -24,10 +24,8 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private facebook: Facebook,
-    public menuEvent: Events,
     private _loginService: LoginService,
   ) {
-
     this._loginService.checkLoggedUserID().subscribe(
       res => {
         this.userData = res;
@@ -38,29 +36,5 @@ export class LoginPage {
         }
       }
     );
-
-
-
-
-
-    // console.log(this.isLoggedIn);
-    // this.isLoggedIn = true;
-    // console.log(this.isLoggedIn);
-    // goToFbLogin() {
-    //   this.facebook.login(['public_profile', 'user_friends', 'email'])
-    //     .then(res => {
-    //       if(res.status === "connected") {
-    //         this.isLoggedIn = true;
-    //         this.navCtrl.push(MenuPage);
-    //       } else {
-    //         this.isLoggedIn = false;
-    //       }
-    //     })
-    //     .catch(e => console.log('Error logging into Facebook', e));
-    // }
-  }
-
-  active() {
-
   }
 }
