@@ -7,6 +7,7 @@ import { ChatPage } from './chat/chat';
 import { LoginPage } from '../login/login';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { ProfilePage } from './profile/profile';
 
 @Component({
   selector: 'page-menu',
@@ -18,8 +19,6 @@ export class MenuPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public fb: Facebook,
-    public nativeStorage: NativeStorage,
   ) {
     this.data = navParams.get('payload');
 
@@ -33,8 +32,8 @@ export class MenuPage {
     this.navCtrl.push(MyRoutePage);
   }
 
-  info() {
-    this.navCtrl.push(InfoPage);
+  profile() {
+    this.navCtrl.push(ProfilePage);
   }
 
   chat() {
@@ -42,7 +41,6 @@ export class MenuPage {
   }
 
   logout() {
-
     this.navCtrl.push(LoginPage);
 
   }

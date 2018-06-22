@@ -9,6 +9,7 @@ import { ChoisePage } from './routeplanner/choise/choise';
 import { ChatroomPage } from './chat/chatroom/chatroom';
 import { SwingModule } from 'angular2-swing';
 import { InfoPage } from './my-route/navigationmap/info/info';
+import { ProfilePage } from './profile/profile';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { InfoPage } from './my-route/navigationmap/info/info';
     InfluencerPage,
     ChoisePage,
     ChatroomPage,
+    ProfilePage,
   ],
   entryComponents: [
     RouteplannerPage,
@@ -28,6 +30,7 @@ import { InfoPage } from './my-route/navigationmap/info/info';
     InfluencerPage,
     ChoisePage,
     ChatroomPage,
+    ProfilePage,
   ],
   imports: [
     IonicPageModule.forChild(MenuPage),
