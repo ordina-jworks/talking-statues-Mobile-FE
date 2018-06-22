@@ -91,9 +91,6 @@
         <variable name="FACEBOOK_DISPLAY_NAME" value="Ionic" />
         <variable name="FACEBOOK_APP_ID" value="ID1349727158506619" />
     </plugin>
-    <engine name="ios" spec="4.5.4" />
-    <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.3.6">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I" />
@@ -122,4 +119,7 @@
         <variable name="DEEPLINK_5_SCHEME" value=" " />
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
+    <engine name="ios" spec="4.5.4" />
+    <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="7.0.0" />
 </widget>
