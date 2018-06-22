@@ -119,6 +119,7 @@ export class NavigationmapPage {
       map: this.map,
       title: 'your current Position ( Home)'
     });
+    startMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
     startMarker.addListener('click', function() {
       infowindow1.open(this.map, startMarker);
     });
