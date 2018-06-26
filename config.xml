@@ -91,9 +91,6 @@
         <variable name="FACEBOOK_DISPLAY_NAME" value="Ionic" />
         <variable name="FACEBOOK_APP_ID" value="ID1349727158506619" />
     </plugin>
-    <engine name="ios" spec="4.5.4" />
-    <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.3.6">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I" />
@@ -104,4 +101,25 @@
     </plugin>
     <allow-navigation href="http://192.168.56.30:8101" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="ionic-plugin-deeplinks" spec="^1.0.15">
+        <variable name="URL_SCHEME" value="myapp" />
+        <variable name="DEEPLINK_SCHEME" value="https" />
+        <variable name="DEEPLINK_HOST" value="example.com" />
+        <variable name="ANDROID_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_2_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_3_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_4_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_5_PATH_PREFIX" value="/" />
+        <variable name="DEEPLINK_2_SCHEME" value=" " />
+        <variable name="DEEPLINK_2_HOST" value=" " />
+        <variable name="DEEPLINK_3_SCHEME" value=" " />
+        <variable name="DEEPLINK_3_HOST" value=" " />
+        <variable name="DEEPLINK_4_SCHEME" value=" " />
+        <variable name="DEEPLINK_4_HOST" value=" " />
+        <variable name="DEEPLINK_5_SCHEME" value=" " />
+        <variable name="DEEPLINK_5_HOST" value=" " />
+    </plugin>
+    <engine name="ios" spec="4.5.4" />
+    <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="7.0.0" />
 </widget>
