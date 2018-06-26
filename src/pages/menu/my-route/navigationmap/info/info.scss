@@ -3,13 +3,13 @@ page-info {
     position: relative;
     margin: auto;
     height: 30%;
-    background-image: url('../../../assets/imgs/CityCentre_overview_Antwerp.jpg');
+    background-image: url('../../../../../assets/imgs/CityCentre_overview_Antwerp.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
   }
   .overlapse {
     overflow: hidden;
-    height: 40%;
+    height: 30%;
   }
   .monument-image {
     position: absolute;
@@ -20,8 +20,8 @@ page-info {
     height: 200px;
     width: 200px;
     border:3px solid lightgrey;
-  }
 
+  }
   .monument-info {
     .monument-title {
       text-align: center;
@@ -31,6 +31,10 @@ page-info {
       padding-bottom: 5px;
       background-color: #85b7e2;
       margin-top: 60px;
+    }
+
+    .navigationList {
+      text-align: center;
     }
 
     .monument-description {
