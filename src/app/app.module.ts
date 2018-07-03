@@ -19,7 +19,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Direction } from 'angular2-swing';
 import { LoginService } from '../services/login.service';
-import { Deeplinks } from '@ionic-native/deeplinks';
+//import { Deeplinks } from '@ionic-native/deeplinks';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,6 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     NativeStorage,
     Geolocation,
     Facebook,
-    Deeplinks,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
 
   ]
