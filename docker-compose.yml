@@ -1,0 +1,9 @@
+version: '2'
+services:
+  ionic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: talkingstatues_fe
+    ports:
+      - "8100:8100"

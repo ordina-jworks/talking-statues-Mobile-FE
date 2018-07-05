@@ -13,7 +13,7 @@ export class LoginService {
 
   }
   checkLoggedUserID() :Observable<{id:string}>{
-    let endpoint = 'http://localhost:9000/auth/user-info';
+    let endpoint = 'http://localhost:9000/auth/user';
     return this._http.get<{id:string}>(endpoint, { withCredentials: true });
   };
 }
