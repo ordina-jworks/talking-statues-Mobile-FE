@@ -35,12 +35,10 @@
 
   <!-- google maps api key,
        needed to draw the google maps, markers and directions -->
-  <script id="google" src="">
+  <script id="google" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XRZJKwlGjlWu15KRI7j-6VFT_LL9TDE"></script>
 
-  </script>
-
+  <!--
   <script>
-
     function getKey(theUrl)
     {
       var xmlHttp = new XMLHttpRequest();
@@ -49,10 +47,10 @@
       var data = JSON.parse(xmlHttp.responseText);
       document.getElementById('google').src = "https://maps.googleapis.com/maps/api/js?key="+data.value;
     }
-
     document.onload=getKey("http://localhost:9000/config/google");
 
   </script>
+  -->
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
 

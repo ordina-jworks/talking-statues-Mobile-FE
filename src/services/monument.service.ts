@@ -18,20 +18,15 @@ export class MonumentService {
   }
 
   getSwipeMonuments(): Observable<QueryMonuments[]> {
-<<<<<<< Updated upstream
     let endpoint = 'http://localhost:9000/monuments/selection?area=Sint-Andries&lang=NL';
     return this._http.get<QueryMonuments[]>(endpoint, { withCredentials: true }).pipe(
-=======
-    let endpoint = 'http://localhost:8080/monuments/selection?area=Sint-Andries&lang=NL';
-    return this._http.get<QueryMonuments[]>(endpoint).pipe(
->>>>>>> Stashed changes
       map(res => this.data = res),
       tap(res => console.log(res))
     );
   };
 
   sendLikedMonumentIds(likedIds): Observable<Route> {
-    let endpoint = `http://localhost:8080/routes`;
+    let endpoint = `http://localhost:9000/routes`;
 
     likedIds.locations = likedIds.locations.map(id => id.id);
     // console.log(likedIds);
