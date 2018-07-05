@@ -9,7 +9,7 @@
         <ion-item *ngIf="monument.name" >
           <div>
             <img style="object-fit: cover; height: 300px; width: 400px"
-                 [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
+                 [src]="'http://localhost:8080/monuments/' + monument.id + '/image'">
           </div>
         </ion-item>
         <h2 style="background-color: white; text-align: center">{{monument.name}}</h2>
