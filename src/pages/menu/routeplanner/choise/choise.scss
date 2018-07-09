@@ -29,13 +29,17 @@ page-choise {
 
   .card-content {
     background-color: white;
+
   }
 
   .confirm-button {
     display: block;
     margin: 0 auto;
     width: 100%;
+    background-color:#DD0F58;
   }
+  .button-inner {color:white; padding:10px 20px;}
+
   ion-list {
     margin: -1px 0 0 !important;
   }
