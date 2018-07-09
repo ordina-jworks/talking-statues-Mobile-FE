@@ -130,14 +130,19 @@ export class ChoisePage {
   }
 
   sendRoutes() {
-    this._monumentService.sendLikedMonumentIds(this.monumentsForm.value).subscribe(
-      res => {
-        this.responseList = res;
-        this.navCtrl.push(NavigationmapPage, {
-          data: this.responseList
-        });
-      }
+    if (this.choisenList.length > 0) {
+      this._monumentService.sendLikedMonumentIds(this.monumentsForm.value).subscribe(
+        res => {
+          this.responseList = res;
+          this.navCtrl.push(NavigationmapPage, {
+            data: this.responseList
+          });
+        })
+    }
+    else (
+      alert('You need to select at least one monument to start a route.')
     )
+
 
   }
 }

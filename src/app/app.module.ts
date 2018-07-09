@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPageModule } from '../pages/login/login.module';
 import { MenuPageModule } from '../pages/menu/menu.module';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { Facebook } from '@ionic-native/facebook';
+
 import { MonumentService } from '../services/monument.service';
 import { RoutesService } from '../services/routes.service';
 import { IonicStorageModule } from '@ionic/storage';
@@ -52,7 +52,6 @@ import { LoginService } from '../services/login.service';
     LoginService,
     NativeStorage,
     Geolocation,
-    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
 
   ]
