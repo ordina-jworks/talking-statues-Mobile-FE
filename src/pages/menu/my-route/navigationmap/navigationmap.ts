@@ -143,7 +143,7 @@ export class NavigationmapPage {
     let destinationLong = Math.max(this.monumentLongitude);
     this.directionsDisplay.setOptions({
       polylineOptions: {
-        strokeColor: 'orange'
+        strokeColor: '#DD0F58'
       }
     });
     this.directionsDisplay.setMap(this.map);
