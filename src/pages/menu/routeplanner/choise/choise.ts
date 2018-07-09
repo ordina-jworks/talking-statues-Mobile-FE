@@ -98,11 +98,9 @@ export class ChoisePage {
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
     if (like) {
-      this.recentCard = 'You liked: ' + monument.name;
       this.choisenList.push(monument);
       this.monumentNames = this.choisenList;
     } else {
-      this.recentCard = 'You disliked: ' + monument.name;
     }
   }
 
