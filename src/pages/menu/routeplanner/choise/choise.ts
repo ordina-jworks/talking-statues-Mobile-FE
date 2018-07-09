@@ -2,15 +2,13 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
 import {
-  DragEvent,
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 import 'rxjs/add/operator/map';
 import { Geolocation} from '@ionic-native/geolocation';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
 import { MonumentService } from '../../../../services/monument.service';
-import { HttpClient } from '@angular/common/http';
 import { QueryMonuments } from '../../../../app/models/query';
 import { Route } from '../../../../app/models/route';
 
@@ -39,18 +37,15 @@ export class ChoisePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: HttpClient,
-    private geolocation: Geolocation,
+    public geolocation: Geolocation,
     private _monumentService: MonumentService,
     private fb: FormBuilder,
   ) {
     this.createMonumentForm();
-    geolocation.getCurrentPosition()
+    this.geolocation.getCurrentPosition()
       .then((locate) => {
         this.latitude =  locate.coords.latitude;
         this.longitude = locate.coords.longitude;
-        // console.log('Current Location coordinates are:' , this.latitude
-        //   + ' latitude & ' + this.longitude + ' longitude.');
         this.monumentsForm.controls['userLocation'].setValue({
           latitude: this.latitude,
           longitude: this.longitude
@@ -82,13 +77,6 @@ export class ChoisePage {
       }
     });
   }
-
-  // ngAfterViewInit() {
-  //   // Either subscribe in controller or set in HTML
-  //   this.swingStack.throwin.subscribe((event: DragEvent) => {
-  //     event.target.style.background = '#ffffff';
-  //   });
-  // }
 
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
@@ -133,7 +121,6 @@ export class ChoisePage {
     this._monumentService.getSwipeMonuments().subscribe(
       res => {
         this.currentList = res;
-          // console.log(this.currentList);
       }
     );
   }
@@ -146,7 +133,6 @@ export class ChoisePage {
     this._monumentService.sendLikedMonumentIds(this.monumentsForm.value).subscribe(
       res => {
         this.responseList = res;
-        // console.log(this.responseList);
         this.navCtrl.push(NavigationmapPage, {
           data: this.responseList
         });

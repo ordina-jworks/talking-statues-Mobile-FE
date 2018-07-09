@@ -18,7 +18,7 @@ export class LoginPage {
     this._loginService.checkLoggedUserID().subscribe(
       res => {
         this.userData = res;
-        console.log('Logged in UserID: ',this.userData);
+        // console.log('Logged in UserID: ',this.userData);
         if (this.userData) {
           this.navCtrl.push(MenuPage);
         }

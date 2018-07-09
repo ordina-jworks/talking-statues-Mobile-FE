@@ -10,16 +10,13 @@ import { LoginPageModule } from '../pages/login/login.module';
 import { MenuPageModule } from '../pages/menu/menu.module';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Facebook } from '@ionic-native/facebook';
-import { HttpModule } from '@angular/http';
 import { MonumentService } from '../services/monument.service';
 import { RoutesService } from '../services/routes.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigationmap';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Direction } from 'angular2-swing';
 import { LoginService } from '../services/login.service';
-//import { Deeplinks } from '@ionic-native/deeplinks';
 
 @NgModule({
   declarations: [
@@ -40,7 +37,6 @@ import { LoginService } from '../services/login.service';
     LoginPageModule,
     MenuPageModule,
     HttpClientModule,
-    HttpModule,
     ReactiveFormsModule,
   ],
   bootstrap: [IonicApp],
