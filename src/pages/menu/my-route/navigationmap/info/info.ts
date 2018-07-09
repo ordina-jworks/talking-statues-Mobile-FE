@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Monument } from '../../../../../app/models/monument';
-import { NavigationmapPage } from '../navigationmap';
 import { ProfilePage } from '../../../profile/profile';
 import { ChatPage } from '../../../chat/chat';
 

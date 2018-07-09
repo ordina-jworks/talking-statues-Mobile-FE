@@ -29,7 +29,6 @@ export class MonumentService {
     let endpoint = `http://localhost:9000/routes`;
 
     likedIds.locations = likedIds.locations.map(id => id.id);
-    // console.log(likedIds);
     return this._http.post<Route>(endpoint, likedIds, { withCredentials: true });
   }
 
