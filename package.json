@@ -22,10 +22,7 @@
     "@angular/platform-browser": "5.2.10",
     "@angular/platform-browser-dynamic": "5.2.10",
     "@ionic-native/core": "^4.7.0",
-    "@ionic-native/deeplinks": "^4.7.0",
-    "@ionic-native/facebook": "^4.7.0",
     "@ionic-native/geolocation": "^4.7.0",
-    "@ionic-native/google-maps": "^4.8.2",
     "@ionic-native/native-storage": "^4.7.0",
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "2.1.3",
@@ -35,8 +32,6 @@
     "cordova-browser": "5.0.3",
     "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-facebook": "^0.2.2",
-    "cordova-plugin-facebook4": "^2.2.0",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googlemaps": "^2.3.6",
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git#2.7.0",
@@ -63,46 +58,11 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-facebook4": {
-        "APP_ID": "1349727158506619",
-        "APP_NAME": "Ionic talking statues",
-        "ANDROID_SDK_VERSION": "4.+"
-      },
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-facebook": {
-        "FACEBOOK_DISPLAY_NAME": "Ionic",
-        "FACEBOOK_APP_ID": "ID1349727158506619"
-      },
-      "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I",
-        "API_KEY_FOR_IOS": "AIzaSyBFqFgr_9DTNB1krM53cs8bMRTaNjD3q6I",
-        "PLAY_SERVICES_VERSION": "15.0.1",
-        "ANDROID_SUPPORT_V4_VERSION": "26.1.0",
-        "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
-        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
-      },
       "cordova-plugin-geolocation": {},
-      "ionic-plugin-deeplinks": {
-        "URL_SCHEME": "myapp",
-        "DEEPLINK_SCHEME": "https",
-        "DEEPLINK_HOST": "example.com",
-        "ANDROID_PATH_PREFIX": "/",
-        "ANDROID_2_PATH_PREFIX": "/",
-        "ANDROID_3_PATH_PREFIX": "/",
-        "ANDROID_4_PATH_PREFIX": "/",
-        "ANDROID_5_PATH_PREFIX": "/",
-        "DEEPLINK_2_SCHEME": " ",
-        "DEEPLINK_2_HOST": " ",
-        "DEEPLINK_3_SCHEME": " ",
-        "DEEPLINK_3_HOST": " ",
-        "DEEPLINK_4_SCHEME": " ",
-        "DEEPLINK_4_HOST": " ",
-        "DEEPLINK_5_SCHEME": " ",
-        "DEEPLINK_5_HOST": " "
-      },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-statusbar": {}
