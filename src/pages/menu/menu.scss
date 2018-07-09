@@ -4,11 +4,12 @@
   //padding: 5%;
 
   .menu-button {
-    display: block;
-    margin: 0 0 0;
-    width: 100%;
+    position: relative;
     margin-bottom: 10%;
-    background-color:#DD0F58;
+  }
+
+  .button {
+    background-color: black !important;
   }
 }
 

@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { NavigationComponent } from './shared/navigation/navigation';
+
 @NgModule({
-	declarations: [NavigationComponent],
+	declarations: [
+	  NavigationComponent,
+    ],
 	imports: [],
-	exports: [NavigationComponent]
+	exports: [
+	  NavigationComponent,
+   ]
 })
 export class ComponentsModule {}
