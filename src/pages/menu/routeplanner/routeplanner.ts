@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChoisePage } from './choise/choise';
 import { InfluencerPage } from './influencer/influencer';
+import { NavigationComponent} from "../../../components/shared/navigation/navigation";
 
 /**
  * Generated class for the RouteplannerPage page.
