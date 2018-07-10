@@ -1,10 +1,9 @@
 page-choise {
 
   #card-stack {
-    width: 90%;
-    height: 200px;
+    width: 100%;
+    height: 48%;
 
-    margin-left: 5%;
     position: relative;
   }
 
@@ -12,31 +11,69 @@ page-choise {
     border-radius: 2px;
     position: absolute;
     text-align: center;
-    height: 380px;
+    height: 600px;
+
+  }
+
+  .voteOverlay {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+
+  }
+  .cardOverlay {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    text-align: center;
+    z-index: 99;
+    bottom: 0px;
+    font-size: 20px;
+    color: #fff;
+
   }
 
   .card-content {
     background-color: white;
+
   }
 
-  .confirm-button {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
+  ion-icon {
+    padding: 5px;
+    font-size: 24px;
   }
+
+  .content-md {
+    #nope {
+      color: #DD0F58;
+    }
+    #like {
+      color: #32db64;
+    }
+  }
+
   ion-list {
-    margin: -1px 0 0 !important;
+    padding: 1px;
   }
 
+  // Vote buttons
   .voting {
     margin-top: 80%;
     position: center;
     text-align: center;
   }
 
+  .icon {
+    text-align: center;
+    display: inline;
 
-  .list {
-    margin-top: 0;
+    #nope {
+    }
+    #like {
+      margin-left: 80%;
+    }
 
   }
 }

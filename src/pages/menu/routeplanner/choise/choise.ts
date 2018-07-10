@@ -23,7 +23,9 @@ export class ChoisePage {
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
   stackConfig: StackConfig;
-  recentCard: string = '';
+  voteImg;
+  user_language = 'NL';
+  title = '';
   choisenList: QueryMonuments[] = [];
   currentList: QueryMonuments[] = [];
   responseList: Route;
@@ -41,6 +43,8 @@ export class ChoisePage {
     private _monumentService: MonumentService,
     private fb: FormBuilder,
   ) {
+    this.getUserLanguage();
+
     this.createMonumentForm();
     this.geolocation.getCurrentPosition()
       .then((locate) => {
@@ -59,13 +63,51 @@ export class ChoisePage {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
       },
       transform: (element, x, y, r) => {
+        this.voteImg = '';
         this.onItemMove(element, x, y, r);
+        if (x < -80) {
+          this.voteImg = '../../../../assets/imgs/nope.png'
+        }
+        if (x > 80) {
+          this.voteImg = '../../../../assets/imgs/like.png';
+        }
       },
       throwOutDistance: (d) => {
         return 800;
       }
     };
     this.addNewCards();
+  }
+
+  getUserLanguage() {
+    let language = this.user_language;
+    switch (language) {
+      case 'NL': {
+        this.title = 'Plan je trip';
+        break;
+      }
+      case 'GB': {
+        this.title = 'Plan your trip';
+        break;
+      }
+      case 'DE': {
+        this.title = 'Planen Sie Ihre Reise';
+        break;
+      }
+      case 'FR': {
+        this.title = 'planifier votre voyage';
+        break;
+      }
+      case 'ES': {
+        this.title = 'planifica tu viaje';
+        break;
+      }
+      default: {
+        this.title = 'Plan je trip';
+        break;
+      }
+
+    }
   }
   createMonumentForm(){
     this.monumentsForm = this.fb.group({
@@ -81,28 +123,17 @@ export class ChoisePage {
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
     var color = '';
-    var abs = Math.abs(x);
-    let min = Math.trunc(Math.min(16*16 - abs, 16*16));
-    let hexCode = this.decimalToHex(min, 2);
-
-    if (x < 0) {
-      color = '#FF' + hexCode + hexCode;
-    } else {
-      color = '#' + hexCode + 'FF' + hexCode;
-    }
-    element.style.background = color;
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
   }
 
 // Connected through HTML
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
+    this.voteImg = '';
     if (like) {
-      this.recentCard = 'You liked: ' + monument.information.name;
       this.choisenList.push(monument);
       this.monumentNames = this.choisenList;
     } else {
-      this.recentCard = 'You disliked: ' + monument.information.name;
     }
   }
 
