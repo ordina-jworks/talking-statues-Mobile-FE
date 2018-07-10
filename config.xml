@@ -84,7 +84,4 @@
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.1" />
     <plugin name="cordova-plugin-statusbar" spec="https://github.com/apache/cordova-plugin-statusbar.git" />
     <allow-navigation href="http://localhost:8100" />
-    <engine name="ios" spec="4.5.4" />
-    <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.0.0" />
 </widget>

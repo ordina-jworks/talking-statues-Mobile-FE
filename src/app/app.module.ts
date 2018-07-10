@@ -17,6 +17,7 @@ import { NavigationmapPage } from '../pages/menu/my-route/navigationmap/navigati
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+import { NavigationComponent } from '../components/shared/navigation/navigation';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoginService } from '../services/login.service';
     LoginPage,
     MenuPage,
     NavigationmapPage,
+    NavigationComponent
   ],
   imports: [
 
@@ -45,6 +47,7 @@ import { LoginService } from '../services/login.service';
     LoginPage,
     MenuPage,
     NavigationmapPage,
+    NavigationComponent
   ],
   providers: [
     MonumentService,
