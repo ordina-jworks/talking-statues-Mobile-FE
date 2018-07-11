@@ -12,17 +12,40 @@ page-choise {
     position: absolute;
     text-align: center;
     height: 600px;
-
   }
 
   .voteOverlay {
     width: 100%;
-    height: 50px;
+    height: 10%;
     position: absolute;
-    text-align: center;
-    top: 0px;
-
+    margin-left: 50px;
+    top: 10px;
   }
+
+  //.like:first-child {
+  //  border-radius: 5px;
+  //  padding: 5px 10px;
+  //  border: 2px solid green;
+  //  color: green;
+  //  text-transform: uppercase;
+  //  font-size: 40px;
+  //  position: absolute;
+  //  top: 50px;
+  //  right: 40px;
+  //  text-shadow: none;
+  //}
+  //.dislike:first-child {
+  //  border-radius: 5px;
+  //  padding: 5px 10px;
+  //  border: 2px solid red;
+  //  color: red;
+  //  text-transform: uppercase;
+  //  font-size: 40px;
+  //  position: absolute;
+  //  top: 50px;
+  //  left: 40px;
+  //  text-shadow: none;
+  //}
   .cardOverlay {
     width: 100%;
     height: 50px;
@@ -33,11 +56,13 @@ page-choise {
     font-size: 20px;
     color: #fff;
 
+    :active {
+      color: #DD0F58;
+    }
   }
 
   .card-content {
     background-color: white;
-
   }
 
   ion-icon {
@@ -55,7 +80,7 @@ page-choise {
   }
 
   ion-list {
-    padding: 1px;
+    padding: 0px;
   }
 
   // Vote buttons
@@ -74,6 +99,6 @@ page-choise {
     #like {
       margin-left: 80%;
     }
-
   }
+
 }
