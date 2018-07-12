@@ -1,6 +1,9 @@
+
 export interface QueryMonuments {
   id: string,
-  information: {
-    name: string
-  }
+  information: Information[]
+}
+
+export interface Information {
+  name: string,
 }

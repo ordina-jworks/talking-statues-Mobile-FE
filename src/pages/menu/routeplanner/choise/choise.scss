@@ -12,12 +12,43 @@ page-choise {
     position: absolute;
     text-align: center;
     height: 600px;
-
-
   }
-  .cardOverlay{
+
+  .voteOverlay {
     width: 100%;
-    height: 60px;
+    height: 10%;
+    position: absolute;
+    margin-left: 50px;
+    top: 10px;
+  }
+
+  //.like:first-child {
+  //  border-radius: 5px;
+  //  padding: 5px 10px;
+  //  border: 2px solid green;
+  //  color: green;
+  //  text-transform: uppercase;
+  //  font-size: 40px;
+  //  position: absolute;
+  //  top: 50px;
+  //  right: 40px;
+  //  text-shadow: none;
+  //}
+  //.dislike:first-child {
+  //  border-radius: 5px;
+  //  padding: 5px 10px;
+  //  border: 2px solid red;
+  //  color: red;
+  //  text-transform: uppercase;
+  //  font-size: 40px;
+  //  position: absolute;
+  //  top: 50px;
+  //  left: 40px;
+  //  text-shadow: none;
+  //}
+  .cardOverlay {
+    width: 100%;
+    height: 50px;
     position: absolute;
     text-align: center;
     z-index: 99;
@@ -25,34 +56,49 @@ page-choise {
     font-size: 20px;
     color: #fff;
 
+    :active {
+      color: #DD0F58;
+    }
   }
 
   .card-content {
     background-color: white;
-
   }
 
-  .confirm-button {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    background-color:#DD0F58;
+  ion-icon {
+    padding: 5px;
+    font-size: 24px;
   }
-  .button-inner {color:white; padding:10px 20px;}
+
+  .content-md {
+    #nope {
+      color: #DD0F58;
+    }
+    #like {
+      color: #32db64;
+    }
+  }
 
   ion-list {
-    margin: -1px 0 0 !important;
+    padding: 0px;
   }
 
+  // Vote buttons
   .voting {
     margin-top: 80%;
     position: center;
     text-align: center;
   }
 
+  .icon {
+    text-align: center;
+    display: inline;
 
-  .list {
-    margin-top: 0;
-
+    #nope {
+    }
+    #like {
+      margin-left: 80%;
+    }
   }
+
 }
