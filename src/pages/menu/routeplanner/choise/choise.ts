@@ -137,10 +137,12 @@ export class ChoisePage {
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
     if (like) {
+      this.recentCard = 'You liked: ' + monument.information.name;
       this.choisenList.push(monument);
       this.monumentNames = this.choisenList.map(res => res.information[0]);
       console.log(this.monumentNames);
     } else {
+      this.recentCard = 'You disliked: ' + monument.information.name;
     }
   }
 
