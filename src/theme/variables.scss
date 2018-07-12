@@ -38,13 +38,14 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  antwerp: #DD0F58
 );
 
-$background-color: #edf4fb !default;
-$background-ios-color: #edf4fb !default;
-$background-md-color: #edf4fb !default;
-$toolbar-md-background: #296ca8 !default;
+$background-color: #F5F5F5 !default;
+$background-ios-color: #F5F5F5 !default;
+$background-md-color: #F5F5F5 !default;
+$toolbar-md-background: #DD0F58 !default;
 
 // App iOS Variables
 // --------------------------------------------------

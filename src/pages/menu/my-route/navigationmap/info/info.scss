@@ -1,4 +1,7 @@
 page-info {
+  ion-content.content.content-md  {
+    background-color: #000 ;
+  }
   .banner {
     position: relative;
     margin: auto;
@@ -29,7 +32,6 @@ page-info {
       color: white;
       padding-top: 5px;
       padding-bottom: 5px;
-      background-color: #85b7e2;
       margin-top: 60px;
     }
 
@@ -38,8 +40,8 @@ page-info {
     }
 
     .monument-description {
+      color: #F5F5F5;
       padding: 15px;
-      background-color: #c2dbf0;
       height: 290px;
       overflow: scroll;
     }

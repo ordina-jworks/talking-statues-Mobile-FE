@@ -6,13 +6,16 @@
   <ion-content padding>
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" *ngIf="!currentList.length == 0">
       <ion-card #mycards1 swing-card *ngFor="let monument of currentList">
-        <ion-item *ngIf="monument.name" >
-          <div>
-            <img style="object-fit: cover; height: 300px; width: 400px"
+        <ion-item>
+          <div *ngIf="monument.name">
+            <img style="object-fit: cover; height: 580px; width: 100%"
                  [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
+            <div class="cardOverlay">
+              <div class="monument-title"><strong>{{ monument.name }}</strong></div>
+            </div>
           </div>
         </ion-item>
-        <h2 style="background-color: white; text-align: center">{{monument.name}}</h2>
+
       </ion-card>
     </div>
 

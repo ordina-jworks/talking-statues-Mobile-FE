@@ -21,24 +21,4 @@ export class MenuPage {
 
   }
 
-  planningRoutes() {
-    this.navCtrl.push(RouteplannerPage);
-  }
-
-  myRoutes() {
-    this.navCtrl.push(MyRoutePage);
-  }
-
-  profile() {
-    this.navCtrl.push(ProfilePage);
-  }
-
-  chat() {
-    this.navCtrl.push(ChatPage);
-  }
-
-  logout() {
-    this.navCtrl.push(LoginPage);
-
-  }
 }
