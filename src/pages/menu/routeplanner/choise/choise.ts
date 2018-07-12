@@ -64,20 +64,21 @@ export class ChoisePage {
       },
       transform: (element, x, y, r) => {
         // console.log('selected card: ', this.cardImages);
-        if (this.cardImages.last) {
+        if (this.cardImages) {
           this.cardImages.last.nativeElement.src = '';
-        }
-        this.onItemMove(element, x, y, r);
-        if (x < -60) {
-          if (this.cardImages.last) {
-            this.cardImages.last.nativeElement.src = '../../../../assets/imgs/nope.png'
+          this.onItemMove(element, x, y, r);
+          if (x < -60) {
+            if (this.cardImages.last) {
+              this.cardImages.last.nativeElement.src = '../../../../assets/imgs/nope.png'
+            }
+          }
+          if (x > 60) {
+            if (this.cardImages.last) {
+              this.cardImages.last.nativeElement.src = '../../../../assets/imgs/like.png';
+            }
           }
         }
-        if (x > 60) {
-          if (this.cardImages.last) {
-            this.cardImages.last.nativeElement.src = '../../../../assets/imgs/like.png';
-          }
-        }
+
       },
       throwOutDistance: (d) => {
         return 800;
@@ -131,6 +132,7 @@ export class ChoisePage {
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    this.cardImages.last.nativeElement.src = '';
   }
 
 // Connected through HTML
