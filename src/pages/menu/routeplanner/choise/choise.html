@@ -5,22 +5,24 @@
 </ion-header>
   <ion-content padding>
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" *ngIf="!currentList.length == 0">
-      <ion-card #mycards1 swing-card *ngFor="let monument of currentList">
+      <ion-card  #mycards1 swing-card *ngFor="let monument of currentList">
         <ion-item>
-          <div *ngIf="monument.name">
-            <div class="voteOverlay">
-              <img src="{{ voteImg }}">
+          <div>
+            <div  #vote class="voteOverlay">
+             <img #cardImages  style="height: 200px;width: 250px;"
+                src="{{ voteImg }}">
             </div>
-            <img style="object-fit: cover; height: 580px; width: 100%"
+
+            <img id="card" style="object-fit: cover; height: 580px; width: 100%"
                  [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
             <div class="cardOverlay">
-              <div class="monument-title"><strong>{{ monument.name }}</strong></div>
+              <div class="monument-title"><strong>{{ monument.information[0].name }}</strong></div>
             </div>
           </div>
         </ion-item>
-
       </ion-card>
     </div>
+
 
     <div>
       <ion-row class="voting" *ngIf="!currentList.length == 0">
@@ -45,16 +47,16 @@
         <ion-title style="text-align: center; margin-bottom: 15px">
           <ion-label style="margin-bottom: 15px">Jouw Interesses</ion-label>
         </ion-title>
-        <ion-list *ngFor="let monument of monumentNames">
-          <ion-item>
+
+        <div *ngFor="let monument of monumentNames">
+          <ion-item >
             {{ monument.name }}
           </ion-item>
-        </ion-list>
+        </div>
         <div class="icon">
           <ion-icon id="nope" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
           <ion-icon id="like" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
         </div>
-
       </form>
     </div>
   </ion-content>
