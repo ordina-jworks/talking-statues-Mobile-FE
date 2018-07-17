@@ -1,13 +1,13 @@
 export class Monument {
   id: string;
-  information:Information[];
+  information:Informations[];
   longitude: number;
   latitude: number;
   area: string;
   picture?:string;
 }
 
-export class Information {
+export class Informations {
   language:Language;
   name: String;
   description: String;

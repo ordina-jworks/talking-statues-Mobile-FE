@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
 import {
@@ -8,6 +8,8 @@ import {
 import 'rxjs/add/operator/map';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+
 import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
 import { MonumentService } from '../../../../services/monument.service';
 import { Information, QueryMonuments } from '../../../../app/models/query';
@@ -35,6 +37,8 @@ export class ChoisePage {
   monumentNames: Information[] = [];
   like: boolean;
 
+  lastCard;
+
   route = {};
   monumentsForm: FormGroup;
 
@@ -42,8 +46,11 @@ export class ChoisePage {
               public navParams: NavParams,
               public geolocation: Geolocation,
               private _monumentService: MonumentService,
-              private fb: FormBuilder,) {
+              private fb: FormBuilder,
+              )
+  {
     this.getUserLanguage();
+
 
     this.createMonumentForm();
     this.geolocation.getCurrentPosition()
@@ -63,25 +70,27 @@ export class ChoisePage {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
       },
       transform: (element, x, y, r) => {
-        // console.log('selected card: ', this.cardImages);
-        if (this.cardImages) {
-          this.cardImages.last.nativeElement.src = '';
+        // if (this.cardImages.last.nativeElement.currentSrc !== null) {
+        //   this.cardImages.last.nativeElement.currentSrc = '';
+        // }
           this.onItemMove(element, x, y, r);
-          if (x < -60) {
-            if (this.cardImages.last) {
-              this.cardImages.last.nativeElement.src = '../../../../assets/imgs/nope.png'
-            }
-          }
-          if (x > 60) {
-            if (this.cardImages.last) {
-              this.cardImages.last.nativeElement.src = '../../../../assets/imgs/like.png';
-            }
-          }
-        }
+
+        // if (this.currentList.slice(-1)) {
+        //   if (x < -60) {
+        //       this.cardImages.last.nativeElement.src = '../../../../assets/imgs/nope.png'
+        //   }
+        //   if (x > 60) {
+        //       this.cardImages.last.nativeElement.src = '../../../../assets/imgs/like.png';
+        //   }
+        //   // reset the vote animation on current card if x coords is in follow range:
+        //   if (x > -60 && x < 60) {
+        //       this.cardImages.last.nativeElement.src = '';
+        //   }
+        // }
 
       },
       throwOutDistance: (d) => {
-        return 800;
+        return d;
       }
     };
     this.addNewCards();
@@ -131,13 +140,27 @@ export class ChoisePage {
 
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
-    element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
-    this.cardImages.last.nativeElement.src = '';
+    if (x > 60) {
+      this.voteImg = '../../../../assets/imgs/like.png'
+      element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    }
+    if ( x < -60) {
+      this.voteImg = '../../../../assets/imgs/nope.png'
+      element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    }
+    if ( x < 60 && x > -60) {
+      this.voteImg = '';
+      element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    }
+    // '#DD0F58';
+    // this.voteImg = '';
   }
 
 // Connected through HTML
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
+    this.lastCard = this.currentList.slice(-1);
+    console.log('last card: ',this.lastCard);
     if (like) {
       this.choisenList.push(monument);
       this.monumentNames = this.choisenList.map(res => res.information[0]);
@@ -158,6 +181,7 @@ export class ChoisePage {
   }
 
   addNewCards() {
+    this.voteImg = '';
     this._monumentService.getSwipeMonuments().subscribe(
       res => {
         this.currentList = res;

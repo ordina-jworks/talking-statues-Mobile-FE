@@ -4,12 +4,13 @@
   </ion-navbar>
 </ion-header>
   <ion-content padding>
+
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" *ngIf="!currentList.length == 0">
       <ion-card  #mycards1 swing-card *ngFor="let monument of currentList">
         <ion-item>
           <div>
-            <div  #vote class="voteOverlay">
-             <img #cardImages  style="height: 200px;width: 250px;"
+            <div *ngIf="voteImg" #vote id="voteOverlay">
+             <img  *ngIf="!voteImg" id="img" #cardImages  style="height: 200px;width: 250px;"
                 src="{{ voteImg }}">
             </div>
 
