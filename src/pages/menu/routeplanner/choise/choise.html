@@ -28,10 +28,10 @@
     <div>
       <ion-row class="voting" *ngIf="!currentList.length == 0">
         <ion-col>
-          <ion-icon id="nope" name="thumbs-down" (click)="voteUp(false)"></ion-icon>
+          <ion-icon class="nope" style="color: #DD0F58 !important;" name="thumbs-down" (click)="voteUp(false)"></ion-icon>
         </ion-col>
         <ion-col>
-          <ion-icon id="like" name="thumbs-up" (click)="voteUp(true)"></ion-icon>
+          <ion-icon class="like" style="color: #32db64 !important;" name="thumbs-up" (click)="voteUp(true)"></ion-icon>
         </ion-col>
       </ion-row>
     </div>
@@ -55,8 +55,8 @@
           </ion-item>
         </div>
         <div class="icon">
-          <ion-icon id="nope" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
-          <ion-icon id="like" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
+          <ion-icon class="nope" style="color: #DD0F58 !important" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
+          <ion-icon class="like" style="margin-left: 80%; ;color: #32db64 !important;" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
         </div>
       </form>
     </div>
