@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { StackConfig } from 'angular2-swing';
 import {
   SwingStackComponent,
@@ -29,10 +29,12 @@ export class ChoisePage {
   voteImg;
 
   // dynamic variables for user language.
-  user_language = 'DE';
+  user_language = 'FR';
   title = '';
   suggestion = '';
-  intrests = '';
+  interests = '';
+  alert = '';
+  backButtonText = '';
 
 
   choisenList: QueryMonuments[] = [];
@@ -53,10 +55,10 @@ export class ChoisePage {
               public geolocation: Geolocation,
               private _monumentService: MonumentService,
               private fb: FormBuilder,
+              public viewCtrl: ViewController,
               )
   {
     this.getUserLanguage();
-
 
     this.createMonumentForm();
     this.geolocation.getCurrentPosition()
@@ -108,42 +110,60 @@ export class ChoisePage {
       case 'NL': {
         this.title = 'Plan je trip';
         this.suggestion = 'Suggestie Route';
-        this.intrests = 'Jouw Interesses';
+        this.interests = 'Jouw Interesses';
+        this.alert = 'Je moet tenminste een monument kiezen.';
+        this.backButtonText = 'Terug';
         break;
       }
       case 'GB': {
         this.title = 'Plan your trip';
         this.suggestion = 'Suggestion Route';
-        this.intrests = 'Your Interests';
+        this.interests = 'Your Interests';
+        this.alert = 'You need to select at least one monument to start a route.';
+        this.backButtonText = 'Back';
         break;
       }
       case 'DE': {
         this.title = 'Planen Sie Ihre Reise';
         this.suggestion = 'Vorschlagsroute';
-        this.intrests = 'Ihre Interessen';
+        this.interests = 'Ihre Interessen';
+        this.alert = 'Sie müssen mindestens ein Monument auswählen, um eine Route zu starten.';
+        this.backButtonText = 'Zurück';
         break;
       }
       case 'FR': {
         this.title = 'planifier votre voyage';
         this.suggestion = 'Suggestion Route';
-        this.intrests = 'Vos intérêts';
+        this.interests = 'Vos intérêts';
+        this.alert = 'Vous devez sélectionner au moins un monument pour commencer un itinéraire.';
+        this.backButtonText = 'Retour';
         break;
       }
       case 'ES': {
         this.title = 'planifica tu viaje';
         this.suggestion = 'Ruta de sugerencia';
-        this.intrests = 'Tus intereses';
+        this.interests = 'Tus intereses';
+        this.alert = 'Debes seleccionar al menos un monumento para comenzar una ruta.';
+        this.backButtonText = 'Volver';
         break;
       }
       default: {
         this.title = 'Plan je trip';
         this.suggestion = 'Suggestie Route';
-        this.intrests = 'Jouw Interesses';
+        this.interests = 'Jouw Interesses';
+        this.alert = 'Je moet tenminste 1 monument kiezen.';
+        this.backButtonText = 'Terug';
         break;
       }
 
     }
   }
+
+  ionViewDidLoad() {
+    this.viewCtrl.setBackButtonText(this.backButtonText);
+  }
+
+
 
   createMonumentForm() {
     this.monumentsForm = this.fb.group({
@@ -170,8 +190,6 @@ export class ChoisePage {
       this.voteImg = '';
       element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
     }
-    // '#DD0F58';
-    // this.voteImg = '';
   }
 
 // Connected through HTML
@@ -224,7 +242,7 @@ export class ChoisePage {
         })
     }
     else (
-      alert('You need to select at least one monument to start a route.')
+      alert(this.alert)
     )
 
 
