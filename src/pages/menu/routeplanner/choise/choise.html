@@ -39,24 +39,24 @@
     <div  *ngIf="currentList.length == 0">
 
       <form  [formGroup]="monumentsForm" >
-        <ion-title style="text-align: center">
-          <ion-label>Sugestie Route</ion-label>
+        <ion-title style="text-align: center; background-color: #222222 !important;">
+          <ion-label>{{ suggestion }}</ion-label>
         </ion-title>
         <ion-item>
           <ion-input type="text" formControlName="name" name="name" ></ion-input>
         </ion-item>
-        <ion-title style="text-align: center; margin-bottom: 15px">
-          <ion-label style="margin-bottom: 15px">Jouw Interesses</ion-label>
+        <ion-title style="text-align: center; margin-bottom: 15px; background-color: #222222 !important;">
+          <ion-label style="margin-bottom: 15px">{{ intrests }}</ion-label>
         </ion-title>
 
-        <div *ngFor="let monument of monumentNames">
+        <div *ngFor="let monument of monumentNames" style="margin-bottom: 10px">
           <ion-item >
             {{ monument.name }}
           </ion-item>
         </div>
         <div class="icon">
-          <ion-icon class="nope" style="color: #DD0F58 !important" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
-          <ion-icon class="like" style="margin-left: 80%; ;color: #32db64 !important;" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
+          <ion-icon class="nope" style="margin-top: 10px; color: #DD0F58 !important" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
+          <ion-icon class="like" style="margin-top: 10px; margin-left: 80%; ;color: #32db64 !important;" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
         </div>
       </form>
     </div>

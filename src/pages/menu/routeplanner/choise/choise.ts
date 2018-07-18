@@ -27,8 +27,14 @@ export class ChoisePage {
   @ViewChildren('cardImages') cardImages: QueryList<any>;
   stackConfig: StackConfig;
   voteImg;
-  user_language = 'NL';
+
+  // dynamic variables for user language.
+  user_language = 'DE';
   title = '';
+  suggestion = '';
+  intrests = '';
+
+
   choisenList: QueryMonuments[] = [];
   currentList: QueryMonuments[] = [];
   responseList: Route;
@@ -101,26 +107,38 @@ export class ChoisePage {
     switch (language) {
       case 'NL': {
         this.title = 'Plan je trip';
+        this.suggestion = 'Suggestie Route';
+        this.intrests = 'Jouw Interesses';
         break;
       }
       case 'GB': {
         this.title = 'Plan your trip';
+        this.suggestion = 'Suggestion Route';
+        this.intrests = 'Your Interests';
         break;
       }
       case 'DE': {
         this.title = 'Planen Sie Ihre Reise';
+        this.suggestion = 'Vorschlagsroute';
+        this.intrests = 'Ihre Interessen';
         break;
       }
       case 'FR': {
         this.title = 'planifier votre voyage';
+        this.suggestion = 'Suggestion Route';
+        this.intrests = 'Vos intérêts';
         break;
       }
       case 'ES': {
         this.title = 'planifica tu viaje';
+        this.suggestion = 'Ruta de sugerencia';
+        this.intrests = 'Tus intereses';
         break;
       }
       default: {
         this.title = 'Plan je trip';
+        this.suggestion = 'Suggestie Route';
+        this.intrests = 'Jouw Interesses';
         break;
       }
 
