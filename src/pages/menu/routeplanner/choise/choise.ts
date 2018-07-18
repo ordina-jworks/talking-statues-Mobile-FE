@@ -25,6 +25,7 @@ export class ChoisePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
   @ViewChildren('cardImages') cardImages: QueryList<any>;
+
   stackConfig: StackConfig;
   voteImg;
 
@@ -35,6 +36,7 @@ export class ChoisePage {
   interests = '';
   alert = '';
   backButtonText = '';
+  clickedLast;
 
 
   choisenList: QueryMonuments[] = [];
@@ -59,7 +61,6 @@ export class ChoisePage {
               )
   {
     this.getUserLanguage();
-
     this.createMonumentForm();
     this.geolocation.getCurrentPosition()
       .then((locate) => {
@@ -74,14 +75,30 @@ export class ChoisePage {
     });
 
     this.stackConfig = {
+
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
       },
+
+
       transform: (element, x, y, r) => {
+          if (x > 60 ) {
+            this.voteImg = '../../../../assets/imgs/like.png'
+          }
+          else if ( x < -60) {
+            this.voteImg = '../../../../assets/imgs/nope.png'
+          }
+          else if ( x < 60 && x > -60) {
+            this.voteImg = '';
+          }
+
+
         // if (this.cardImages.last.nativeElement.currentSrc !== null) {
         //   this.cardImages.last.nativeElement.currentSrc = '';
         // }
-          this.onItemMove(element, x, y, r);
+        this.onItemMove(element, x, y, r);
+
+        console.log('element: ', element);
 
         // if (this.currentList.slice(-1)) {
         //   if (x < -60) {
@@ -163,6 +180,11 @@ export class ChoisePage {
     this.viewCtrl.setBackButtonText(this.backButtonText);
   }
 
+  sendIndex(index) {
+    console.log('boolean is : ', index)
+   this.clickedLast = index;
+  }
+
 
 
   createMonumentForm() {
@@ -178,18 +200,7 @@ export class ChoisePage {
 
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
-    if (x > 60) {
-      this.voteImg = '../../../../assets/imgs/like.png'
       element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
-    }
-    if ( x < -60) {
-      this.voteImg = '../../../../assets/imgs/nope.png'
-      element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
-    }
-    if ( x < 60 && x > -60) {
-      this.voteImg = '';
-      element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
-    }
   }
 
 // Connected through HTML
