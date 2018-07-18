@@ -169,7 +169,6 @@ export class ChoisePage {
     }
   }
 
-// http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
   decimalToHex(d, padding) {
     var hex = Number(d).toString(16);
     padding = typeof (padding) === 'undefined' || padding === null ? padding = 2 : padding;
