@@ -13,7 +13,7 @@
           <div>
 
 
-            <div *ngIf="voteImg && isLast" #vote id="voteOverlay">
+            <div *ngIf="voteImg" #vote id="voteOverlay">
              <img (mousedown)="sendIndex(isLast)"id="img" #cardImages  style="height: 200px;width: 250px;"
                 src="{{ voteImg }}">
             </div>

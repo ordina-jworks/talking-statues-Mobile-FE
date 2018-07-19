@@ -16,6 +16,7 @@ import { Information, QueryMonuments } from '../../../../app/models/query';
 import { Route } from '../../../../app/models/route';
 
 
+
 @IonicPage()
 @Component({
   selector: 'page-choise',
@@ -30,14 +31,13 @@ export class ChoisePage {
   voteImg;
 
   // dynamic variables for user language.
-  user_language = 'FR';
+  user_language = 'NL';
   title = '';
   suggestion = '';
   interests = '';
   alert = '';
   backButtonText = '';
   clickedLast;
-
 
   choisenList: QueryMonuments[] = [];
   currentList: QueryMonuments[] = [];
@@ -98,7 +98,7 @@ export class ChoisePage {
         // }
         this.onItemMove(element, x, y, r);
 
-        console.log('element: ', element);
+        // console.log('element: ', element);
 
         // if (this.currentList.slice(-1)) {
         //   if (x < -60) {
@@ -122,6 +122,13 @@ export class ChoisePage {
   }
 
   getUserLanguage() {
+    // this.title = this.userLanguage.choiseTitle;
+    // this.suggestion = this.userLanguage.choiseSuggestion;
+    // this.interests = this.userLanguage.choiseInterests;
+    // this.alert = this.userLanguage.choiseAlert;
+    // console.log('dynamic user language title: ', this.userLanguage.language());
+    // this.backButtonText = this.userLanguage.backButtonText;
+
     let language = this.user_language;
     switch (language) {
       case 'NL': {
@@ -172,7 +179,6 @@ export class ChoisePage {
         this.backButtonText = 'Terug';
         break;
       }
-
     }
   }
 
@@ -207,7 +213,7 @@ export class ChoisePage {
   voteUp(like: boolean) {
     let monument = this.currentList.pop();
     this.lastCard = this.currentList.slice(-1);
-    console.log('last card: ',this.lastCard);
+    // console.log('last card: ',this.lastCard);
     if (like) {
       this.choisenList.push(monument);
       this.monumentNames = this.choisenList.map(res => res.information[0]);

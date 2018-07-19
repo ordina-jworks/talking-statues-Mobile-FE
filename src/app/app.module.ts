@@ -25,7 +25,7 @@ import { NavigationComponent } from '../components/shared/navigation/navigation'
     LoginPage,
     MenuPage,
     NavigationmapPage,
-    NavigationComponent
+    NavigationComponent,
   ],
   imports: [
 
@@ -47,7 +47,7 @@ import { NavigationComponent } from '../components/shared/navigation/navigation'
     LoginPage,
     MenuPage,
     NavigationmapPage,
-    NavigationComponent
+    NavigationComponent,
   ],
   providers: [
     MonumentService,

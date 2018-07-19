@@ -10,7 +10,7 @@ import { InfluencerPage } from './influencer/influencer';
 })
 export class RouteplannerPage {
 
-  user_language = 'FR';
+  user_language = 'NL';
   title = '';
   backButtonText = '';
   keuzes = '';
