@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { QueryMonuments } from '../app/models/query';
 import { Route } from '../app/models/route';
 
@@ -21,7 +21,6 @@ export class MonumentService {
     let endpoint = 'http://localhost:9000/monuments/selection?area=Sint-Andries&lang=NL';
     return this._http.get<QueryMonuments[]>(endpoint, { withCredentials: true }).pipe(
       map(res => this.data = res),
-      // tap(res => console.log(res))
     );
   };
 

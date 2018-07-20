@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ChoisePage } from './choise/choise';
 import { InfluencerPage } from './influencer/influencer';
-import { NavigationComponent} from "../../../components/shared/navigation/navigation";
-
-/**
- * Generated class for the RouteplannerPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,10 +10,70 @@ import { NavigationComponent} from "../../../components/shared/navigation/naviga
 })
 export class RouteplannerPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user_language = 'FR';
+  title = '';
+  backButtonText = '';
+  keuzes = '';
+  influencer = '';
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+  ) {
+    this.getUserLanguage();
+  }
+
+  getUserLanguage() {
+    let language = this.user_language;
+    switch (language) {
+      case 'NL': {
+        this.title = 'Routeplanner';
+        this.backButtonText = 'Terug';
+        this.keuzes = 'Keuzes';
+        this.influencer = 'Influencers';
+        break;
+      }
+      case 'GB': {
+        this.title = 'Route planner';
+        this.backButtonText = 'Back';
+        this.keuzes = 'Choices';
+        this.influencer = 'Influencers';
+        break;
+      }
+      case 'DE': {
+        this.title = 'Routenplaner';
+        this.backButtonText = 'Zurück';
+        this.keuzes = 'Möglichkeiten';
+        this.influencer = 'Influencers';
+        break;
+      }
+      case 'FR': {
+        this.title = 'Planificateur d\'itinéraires';
+        this.backButtonText = 'Retour';
+        this.keuzes = 'Choix';
+        this.influencer = 'Influenceurs';
+        break;
+      }
+      case 'ES': {
+        this.title = 'Planificador de ruta';
+        this.backButtonText = 'Volver';
+        this.keuzes = 'Elecciones';
+        this.influencer = 'Influencers';
+        break;
+      }
+      default: {
+        this.title = 'Routeplanner';
+        this.backButtonText = 'Terug';
+        this.keuzes = 'Keuzes';
+        this.influencer = 'Influencers';
+        break;
+      }
+
+    }
   }
 
   ionViewDidLoad() {
+    this.viewCtrl.setBackButtonText(this.backButtonText);
   }
 
   choices() {

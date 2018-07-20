@@ -5,12 +5,10 @@
 </ion-header>
 
 <ion-content  *ngIf="monumentData as monument">
-  <div class="banner">
-    <div class="overlapse">
-        <img class="monument-image" [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
+  <ion-avatar style="padding-top: 15px;">
+    <img class="monument-image" [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
+  </ion-avatar>
 
-    </div>
-  </div>
   <div class="monument-info">
     <div class="monument-title">
       {{ monument.information[0].name }}

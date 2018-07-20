@@ -6,13 +6,18 @@
   <ion-content padding>
 
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" *ngIf="!currentList.length == 0">
-      <ion-card  #mycards1 swing-card *ngFor="let monument of currentList">
-        <ion-item>
+      <ion-card  #mycards1 swing-card *ngFor="let monument of currentList; last as isLast;">
+
+
+        <ion-item >
           <div>
-            <div *ngIf="voteImg" #vote id="voteOverlay">
-             <img  id="img" #cardImages  style="height: 200px;width: 250px;"
+
+
+            <div *ngIf="voteImg && isLast" #vote id="voteOverlay">
+             <img (mousedown)="sendIndex(isLast)"id="img" #cardImages  style="height: 200px;width: 250px;"
                 src="{{ voteImg }}">
             </div>
+
 
             <img id="card" style="object-fit: cover; height: 580px; width: 100%"
                  [src]="'http://localhost:9000/monuments/' + monument.id + '/image'">
@@ -21,6 +26,8 @@
             </div>
           </div>
         </ion-item>
+
+
       </ion-card>
     </div>
 
@@ -28,10 +35,10 @@
     <div>
       <ion-row class="voting" *ngIf="!currentList.length == 0">
         <ion-col>
-          <ion-icon id="nope" name="thumbs-down" (click)="voteUp(false)"></ion-icon>
+          <ion-icon class="nope" style="color: #DD0F58 !important;" name="thumbs-down" (click)="voteUp(false)"></ion-icon>
         </ion-col>
         <ion-col>
-          <ion-icon id="like" name="thumbs-up" (click)="voteUp(true)"></ion-icon>
+          <ion-icon class="like" style="color: #32db64 !important;" name="thumbs-up" (click)="voteUp(true)"></ion-icon>
         </ion-col>
       </ion-row>
     </div>
@@ -39,24 +46,24 @@
     <div  *ngIf="currentList.length == 0">
 
       <form  [formGroup]="monumentsForm" >
-        <ion-title style="text-align: center">
-          <ion-label>Sugestie Route</ion-label>
+        <ion-title style="text-align: center; background-color: #222222 !important;">
+          <ion-label>{{ suggestion }}</ion-label>
         </ion-title>
         <ion-item>
           <ion-input type="text" formControlName="name" name="name" ></ion-input>
         </ion-item>
-        <ion-title style="text-align: center; margin-bottom: 15px">
-          <ion-label style="margin-bottom: 15px">Jouw Interesses</ion-label>
+        <ion-title style="text-align: center; margin-bottom: 15px; background-color: #222222 !important;">
+          <ion-label style="margin-bottom: 15px">{{ interests }}</ion-label>
         </ion-title>
 
-        <div *ngFor="let monument of monumentNames">
+        <div *ngFor="let monument of monumentNames" style="margin-bottom: 10px">
           <ion-item >
             {{ monument.name }}
           </ion-item>
         </div>
         <div class="icon">
-          <ion-icon id="nope" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
-          <ion-icon id="like" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
+          <ion-icon class="nope" style="margin-top: 10px; color: #DD0F58 !important" name="thumbs-down" (click)="getNewMonuments()"></ion-icon>
+          <ion-icon class="like" style="margin-top: 10px; margin-left: 80%; ;color: #32db64 !important;" name="thumbs-up" (click)="sendRoutes()"></ion-icon>
         </div>
       </form>
     </div>

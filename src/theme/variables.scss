@@ -26,7 +26,17 @@ ion-title {
   text-align: center;
 }
 
+ion-content.content.content-ios  {
+  background-color: #000 !important ;
+}
 
+ion-title.title.title-ios {
+  background-color: #DD0F58 !important;
+
+  div.toolbar-title.toolbar-title-ios {
+    color: white;
+  }
+}
 
 // Named Color Variables
 // --------------------------------------------------
@@ -86,7 +96,7 @@ $toolbar-md-background: #DD0F58 !default;
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/ionicons/
 
-@import "ionic.ionicons";
+@import 'ionic.ionicons';
 
 
 // Fonts

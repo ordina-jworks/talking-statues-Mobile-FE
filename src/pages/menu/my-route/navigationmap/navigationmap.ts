@@ -91,9 +91,10 @@ export class NavigationmapPage {
       marker.addListener('click',() => {
         var content = document.createElement('div'),
           button;
-        content.innerHTML = 'My monument name is   ' + marker.title;
+        content.innerHTML = `<div>My monument name is ` + marker.title + `</div>`;
         button = content.appendChild(document.createElement('input'));
         button.type = 'button';
+        button.innerHTML = `<div></div>`
         button.value = 'Click here to see my info.';
 
         // code to get data from JS code into Angular: from the on infowindow click event

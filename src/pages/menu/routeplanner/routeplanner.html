@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title style="margin-right: 15%">Routeplanner</ion-title>
+    <ion-title style="margin-right: 15%">{{ title }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <div id="list">
-    <button id="btnKeuzes" class="menu-button" ion-button (click)="choices()">Keuzes</button>
-    <button id="btnInfluences" class="menu-button" ion-button (click)="influencers()">Influencers</button>
+    <button id="btnKeuzes" class="menu-button" ion-button (click)="choices()">{{ keuzes }}</button>
+    <button id="btnInfluences" class="menu-button" ion-button (click)="influencers()">{{ influencer }}</button>
   </div>
 </ion-content>
