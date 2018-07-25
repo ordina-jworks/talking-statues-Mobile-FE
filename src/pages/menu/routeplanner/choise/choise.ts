@@ -122,6 +122,77 @@ export class ChoisePage {
   }
 
   getUserLanguage() {
+
+    // // dynamic variables for user language.
+    // user_language = 'NL';
+    // choiseTitle = '';
+    // choiseSuggestion = '';
+    // choiseInterests = '';
+    // choiseAlert = '';
+    // backButtonText = '';
+    // routeplannerContent = '';
+    //
+    // language() {
+    //   let language = this.user_language;
+    //
+    //   switch (language) {
+    //     case 'NL': {
+    //       this.choiseTitle = 'Plan je trip';
+    //       this.choiseSuggestion = 'Suggestie Route';
+    //       this.choiseInterests = 'Jouw Interesses';
+    //       this.choiseAlert = 'Je moet tenminste een monument kiezen.';
+    //       this.backButtonText = 'Terug';
+    //       this.routeplannerContent = ' De beste tips voor al je trips';
+    //       break;
+    //     }
+    //     case 'GB': {
+    //       this.choiseTitle = 'Plan your trip';
+    //       this.choiseSuggestion = 'Suggestion Route';
+    //       this.choiseInterests = 'Your Interests';
+    //       this.choiseAlert = 'You need to select at least one monument to start a route.';
+    //       this.backButtonText = 'Back';
+    //       this.routeplannerContent = ' The best tips for all your trips on';
+    //       break;
+    //     }
+    //     case 'DE': {
+    //       this.choiseTitle = 'Planen Sie Ihre Reise';
+    //       this.choiseSuggestion = 'Vorschlagsroute';
+    //       this.choiseInterests = 'Ihre Interessen';
+    //       this.choiseAlert = 'Sie müssen mindestens ein Monument auswählen, um eine Route zu starten.';
+    //       this.backButtonText = 'Zurück';
+    //       this.routeplannerContent = ' Die besten Tipps für alle Ihre Reisen';
+    //       break;
+    //     }
+    //     case 'FR': {
+    //       this.choiseTitle = 'planifier votre voyage';
+    //       this.choiseSuggestion = 'Suggestion Route';
+    //       this.choiseInterests = 'Vos intérêts';
+    //       this.choiseAlert = 'Vous devez sélectionner au moins un monument pour commencer un itinéraire.';
+    //       this.backButtonText = 'Retour';
+    //       this.routeplannerContent = ' Les meilleurs conseils pour tous vos voyages';
+    //       break;
+    //     }
+    //     case 'ES': {
+    //       this.choiseTitle = 'planifica tu viaje';
+    //       this.choiseSuggestion = 'Ruta de sugerencia';
+    //       this.choiseInterests = 'Tus intereses';
+    //       this.choiseAlert = 'Debes seleccionar al menos un monumento para comenzar una ruta.';
+    //       this.backButtonText = 'Volver';
+    //       this.routeplannerContent = ' Los mejores consejos para todos tus viajes';
+    //       break;
+    //     }
+    //     default: {
+    //       this.choiseTitle = 'Plan je trip';
+    //       this.choiseSuggestion = 'Suggestie Route';
+    //       this.choiseInterests = 'Jouw Interesses';
+    //       this.choiseAlert = 'Je moet tenminste 1 monument kiezen.';
+    //       this.backButtonText = 'Terug';
+    //       this.routeplannerContent = ' De beste tips voor al je trips';
+    //       break;
+    //     }
+    //   }
+    // }
+
     // this.title = this.userLanguage.choiseTitle;
     // this.suggestion = this.userLanguage.choiseSuggestion;
     // this.interests = this.userLanguage.choiseInterests;
