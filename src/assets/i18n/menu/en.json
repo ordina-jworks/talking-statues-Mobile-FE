@@ -1,0 +1,35 @@
+{
+  "CHAT": {
+    "TITLE": "Join Chat",
+    "NICKNAME": "Set Nickname",
+    "JOIN": "Join Chat as"
+  },
+  "CHATROOM": {
+    "TITLE": "Chatroom",
+    "HELLO": "Hello"
+  },
+  "MYROUTE": {
+    "TITLE": "My Routes",
+    "TITLE_PLANNED": "Planned Routes",
+    "TITLE_DONE": "Routes"
+  },
+  "PROFILE": {
+    "TITLE": "Profile"
+  },
+  "ROUTEPLANNER": {
+    "TITLE": "Route planner",
+    "BACK": "Back",
+    "CHOICES": "Choices",
+    "INFLUENCERS": "Influencers"
+  },
+  "INFLUENCER": {
+    "TITLE": "Influencers"
+  },
+  "CHOICE": {
+    "TITLE": "Plan your trip",
+    "SUGGESTION": "Suggested Route",
+    "INTERESTS": "Your Interests",
+    "ALERT": "You need to select at least one monument to start a route.",
+    "BACK": "Back"
+  }
+}

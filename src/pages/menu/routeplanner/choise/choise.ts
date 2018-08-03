@@ -14,6 +14,9 @@ import { NavigationmapPage } from '../../my-route/navigationmap/navigationmap';
 import { MonumentService } from '../../../../services/monument.service';
 import { Information, QueryMonuments } from '../../../../app/models/query';
 import { Route } from '../../../../app/models/route';
+import { TranslationService } from '../../../../components/shared/translation.service';
+import { DatePipe } from '../../../../../node_modules/@angular/common';
+// import { TranslateService } from '@ngx-translate/core';
 
 
 @IonicPage()
@@ -30,14 +33,17 @@ export class ChoisePage {
   voteImg;
 
   // dynamic variables for user language.
-  user_language = 'FR';
-  title = '';
-  suggestion = '';
-  interests = '';
-  alert = '';
-  backButtonText = '';
+  // user_language = 'FR';
+  // title = '';
+  // suggestion = '';
+  // interests = '';
+  // alert = '';
+  // backButtonText = '';
   clickedLast;
 
+  pipe = new DatePipe('en-US');
+
+  // lang: string;
 
   choisenList: QueryMonuments[] = [];
   currentList: QueryMonuments[] = [];
@@ -52,15 +58,25 @@ export class ChoisePage {
   route = {};
   monumentsForm: FormGroup;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+              public translate: TranslationService,
+              public navCtrl: NavController,
               public navParams: NavParams,
               public geolocation: Geolocation,
               private _monumentService: MonumentService,
               private fb: FormBuilder,
               public viewCtrl: ViewController,
+              // private _translate: TranslateService
               )
   {
-    this.getUserLanguage();
+    // this.translate.initTranslate();
+    // this.translate.lang.subscribe(lang => this._translate.use(lang));
+    // this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    //   console.log(`LangChangeEvent: ${JSON.stringify(event)}`);
+    //   this._translate.use(event.lang);
+    //   this.lang = this._translate.currentLang;
+    // });
+    // this.getUserLanguage();
     this.createMonumentForm();
     this.geolocation.getCurrentPosition()
       .then((locate) => {
@@ -121,63 +137,63 @@ export class ChoisePage {
     this.addNewCards();
   }
 
-  getUserLanguage() {
-    let language = this.user_language;
-    switch (language) {
-      case 'NL': {
-        this.title = 'Plan je trip';
-        this.suggestion = 'Suggestie Route';
-        this.interests = 'Jouw Interesses';
-        this.alert = 'Je moet tenminste een monument kiezen.';
-        this.backButtonText = 'Terug';
-        break;
-      }
-      case 'GB': {
-        this.title = 'Plan your trip';
-        this.suggestion = 'Suggestion Route';
-        this.interests = 'Your Interests';
-        this.alert = 'You need to select at least one monument to start a route.';
-        this.backButtonText = 'Back';
-        break;
-      }
-      case 'DE': {
-        this.title = 'Planen Sie Ihre Reise';
-        this.suggestion = 'Vorschlagsroute';
-        this.interests = 'Ihre Interessen';
-        this.alert = 'Sie müssen mindestens ein Monument auswählen, um eine Route zu starten.';
-        this.backButtonText = 'Zurück';
-        break;
-      }
-      case 'FR': {
-        this.title = 'planifier votre voyage';
-        this.suggestion = 'Suggestion Route';
-        this.interests = 'Vos intérêts';
-        this.alert = 'Vous devez sélectionner au moins un monument pour commencer un itinéraire.';
-        this.backButtonText = 'Retour';
-        break;
-      }
-      case 'ES': {
-        this.title = 'planifica tu viaje';
-        this.suggestion = 'Ruta de sugerencia';
-        this.interests = 'Tus intereses';
-        this.alert = 'Debes seleccionar al menos un monumento para comenzar una ruta.';
-        this.backButtonText = 'Volver';
-        break;
-      }
-      default: {
-        this.title = 'Plan je trip';
-        this.suggestion = 'Suggestie Route';
-        this.interests = 'Jouw Interesses';
-        this.alert = 'Je moet tenminste 1 monument kiezen.';
-        this.backButtonText = 'Terug';
-        break;
-      }
+  // getUserLanguage() {
+  //   let language = this.user_language;
+  //   switch (language) {
+  //     case 'NL': {
+  //       this.title = 'Plan je trip';
+  //       this.suggestion = 'Suggestie Route';
+  //       this.interests = 'Jouw Interesses';
+  //       this.alert = 'Je moet tenminste een monument kiezen.';
+  //       this.backButtonText = 'Terug';
+  //       break;
+  //     }
+  //     case 'GB': {
+  //       this.title = 'Plan your trip';
+  //       this.suggestion = 'Suggestion Route';
+  //       this.interests = 'Your Interests';
+  //       this.alert = 'You need to select at least one monument to start a route.';
+  //       this.backButtonText = 'Back';
+  //       break;
+  //     }
+  //     case 'DE': {
+  //       this.title = 'Planen Sie Ihre Reise';
+  //       this.suggestion = 'Vorschlagsroute';
+  //       this.interests = 'Ihre Interessen';
+  //       this.alert = 'Sie müssen mindestens ein Monument auswählen, um eine Route zu starten.';
+  //       this.backButtonText = 'Zurück';
+  //       break;
+  //     }
+  //     case 'FR': {
+  //       this.title = 'planifier votre voyage';
+  //       this.suggestion = 'Suggestion Route';
+  //       this.interests = 'Vos intérêts';
+  //       this.alert = 'Vous devez sélectionner au moins un monument pour commencer un itinéraire.';
+  //       this.backButtonText = 'Retour';
+  //       break;
+  //     }
+  //     case 'ES': {
+  //       this.title = 'planifica tu viaje';
+  //       this.suggestion = 'Ruta de sugerencia';
+  //       this.interests = 'Tus intereses';
+  //       this.alert = 'Debes seleccionar al menos un monumento para comenzar una ruta.';
+  //       this.backButtonText = 'Volver';
+  //       break;
+  //     }
+  //     default: {
+  //       this.title = 'Plan je trip';
+  //       this.suggestion = 'Suggestie Route';
+  //       this.interests = 'Jouw Interesses';
+  //       this.alert = 'Je moet tenminste 1 monument kiezen.';
+  //       this.backButtonText = 'Terug';
+  //       break;
+  //     }
 
-    }
-  }
+  //   }
+  // }
 
   ionViewDidLoad() {
-    this.viewCtrl.setBackButtonText(this.backButtonText);
+    this.viewCtrl.setBackButtonText(this.navParams.get('backButtonText'));
   }
 
   sendIndex(index) {
@@ -188,8 +204,10 @@ export class ChoisePage {
 
 
   createMonumentForm() {
+    const now = new Date();
+    const formattedDate = this.pipe.transform(now, 'medium')
     this.monumentsForm = this.fb.group({
-      name: ['Route :' + new Date(),],
+      name: ['Route: ' + formattedDate,],
       locations: [this.choisenList],
       userLocation: {
         latitude: 0.0,
@@ -252,9 +270,9 @@ export class ChoisePage {
           });
         })
     }
-    else (
-      alert(this.alert)
-    )
+    // else (
+    //   alert(this.alert)
+    // )
 
 
   }

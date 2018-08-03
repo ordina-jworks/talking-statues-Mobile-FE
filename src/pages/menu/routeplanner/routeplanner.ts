@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ChoisePage } from './choise/choise';
 import { InfluencerPage } from './influencer/influencer';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { TranslationService } from '../../../components/shared/translation.service';
 
 @IonicPage()
 @Component({
@@ -15,12 +17,24 @@ export class RouteplannerPage {
   backButtonText = '';
   keuzes = '';
   influencer = '';
+
+  lang: string;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
+    public translate: TranslateService,
+    private _translate: TranslationService
   ) {
-    this.getUserLanguage();
+    // this.translate.initTranslate();
+    this._translate.lang.subscribe(lang => this.translate.use(lang));
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      console.log(`LangChangeEvent: ${JSON.stringify(event)}`);
+      this.translate.use(event.lang);
+      this.lang = this.translate.currentLang;
+    });
+    // this.getUserLanguage();
   }
 
   getUserLanguage() {

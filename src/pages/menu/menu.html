@@ -1,17 +1,22 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Menu
+      {{ 'MENU.TITLE' | translate }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-list text-center>
+    <label translate>MENU.LANG_SELECT</label>
+    <button ion-button *ngFor="let lang of translate.getLangs()" [disabled]="lang === translate.currentLang"
+      (click)="translate.use(lang)">{{ lang.toUpperCase() }}</button>
+  </ion-list>
   <div>
-    <h1 style="color: #DD0F58; text-align: center;">Ugo</h1>
+    <h1 style="color: #DD0F58; text-align: center;" translate>MENU.TITLE_H1</h1>
   </div>
-  <div style="text-align: center; font-size: 16px; margin-bottom: 5px; color: white;">{{ content }}</div>
+  <div style="text-align: center; font-size: 16px; margin-bottom: 5px; color: white;" translate>MENU.CONTENT</div>
   <img src="../../assets/imgs/CityCentre_overview_Antwerp.jpg">
-    <navigation></navigation>
+    <navigation [backButtonText]=""></navigation>
 </ion-content>
 
 

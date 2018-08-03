@@ -10,6 +10,7 @@ import { ChatroomPage } from './chat/chatroom/chatroom';
 import { SwingModule } from 'angular2-swing';
 import { InfoPage } from './my-route/navigationmap/info/info';
 import { ProfilePage } from './profile/profile';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ProfilePage } from './profile/profile';
   imports: [
     IonicPageModule.forChild(MenuPage),
     SwingModule,
-  ],
+    TranslateModule.forChild()
+  ]
 })
 export class MenuPageModule {}

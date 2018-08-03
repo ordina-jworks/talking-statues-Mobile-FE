@@ -1,0 +1,15 @@
+{
+  "LOGIN": {
+    "TITLE": "LoginPagina",
+    "LOGIN_BTN": "Login Met"
+  },
+  "NAVIGATION": {
+    "DISMISS_BTN": "Sluit"
+  },
+  "MENU": {
+    "TITLE": "Menu",
+    "LANG_SELECT": "Taal",
+    "TITLE_H1": "UGO",
+    "CONTENT": "De beste tips voor al uw reizen op"
+  }
+}

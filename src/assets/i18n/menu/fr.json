@@ -1,0 +1,35 @@
+{
+  "CHAT": {
+    "TITLE": "Rejoindre le Chat",
+    "NICKNAME": "La valeur de Pseudo",
+    "JOIN": "Rejoignez le Chat comme"
+  },
+  "CHATROOM": {
+    "TITLE": "Forum de discussion",
+    "HELLO": "Salut"
+  },
+  "MYROUTE": {
+    "TITLE": "Mes parcours",
+    "TITLE_PLANNED": "Itinéraires prévus",
+    "TITLE_DONE": "Itinéraires"
+  },
+  "PROFILE": {
+    "TITLE": "Voir le profil"
+  },
+  "ROUTEPLANNER": {
+    "TITLE": "Planificateur d’itinéraire",
+    "BACK": "Précédent",
+    "CHOICES": "Choix",
+    "INFLUENCERS": "Influenceurs"
+  },
+  "INFLUENCER": {
+    "TITLE": "Influenceurs"
+  },
+  "CHOICE": {
+    "TITLE": "Planifiez votre voyage",
+    "SUGGESTION": "Suggéré de Route",
+    "INTERESTS": "Vos centres d’intérêt",
+    "ALERT": "Vous devez sélectionner au moins un monument pour démarrer un itinéraire.",
+    "BACK": "Précédent"
+  }
+}

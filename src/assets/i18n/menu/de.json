@@ -1,0 +1,35 @@
+{
+  "CHAT": {
+    "TITLE": "Chat beitreten",
+    "NICKNAME": "Legen Sie Spitznamen",
+    "JOIN": "Join Chat als"
+  },
+  "CHATROOM": {
+    "TITLE": "Chatraum",
+    "HELLO": "Hello"
+  },
+  "MYROUTE": {
+    "TITLE": "Meine Routen",
+    "TITLE_PLANNED": "Geplante Routen",
+    "TITLE_DONE": "Routen"
+  },
+  "PROFILE": {
+    "TITLE": "Profil"
+  },
+  "ROUTEPLANNER": {
+    "TITLE": "Routenplaner",
+    "BACK": "Zurück",
+    "CHOICES": "Entscheidungen",
+    "INFLUENCERS": "Beeinflusser"
+  },
+  "INFLUENCER": {
+    "TITLE": "Beeinflusser"
+  },
+  "CHOICE": {
+    "TITLE": "Planen Sie Ihre Reise",
+    "SUGGESTION": "Vorgeschlagene Route",
+    "INTERESTS": "Ihre Interessen",
+    "ALERT": "Sie müssen mindestens ein Denkmal für eine Route starten auswählen.",
+    "BACK": "Zurück"
+  }
+}

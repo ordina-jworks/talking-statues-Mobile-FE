@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>LoginPage</ion-title>
+    <ion-title>{{ 'LOGIN.TITLE' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,12 +11,12 @@
   <div id="list">
    <a class="login-button"
       ion-button icon-right href="http://localhost:8080/oauth2/authorization/facebook">
-      Login with
+      {{ 'LOGIN.LOGIN_BTN' | translate }}
       <ion-icon name="logo-facebook"></ion-icon>
    </a>
    <a class="login-button"
       ion-button icon-right href="">
-      Login with
+      {{ 'LOGIN.LOGIN_BTN' | translate }}
       <ion-icon name="logo-google"></ion-icon>
     </a>
   </div>

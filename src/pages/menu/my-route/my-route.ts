@@ -3,6 +3,7 @@ import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angu
 import { RoutesService } from '../../../services/routes.service';
 import { NavigationmapPage } from './navigationmap/navigationmap';
 import { Language, Monument } from '../../../app/models/monument';
+import { TranslateService } from '../../../../node_modules/@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -35,6 +36,7 @@ export class MyRoutePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public translate: TranslateService,
     private _routesService: RoutesService,
     private _modalCtrl: ModalController,
     ) {

@@ -1,0 +1,15 @@
+{
+  "LOGIN": {
+    "TITLE": "Login-Seite",
+    "LOGIN_BTN": "Loggen Sie sich mit"
+  },
+  "NAVIGATION": {
+    "DISMISS_BTN": "Entlassen"
+  },
+  "MENU": {
+    "TITLE": "Menü",
+    "LANG_SELECT": "Sprache",
+    "TITLE_H1": "UGO",
+    "CONTENT": "Die besten Tipps für Ihre Ausflüge auf"
+  }
+}

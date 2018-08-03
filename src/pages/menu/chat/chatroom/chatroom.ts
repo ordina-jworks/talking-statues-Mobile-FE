@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '../../../../../node_modules/@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -14,6 +15,7 @@ export class ChatroomPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public translate: TranslateService
   ) {
     this.nickname = navParams.get('payload');
   }

@@ -4,6 +4,7 @@ import { Geolocation} from '@ionic-native/geolocation';
 import { Route } from '../../../../app/models/monument';
 import { Nav } from 'ionic-angular';
 import { InfoPage } from './info/info';
+import { TranslateService } from '../../../../../node_modules/@ngx-translate/core';
 
 declare var google;
 
@@ -36,6 +37,7 @@ export class NavigationmapPage {
     public geolocation: Geolocation,
     public params: NavParams,
     public viewCtrl: ViewController,
+    public translate: TranslateService
   ) {
     this.receivedData = params.get('data');
     this.title = this.receivedData.routeTitle;

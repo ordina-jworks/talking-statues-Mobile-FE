@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouteplannerPage } from '../../../pages/menu/routeplanner/routeplanner';
 import { ChatPage } from '../../../pages/menu/chat/chat';
 import { ProfilePage } from '../../../pages/menu/profile/profile';
@@ -17,6 +17,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'navigation.html'
 })
 export class NavigationComponent {
+  @Input() backButtonText: string;
 
   text: string;
 
@@ -27,7 +28,7 @@ export class NavigationComponent {
   }
 
   planningRoutes() {
-    this.navCtrl.push(RouteplannerPage);
+    this.navCtrl.push(RouteplannerPage, this.backButtonText);
   }
 
   myRoutes() {

@@ -6,15 +6,17 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Join Chat</ion-title>
+    <ion-title translate>CHAT.TITLE</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
   <ion-item>
-    <ion-label stacked>Set Nickname</ion-label>
-    <ion-input type="text" [(ngModel)]="nickname" placeholder="Nickname" #passNickname></ion-input>
+    <ion-label stacked translate>CHAT.NICKNAME</ion-label>
+    <ion-input type="text" [(ngModel)]="passNickname.value" placeholder="Nickname" #passNickname></ion-input>
   </ion-item>
-  <button ion-button full (click)="joinChat(nickname)" [disabled]="nickname === ''">Join Chat as {{ nickname }}</button>
+  <button ion-button full (click)="joinChat(passNickname.value)"
+    [disabled]="passNickname.value === ''" translate>
+    CHAT.JOIN {{ passNickname.value }}</button>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '../../../../node_modules/@ngx-translate/core';
 
 /**
  * Generated class for the ProfilePage page.
@@ -15,7 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public translate: TranslateService
+  ) {
   }
 
   ionViewDidLoad() {

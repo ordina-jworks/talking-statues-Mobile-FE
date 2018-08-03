@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ChatPage } from './chat';
 import { ChatroomPageModule } from './chatroom/chatroom.module';
 import { ChatroomPage } from './chatroom/chatroom';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ChatroomPage } from './chatroom/chatroom';
   ],
   imports: [
     IonicPageModule.forChild(ChatPage),
-    ChatroomPageModule,
+    TranslateModule.forChild(),
+    ChatroomPageModule
   ],
 })
 export class ChatPageModule {}

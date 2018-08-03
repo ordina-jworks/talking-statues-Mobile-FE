@@ -1,7 +1,6 @@
-
 <ion-header>
   <ion-navbar>
-    <ion-title>Mijn Routes</ion-title>
+    <ion-title translate>MYROUTE.TITLE</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,8 +9,8 @@
 
   <div *ngIf="receivedRoutes as route; index">
     <ion-list>
-      <ion-title style="margin-bottom: 15px">
-        Geplande Routes
+      <ion-title style="margin-bottom: 15px" translate>
+        MYROUTE.TITLE_PLANNED
       </ion-title>
       <ion-item (click)="onOpenRoute(route)">
           {{ route.routeTitle }}
@@ -21,8 +20,8 @@
 
   <div *ngIf="completedRoutes">
     <ion-list>
-      <ion-title style="margin-bottom: 15px">
-        Afgelegde Routes
+      <ion-title style="margin-bottom: 15px" translate>
+        MYROUTE.TITLE_DONE
       </ion-title>
       <ion-item *ngFor="let route of completedRoutes" (click)="onOpenRoute(route)">
         {{monumentNames }}

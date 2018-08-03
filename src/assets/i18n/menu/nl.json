@@ -1,0 +1,35 @@
+{
+  "CHAT": {
+    "TITLE": "Deelnemen aan Chat",
+    "NICKNAME": "Instellen van de bijnaam",
+    "JOIN": "Deelnemen aan Chat als"
+  },
+  "CHATROOM": {
+    "TITLE": "Chatroom",
+    "HELLO": "Hallo"
+  },
+  "MYROUTE": {
+    "TITLE": "Mijn Routes",
+    "TITLE_PLANNED": "Planned Routes",
+    "TITLE_DONE": "Routes"
+  },
+  "PROFILE": {
+    "TITLE": "Profiel"
+  },
+  "ROUTEPLANNER": {
+    "TITLE": "Route planner",
+    "BACK": "Terug",
+    "CHOICES": "Keuzes",
+    "INFLUENCERS": "Beïnvloeders"
+  },
+  "INFLUENCER": {
+    "TITLE": "Beïnvloeders"
+  },
+  "CHOICE": {
+    "TITLE": "Plan u reis",
+    "SUGGESTION": "Voorgestelde Route",
+    "INTERESTS": "Uw interesses",
+    "ALERT": "U moet ten minste één monument om te beginnen met een route te selecteren.",
+    "BACK": "Terug"
+  }
+}

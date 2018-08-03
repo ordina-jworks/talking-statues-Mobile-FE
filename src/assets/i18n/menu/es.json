@@ -1,0 +1,35 @@
+{
+  "CHAT": {
+    "TITLE": "Únete a Chat",
+    "NICKNAME": "Establecer el sobrenombre",
+    "JOIN": "Únete Chat como"
+  },
+  "CHATROOM": {
+    "TITLE": "Sala de chat",
+    "HELLO": "Hola"
+  },
+  "MYROUTE": {
+    "TITLE": "Mis rutas",
+    "TITLE_PLANNED": "Rutas planificadas",
+    "TITLE_DONE": "Rutas"
+  },
+  "PROFILE": {
+    "TITLE": "Perfil"
+  },
+  "ROUTEPLANNER": {
+    "TITLE": "Planificador de rutas",
+    "BACK": "Atrás",
+    "CHOICES": "Opciones",
+    "INFLUENCERS": "Fuentes de influencia"
+  },
+  "INFLUENCER": {
+    "TITLE": "Fuentes de influencia"
+  },
+  "CHOICE": {
+    "TITLE": "Planifica tu viaje",
+    "SUGGESTION": "Sugirió la ruta",
+    "INTERESTS": "Sus intereses",
+    "ALERT": "Debe seleccionar al menos un monumento para iniciar una ruta.",
+    "BACK": "Atrás"
+  }
+}
