@@ -62,9 +62,9 @@ export class RouteplannerPage {
         break;
       }
       default: {
-        this.title = 'Routeplanner';
-        this.backButtonText = 'Terug';
-        this.keuzes = 'Keuzes';
+        this.title = 'Route planner';
+        this.backButtonText = 'Back';
+        this.keuzes = 'Choices';
         this.influencer = 'Influencers';
         break;
       }

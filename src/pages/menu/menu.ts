@@ -43,7 +43,7 @@ export class MenuPage {
         break;
       }
       default: {
-        this.content = ' De beste tips voor al je trips';
+        this.content = ' The best tips for all your trips on';
         break;
       }
 
