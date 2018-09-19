@@ -8,7 +8,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class MenuPage {
   data: any;
   content = '';
-  user_language = 'NL';
+  user_language = 'GB';
 
   constructor(
     public navCtrl: NavController,
@@ -43,7 +43,7 @@ export class MenuPage {
         break;
       }
       default: {
-        this.content = ' De beste tips voor al je trips';
+        this.content = ' The best tips for all your trips on';
         break;
       }
 

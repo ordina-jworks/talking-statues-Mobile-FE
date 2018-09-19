@@ -31,7 +31,7 @@ export class ChoisePage {
   voteImg;
 
   // dynamic variables for user language.
-  user_language = 'NL';
+  user_language = 'GB';
   title = '';
   suggestion = '';
   interests = '';
